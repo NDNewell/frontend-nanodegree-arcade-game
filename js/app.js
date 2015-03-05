@@ -32,8 +32,8 @@ function Player(x,y) {
     this.y = y;
     this.sprite = 'images/char-boy.png';
 
-    this.x = 250;
-    this.y = 500;
+    this.x = 200;
+    this.y = 400;
 }
 
 Player.prototype.update = function(dt) {
@@ -45,8 +45,8 @@ Player.prototype.render = function() {
 }
 
 Player.prototype.startOver = function() {
-    this.x = 250;
-    this.y = 500;
+    this.x = 200;
+    this.y = 400;
 }
 
 Player.prototype.handleInput = function(key) {
