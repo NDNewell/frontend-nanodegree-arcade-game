@@ -36,6 +36,10 @@ function Player(x,y) {
     this.y = 500;
 }
 
+Player.prototype.update = function(dt) {
+    
+}
+
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
