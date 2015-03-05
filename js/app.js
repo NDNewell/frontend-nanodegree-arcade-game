@@ -59,8 +59,10 @@ Player.prototype.handleInput = function(key) {
             break;
 
         case 'up':
-            if(this.y > 0) {
+            if(this.y > 100) {
                 this.y--;
+            } else {
+                this.startOver();
             }
             break;
 
