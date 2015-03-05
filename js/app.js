@@ -53,19 +53,19 @@ Player.prototype.handleInput = function(key) {
     switch(key) {
         case 'left':
             if(this.x > 0) {
-                this.x--;
+                this.x-=25;
             }
             break;
 
         case 'right':
             if(this.x < 505) {
-                this.x++;
+                this.x+=25;
             }
             break;
 
         case 'up':
             if(this.y > 100) {
-                this.y--;
+                this.y-=25;
             } else {
                 this.startOver();
             }
@@ -73,7 +73,7 @@ Player.prototype.handleInput = function(key) {
 
         case 'down':
             if(this.y < 606) {
-                this.y++;
+                this.y+=25;
             }
             break;
     }
