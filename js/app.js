@@ -44,6 +44,11 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
+Player.prototype.startOver = function() {
+    this.x = 250;
+    this.y = 500;
+}
+
 Player.prototype.handleInput = function(key) {
     switch(key) {
         case 'left':
