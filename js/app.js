@@ -58,7 +58,7 @@ Player.prototype.handleInput = function(key) {
             break;
 
         case 'right':
-            if(this.x < 505) {
+            if(this.x < 400) {
                 this.x+=25;
             }
             break;
