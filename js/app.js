@@ -14,7 +14,7 @@ Enemy.prototype.update = function(dt) {
     this.x += this.speed * dt;
 
         if(this.x > 505) {
-            this.x = 0;
+            this.x = -100;
         }
 }
 
