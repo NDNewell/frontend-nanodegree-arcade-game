@@ -4,6 +4,10 @@ var Enemy = function(x, y, speed) {
     this.x = x;
     this.y = y;
     this.sprite = 'images/enemy-bug.png';
+    this.left = this.x;
+    this.right = this.x + 50;
+    this.top = this.y;
+    this.bottom = this.y + 50;
 }
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -13,32 +17,35 @@ Enemy.prototype.update = function(dt) {
     // all computers.
     this.x += this.speed * dt;
 
-        if(this.x > 505) {
-            this.x = -100;
-        }
-}
+    if(this.x > 505) {
+        this.x = -100;
+    }
+} 
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
+
+
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
 
 function Player(x,y) {
-    this.x = x;
-    this.y = y;
-    this.sprite = 'images/char-boy.png';
-
     this.x = 200;
     this.y = 400;
+    this.sprite = 'images/char-boy.png';
+    this.left = this.x;
+    this.right = this.x + 50;
+    this.top = this.y;
+    this.bottom = this.y +50;
 }
 
 Player.prototype.update = function(dt) {
-
 }
+
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -103,3 +110,4 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
