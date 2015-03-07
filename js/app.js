@@ -20,10 +20,11 @@ Enemy.prototype.update = function(dt) {
 
 function checkCollisions () {
     allEnemies.forEach(function(enemy) {
-             if(enemy.x < player.y + 50 &&
-                enemy.x + 50 > player.x &&
+             if(enemy.x < player.x + 50 &&
+                enemy.x + 70 > player.x &&
                 enemy.y < player.y + 50 &&
-                enemy.y + 50 > player.y) {
+                enemy.y + 70 > player.y) {
+                    console.log('collision!');
                     player.startOver();
                 }
             });
