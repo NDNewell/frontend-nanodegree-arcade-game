@@ -22,6 +22,22 @@ Enemy.prototype.update = function(dt) {
     }
 }
 
+function evilerEnemy(x,y,speed) {
+    Enemy.call(this, x, y, speed);
+    this.sprite = 'images/enemy-bug2.png';
+}
+
+evilerEnemy.prototype = Object.create(Enemy.prototype);
+evilerEnemy.prototype.constructor = evilerEnemy;
+
+function evilestEnemy(x,y,speed) {
+    Enemy.call(this, x, y, speed);
+    this.sprite = 'images/enemy-bug3.png';
+}
+
+evilestEnemy.prototype = Object.create(Enemy.prototype);
+evilestEnemy.prototype.constructor = evilestEnemy;
+
 function checkCollisions () {
     allEnemies.forEach(function(enemy) {
              if(enemy.leftSide < player.rightSide &&
@@ -102,8 +118,8 @@ Player.prototype.handleInput = function(key) {
 // Place the player object in a variable called player
 
 var allEnemies = [
-    new Enemy(0, 55, 150),
-    new Enemy(0, 140, 250),
+    new evilerEnemy(0, 55, 150),
+    new evilestEnemy(0, 140, 250),
     new Enemy(0, 225, 100)
     ];
 
