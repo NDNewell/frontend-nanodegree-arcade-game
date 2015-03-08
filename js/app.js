@@ -22,14 +22,6 @@ Enemy.prototype.update = function(dt) {
     }
 }
 
-function evilerEnemy(x,y,speed) {
-    Enemy.call(this, x, y, speed);
-    this.sprite = 'images/enemy-bug.png';
-}
-
-evilerEnemy.prototype = Object.create(Enemy.prototype);
-evilerEnemy.prototype.constructor = evilerEnemy;
-
 function checkCollisions () {
     allEnemies.forEach(function(enemy) {
              if(enemy.leftSide < player.rightSide &&
@@ -110,9 +102,9 @@ Player.prototype.handleInput = function(key) {
 // Place the player object in a variable called player
 
 var allEnemies = [
-    new evilerEnemy(0, 135, 250),
-    new Enemy(0, 220, 150),
-    new Enemy(0, 305, 100)
+    new Enemy(0, 55, 150),
+    new Enemy(0, 140, 250),
+    new Enemy(0, 225, 100)
     ];
 
 var player = new Player();
