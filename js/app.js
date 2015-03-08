@@ -20,10 +20,10 @@ Enemy.prototype.update = function(dt) {
 
 function checkCollisions () {
     allEnemies.forEach(function(enemy) {
-             if(enemy.x < player.x + 50 &&
-                enemy.x + 70 > player.x &&
-                enemy.y < player.y + 50 &&
-                enemy.y + 70 > player.y) {
+             if(enemy.x < player.rightSide &&
+                enemy.x + 70 > player.leftSide &&
+                enemy.y < player.bottom &&
+                enemy.y + 70 > player.top) {
                     console.log('collision!');
                     player.startOver();
                 }
@@ -47,6 +47,10 @@ function Player(x,y) {
 }
 
 Player.prototype.update = function(dt) {
+    this.leftSide = this.x;
+    this.rightSide = this.x + 70;
+    this.top = this.y;
+    this.bottom = this.y + 70;
 }
 
 
