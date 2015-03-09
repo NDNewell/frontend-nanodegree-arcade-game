@@ -1,10 +1,18 @@
 // Enemies our player must avoid
-var Enemy = function(x, y, speed) {
+function Sprite(x,y) {
+  this.x = x;
+  this.y = y;
+}
+
+function Enemy(x, y, speed) {
+    Sprite.call(this, x, y);
     this.speed = speed;
-    this.x = x;
-    this.y = y;
     this.sprite = 'images/enemy-bug.png';
 }
+
+Enemy.prototype = Object.create(Sprite.prototype);
+Enemy.prototype.constructor = Enemy;
+
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
@@ -15,6 +23,7 @@ Enemy.prototype.update = function(dt) {
     this.rightSide = this.x + 70;
     this.top = this.y;
     this.bottom = this.y + 75;
+
     this.x += this.speed * dt;
 
     if(this.x > 505) {
@@ -24,7 +33,7 @@ Enemy.prototype.update = function(dt) {
 
 function evilerEnemy(x,y,speed) {
     Enemy.call(this, x, y, speed);
-    this.sprite = 'images/enemy-bug2.png';
+    this.sprite = 'images/enemy-bug3.png';
 }
 
 evilerEnemy.prototype = Object.create(Enemy.prototype);
@@ -32,7 +41,7 @@ evilerEnemy.prototype.constructor = evilerEnemy;
 
 function evilestEnemy(x,y,speed) {
     Enemy.call(this, x, y, speed);
-    this.sprite = 'images/enemy-bug3.png';
+    this.sprite = 'images/enemy-bug2.png';
 }
 
 evilestEnemy.prototype = Object.create(Enemy.prototype);
@@ -118,9 +127,9 @@ Player.prototype.handleInput = function(key) {
 // Place the player object in a variable called player
 
 var allEnemies = [
-    new evilerEnemy(0, 55, 150),
-    new evilestEnemy(0, 140, 250),
-    new Enemy(0, 225, 100)
+    new evilerEnemy(0, 30, 150),
+    new evilestEnemy(0, 85, 100),
+    new Enemy(0, 225, 250)
     ];
 
 var player = new Player();
