@@ -43,6 +43,24 @@ function evilerEnemy(x,y,speed) {
 evilerEnemy.prototype = Object.create(Enemy.prototype);
 evilerEnemy.prototype.constructor = evilerEnemy;
 
+// Update evilerEnemy objects
+evilerEnemy.prototype.update = function(dt) {
+
+// Set variables for enemy dimensions
+    this.leftSide = this.x;
+    this.rightSide = this.x + 100;
+    this.top = this.y;
+    this.bottom = this.y + 100;
+
+// Update the enemy's position using time delta between ticks
+    this.x += this.speed * dt;
+
+// Parameter to reset enemy's position after moving off screen
+    if(this.x > 505) {
+        this.x = -100;
+    }
+}
+
 // Create subclass evilestEnemy
 function evilestEnemy(x,y,speed) {
     Enemy.call(this, x, y, speed);
@@ -52,6 +70,23 @@ function evilestEnemy(x,y,speed) {
 // Set evilestEnemy prototype as a subclass of Enemy
 evilestEnemy.prototype = Object.create(Enemy.prototype);
 evilestEnemy.prototype.constructor = evilestEnemy;
+
+evilestEnemy.prototype.update = function(dt) {
+
+// Set variables for enemy dimensions
+    this.leftSide = this.x;
+    this.rightSide = this.x + 130;
+    this.top = this.y + 50;
+    this.bottom = this.y + 140;
+
+// Update the enemy's position using time delta between ticks
+    this.x += this.speed * dt;
+
+// Parameter to reset enemy's position after moving off screen
+    if(this.x > 505) {
+        this.x = -100;
+    }
+}
 
 // Collision detection algorithm using box collision
 function checkCollisions () {
@@ -89,7 +124,7 @@ Player.prototype.update = function(dt) {
     this.leftSide = this.x - 15;
     this.rightSide = this.x + 77;
     this.top = this.y - 25;
-    this.bottom = this.y + 100;
+    this.bottom = this.y + 55;
 }
 
 // Draw the player on the screen
@@ -137,9 +172,9 @@ Player.prototype.handleInput = function(key) {
 
 // Instantiate objects
 var allEnemies = [
-    new evilerEnemy(0, 30, 150),
+    new evilerEnemy(0, 30, 200),
     new evilestEnemy(0, 85, 100),
-    new Enemy(0, 225, 250)
+    new Enemy(0, 225, 300)
     ];
 
 var player = new Player();
