@@ -1,3 +1,8 @@
+gameState = function() {
+    this.lives = 3;
+}
+
+
 // Create master-class
 function Sprite(x, y, speed, right, left, bottom, top, sprite) {
     this.x = x;
@@ -86,6 +91,17 @@ Player.prototype.update = function(dt) {
 // Draw the player on the screen
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+}
+
+// Method for ending game or taking player's life before starting over
+// Still need to create gameOver.render();
+Player.prototype.die = function() {
+    if(this.lives < 1) {
+      gameOver.render();
+      } else {
+        player.startOver();
+        this.lives--;
+      }
 }
 
 // Method for resetting player position
