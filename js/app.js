@@ -6,8 +6,8 @@ function Sprite(x, y, speed, right, left, bottom, top) {
     // Set variables for enemy dimensions
     this.right = right;
     this.left = left;
-    this.bottom = this.y + bottom;
-    this.top = this.y + top;
+    this.bottom = bottom;
+    this.top = top;
 }
 
 // Create subclass Enemy
@@ -31,6 +31,7 @@ Enemy.prototype.update = function(dt) {
         this.x = -100;
     }
 }
+
 // Create subclass evilerEnemy
 function evilerEnemy(x, y, speed, right, left, bottom, top) {
     Enemy.call(this, x, y, speed, right, left, bottom, top);
@@ -56,8 +57,8 @@ function checkCollisions () {
     allEnemies.forEach(function(enemy) {
              if(enemy.x + enemy.left < player.x + player.right &&
                 enemy.x + enemy.right > player.x + player.left &&
-                enemy.top < player.bottom &&
-                enemy.bottom > player.top) {
+                enemy.y + enemy.top < player.y + player.bottom &&
+                enemy.y + enemy.bottom > player.y + player.top) {
                     console.log('collision!');
                   //Reset player position
                     player.startOver();
@@ -130,13 +131,13 @@ Player.prototype.handleInput = function(key) {
 
 // Instantiate objects
 var allEnemies = [
-    //x, y, speed, right, left, bottom, top
+                    // x, y, speed, right, left, bottom, top
     new evilerEnemy(0, 30, 200, 100, 0, 100, 0),
     new evilestEnemy(0, 85, 100, 130, 0, 140, 50),
     new Enemy(0, 225, 300, 70, 0, 75, 0)
     ];
 
-//x, y, speed, right, left, bottom, top
+                    // x, y, speed, right, left, bottom, top
 var player = new Player(200, 400, 0, 77, -15, 55, -25);
 
 // Listen for key presses and send the keys to
