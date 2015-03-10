@@ -5,9 +5,12 @@ function Sprite(x,y) {
 }
 
 // Create subclass Enemy
-function Enemy(x, y, speed) {
+function Enemy(x, y, speed, width, height) {
     Sprite.call(this, x, y);
     this.speed = speed;
+    // Set variables for enemy dimensions
+    this.width = width;
+    this.height = height;
     this.sprite = 'images/enemy-bug.png';
 }
 
@@ -18,12 +21,6 @@ Enemy.prototype.constructor = Enemy;
 // Update enemy objects
 Enemy.prototype.update = function(dt) {
 
-// Set variables for enemy dimensions
-    this.leftSide = this.x;
-    this.rightSide = this.x + 70;
-    this.top = this.y;
-    this.bottom = this.y + 75;
-
 // Update the enemy's position using time delta between ticks
     this.x += this.speed * dt;
 
@@ -32,7 +29,6 @@ Enemy.prototype.update = function(dt) {
         this.x = -100;
     }
 }
-
 // Create subclass evilerEnemy
 function evilerEnemy(x,y,speed) {
     Enemy.call(this, x, y, speed);
@@ -46,7 +42,7 @@ evilerEnemy.prototype.constructor = evilerEnemy;
 // Update evilerEnemy objects
 evilerEnemy.prototype.update = function(dt) {
 
-// Set variables for enemy dimensions
+// Set variables for evilerEnemy dimensions
     this.leftSide = this.x;
     this.rightSide = this.x + 100;
     this.top = this.y;
@@ -87,14 +83,13 @@ evilestEnemy.prototype.update = function(dt) {
         this.x = -100;
     }
 }
-
 // Collision detection algorithm using box collision
 function checkCollisions () {
     allEnemies.forEach(function(enemy) {
-             if(enemy.leftSide < player.rightSide &&
-                enemy.rightSide > player.leftSide &&
-                enemy.top < player.bottom &&
-                enemy.bottom > player.top) {
+             if(enemy.x < player.rightSide &&
+                enemy.x + enemy.width > player.leftSide &&
+                enemy.y < player.bottom &&
+                enemy.y + enemy.height > player.top) {
                     console.log('collision!');
                   //Reset player position
                     player.startOver();
@@ -173,7 +168,7 @@ Player.prototype.handleInput = function(key) {
 var allEnemies = [
     new evilerEnemy(0, 30, 200),
     new evilestEnemy(0, 85, 100),
-    new Enemy(0, 225, 300)
+    new Enemy(0, 225, 60, 70, 75)
     ];
 
 var player = new Player(200, 400);
