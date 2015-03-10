@@ -1,18 +1,18 @@
 // Create master-class
-function Sprite(x,y) {
-  this.x = x;
-  this.y = y;
-}
-
-// Create subclass Enemy
-function Enemy(x, y, speed, right, left, bottom, top) {
-    Sprite.call(this, x, y);
+function Sprite(x, y, speed, right, left, bottom, top) {
+    this.x = x;
+    this.y = y;
     this.speed = speed;
     // Set variables for enemy dimensions
     this.right = right;
     this.left = left;
     this.bottom = this.y + bottom;
     this.top = this.y + top;
+}
+
+// Create subclass Enemy
+function Enemy(x, y, speed, right, left, bottom, top) {
+    Sprite.call(this, x, y, speed, right, left, bottom, top);
     this.sprite = 'images/enemy-bug.png';
 }
 
@@ -73,13 +73,14 @@ Enemy.prototype.render = function() {
 // Create player subclass of Sprite
 
 function Player(x,y) {
-    Sprite.call(this, x, y);
+    this.x = x;
+    this.y = y;
     this.sprite = 'images/char-cartman.png';
 }
 
 // Set Player prototype as a subclass of Sprite
-Player.prototype = Object.create(Sprite.prototype);
-Player.prototype.constructor = Player;
+//Player.prototype = Object.create(Sprite.prototype);
+//Player.prototype.constructor = Player;
 
 // Set variables for enemy dimensions
 Player.prototype.update = function(dt) {
@@ -134,6 +135,7 @@ Player.prototype.handleInput = function(key) {
 
 // Instantiate objects
 var allEnemies = [
+    //x, y, speed, right, left, bottom, top
     new evilerEnemy(0, 30, 200, 100, 0, 100, 0),
     new evilestEnemy(0, 85, 100, 130, 0, 140, 50),
     new Enemy(0, 225, 300, 70, 0, 75, 0)
