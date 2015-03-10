@@ -119,7 +119,7 @@ Player.prototype.handleInput = function(key) {
             break;
 
         case 'down':
-            if(this.y < 425) {
+            if(this.y < 475) {
                 this.y+=25;
             }
             break;
@@ -130,12 +130,12 @@ Player.prototype.handleInput = function(key) {
 var allEnemies = [
                     // x, y, speed, right, left, bottom, top, sprite
     new evilerEnemy(0, 30, 200, 100, 0, 100, 0, 'images/enemy-bug3.png'),
-    new evilestEnemy(0, 85, 100, 130, 0, 140, 50, 'images/enemy-bug2.png'),
-    new Enemy(0, 225, 300, 70, 0, 75, 0, 'images/enemy-bug.png')
+    new evilestEnemy(0, 125, 100, 130, 0, 140, 50, 'images/enemy-bug2.png'),
+    new Enemy(0, 275, 300, 70, 0, 75, 0, 'images/enemy-bug.png'),
     ];
 
                     // x, y, speed, right, left, bottom, top, sprite
-var player = new Player(200, 400, 0, 77, -15, 55, -25, 'images/char-cartman.png');
+var player = new Player(200, 475, 0, 77, -15, 55, -25, 'images/char-cartman.png');
 
 // Listen for key presses and send the keys to
 // Player.handleInput() method.
