@@ -110,8 +110,7 @@ Enemy.prototype.render = function() {
 // Create player subclass of Sprite
 
 function Player(x,y) {
-    this.x = 200;
-    this.y = 400;
+    Sprite.call(this, x, y);
     this.sprite = 'images/char-cartman.png';
 }
 
@@ -177,7 +176,7 @@ var allEnemies = [
     new Enemy(0, 225, 300)
     ];
 
-var player = new Player();
+var player = new Player(200, 400);
 
 // Listen for key presses and send the keys to
 // Player.handleInput() method.
