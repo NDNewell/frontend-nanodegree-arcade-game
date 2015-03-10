@@ -5,12 +5,14 @@ function Sprite(x,y) {
 }
 
 // Create subclass Enemy
-function Enemy(x, y, speed, width, height) {
+function Enemy(x, y, speed, right, left, bottom, top) {
     Sprite.call(this, x, y);
     this.speed = speed;
     // Set variables for enemy dimensions
-    this.width = width;
-    this.height = height;
+    this.right = right;
+    this.left = left;
+    this.bottom = this.y + bottom;
+    this.top = this.y + top;
     this.sprite = 'images/enemy-bug.png';
 }
 
@@ -30,8 +32,8 @@ Enemy.prototype.update = function(dt) {
     }
 }
 // Create subclass evilerEnemy
-function evilerEnemy(x,y,speed) {
-    Enemy.call(this, x, y, speed);
+function evilerEnemy(x, y, speed, right, left, bottom, top) {
+    Enemy.call(this, x, y, speed, right, left, bottom, top);
     this.sprite = 'images/enemy-bug3.png';
 }
 
@@ -39,27 +41,9 @@ function evilerEnemy(x,y,speed) {
 evilerEnemy.prototype = Object.create(Enemy.prototype);
 evilerEnemy.prototype.constructor = evilerEnemy;
 
-// Update evilerEnemy objects
-evilerEnemy.prototype.update = function(dt) {
-
-// Set variables for evilerEnemy dimensions
-    this.leftSide = this.x;
-    this.rightSide = this.x + 100;
-    this.top = this.y;
-    this.bottom = this.y + 100;
-
-// Update the enemy's position using time delta between ticks
-    this.x += this.speed * dt;
-
-// Parameter to reset enemy's position after moving off screen
-    if(this.x > 505) {
-        this.x = -100;
-    }
-}
-
 // Create subclass evilestEnemy
-function evilestEnemy(x,y,speed) {
-    Enemy.call(this, x, y, speed);
+function evilestEnemy(x, y , speed, right, left, bottom, top) {
+    Enemy.call(this, x, y, speed, right, left, bottom, top);
     this.sprite = 'images/enemy-bug2.png';
 }
 
@@ -67,29 +51,13 @@ function evilestEnemy(x,y,speed) {
 evilestEnemy.prototype = Object.create(Enemy.prototype);
 evilestEnemy.prototype.constructor = evilestEnemy;
 
-evilestEnemy.prototype.update = function(dt) {
-
-// Set variables for enemy dimensions
-    this.leftSide = this.x;
-    this.rightSide = this.x + 130;
-    this.top = this.y + 50;
-    this.bottom = this.y + 140;
-
-// Update the enemy's position using time delta between ticks
-    this.x += this.speed * dt;
-
-// Parameter to reset enemy's position after moving off screen
-    if(this.x > 505) {
-        this.x = -100;
-    }
-}
 // Collision detection algorithm using box collision
 function checkCollisions () {
     allEnemies.forEach(function(enemy) {
-             if(enemy.x < player.rightSide &&
-                enemy.x + enemy.width > player.leftSide &&
-                enemy.y < player.bottom &&
-                enemy.y + enemy.height > player.top) {
+             if(enemy.x + enemy.left < player.rightSide &&
+                enemy.x + enemy.right > player.leftSide &&
+                enemy.top < player.bottom &&
+                enemy.bottom > player.top) {
                     console.log('collision!');
                   //Reset player position
                     player.startOver();
@@ -166,9 +134,9 @@ Player.prototype.handleInput = function(key) {
 
 // Instantiate objects
 var allEnemies = [
-    new evilerEnemy(0, 30, 200),
-    new evilestEnemy(0, 85, 100),
-    new Enemy(0, 225, 60, 70, 75)
+    new evilerEnemy(0, 30, 200, 100, 0, 100, 0),
+    new evilestEnemy(0, 85, 100, 130, 0, 140, 50),
+    new Enemy(0, 225, 300, 70, 0, 75, 0)
     ];
 
 var player = new Player(200, 400);
