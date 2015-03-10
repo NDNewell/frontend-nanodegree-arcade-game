@@ -1,5 +1,5 @@
 // Create master-class
-function Sprite(x, y, speed, right, left, bottom, top) {
+function Sprite(x, y, speed, right, left, bottom, top, sprite) {
     this.x = x;
     this.y = y;
     this.speed = speed;
@@ -8,12 +8,12 @@ function Sprite(x, y, speed, right, left, bottom, top) {
     this.left = left;
     this.bottom = bottom;
     this.top = top;
+    this.sprite = sprite;
 }
 
 // Create subclass Enemy
-function Enemy(x, y, speed, right, left, bottom, top) {
-    Sprite.call(this, x, y, speed, right, left, bottom, top);
-    this.sprite = 'images/enemy-bug.png';
+function Enemy(x, y, speed, right, left, bottom, top, sprite) {
+    Sprite.call(this, x, y, speed, right, left, bottom, top, sprite);
 }
 
 // Set Enemy prototype as a subclass of Sprite
@@ -33,9 +33,8 @@ Enemy.prototype.update = function(dt) {
 }
 
 // Create subclass evilerEnemy
-function evilerEnemy(x, y, speed, right, left, bottom, top) {
-    Enemy.call(this, x, y, speed, right, left, bottom, top);
-    this.sprite = 'images/enemy-bug3.png';
+function evilerEnemy(x, y, speed, right, left, bottom, top, sprite) {
+    Enemy.call(this, x, y, speed, right, left, bottom, top, sprite);
 }
 
 // Set Enemy prototype as a subclass of Enemy
@@ -43,9 +42,8 @@ evilerEnemy.prototype = Object.create(Enemy.prototype);
 evilerEnemy.prototype.constructor = evilerEnemy;
 
 // Create subclass evilestEnemy
-function evilestEnemy(x, y , speed, right, left, bottom, top) {
-    Enemy.call(this, x, y, speed, right, left, bottom, top);
-    this.sprite = 'images/enemy-bug2.png';
+function evilestEnemy(x, y , speed, right, left, bottom, top, sprite) {
+    Enemy.call(this, x, y, speed, right, left, bottom, top, sprite);
 }
 
 // Set evilestEnemy prototype as a subclass of Enemy
@@ -73,9 +71,8 @@ Enemy.prototype.render = function() {
 
 // Create player subclass of Sprite
 
-function Player(x, y, speed, right, left, bottom, top) {
-    Sprite.call(this, x, y, speed, right, left, bottom, top);
-    this.sprite = 'images/char-cartman.png';
+function Player(x, y, speed, right, left, bottom, top, sprite) {
+    Sprite.call(this, x, y, speed, right, left, bottom, top, sprite);
 }
 
 // Set Player prototype as a subclass of Sprite
@@ -131,14 +128,14 @@ Player.prototype.handleInput = function(key) {
 
 // Instantiate objects
 var allEnemies = [
-                    // x, y, speed, right, left, bottom, top
-    new evilerEnemy(0, 30, 200, 100, 0, 100, 0),
-    new evilestEnemy(0, 85, 100, 130, 0, 140, 50),
-    new Enemy(0, 225, 300, 70, 0, 75, 0)
+                    // x, y, speed, right, left, bottom, top, sprite
+    new evilerEnemy(0, 30, 200, 100, 0, 100, 0, 'images/enemy-bug3.png'),
+    new evilestEnemy(0, 85, 100, 130, 0, 140, 50, 'images/enemy-bug2.png'),
+    new Enemy(0, 225, 300, 70, 0, 75, 0, 'images/enemy-bug.png')
     ];
 
-                    // x, y, speed, right, left, bottom, top
-var player = new Player(200, 400, 0, 77, -15, 55, -25);
+                    // x, y, speed, right, left, bottom, top, sprite
+var player = new Player(200, 400, 0, 77, -15, 55, -25, 'images/char-cartman.png');
 
 // Listen for key presses and send the keys to
 // Player.handleInput() method.
