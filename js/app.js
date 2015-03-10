@@ -46,8 +46,8 @@ evilestEnemy.prototype.constructor = evilestEnemy;
 // Collision detection algorithm using box collision
 function checkCollisions () {
     allEnemies.forEach(function(enemy) {
-             if(enemy.x + enemy.left < player.rightSide &&
-                enemy.x + enemy.right > player.leftSide &&
+             if(enemy.x + enemy.left < player.x + player.right &&
+                enemy.x + enemy.right > player.x + player.left &&
                 enemy.top < player.bottom &&
                 enemy.bottom > player.top) {
                     console.log('collision!');
@@ -64,18 +64,19 @@ Enemy.prototype.render = function() {
 
 // Create player subclass of Sprite
 
-function Player(x,y) {
+function Player(x, y, right, left, bottom, top) {
     this.x = x;
     this.y = y;
+    // Set variables for enemy dimensions
+    this.right = right;
+    this.left = left;
+    this.bottom = this.y + bottom;
+    this.top = this.y + top;
     this.sprite = 'images/char-cartman.png';
 }
 
 // Set variables for enemy dimensions
 Player.prototype.update = function(dt) {
-    this.leftSide = this.x - 15;
-    this.rightSide = this.x + 77;
-    this.top = this.y - 25;
-    this.bottom = this.y + 55;
 }
 
 // Draw the player on the screen
@@ -128,7 +129,8 @@ var allEnemies = [
     new Enemy(0, 225, 300, 70, 0, 75, 0)
     ];
 
-var player = new Player(200, 400);
+//x, y, right, left, bottom, top
+var player = new Player(200, 400, 77, -15, 55, -25);
 
 // Listen for key presses and send the keys to
 // Player.handleInput() method.
