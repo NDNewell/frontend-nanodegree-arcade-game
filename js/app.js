@@ -82,8 +82,8 @@ function Player(lives, x, y, speed, right, left, bottom, top, sprite) {
 }
 
 // Set Player prototype as a subclass of Sprite
-//Player.prototype = Object.create(Sprite.prototype);
-//Player.prototype.constructor = Player;
+Player.prototype = Object.create(Sprite.prototype);
+Player.prototype.constructor = Player;
 
 // Set variables for enemy dimensions
 Player.prototype.update = function(dt) {
