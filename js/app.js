@@ -1,7 +1,3 @@
-gameState = function() {
-    this.lives = 3;
-}
-
 
 // Create master-class
 function Sprite(x, y, speed, right, left, bottom, top, sprite) {
@@ -152,7 +148,7 @@ var allEnemies = [
     ];
 
                     // lives, x, y, speed, right, left, bottom, top, sprite
-var player = new Player(1, 200, 475, 0, 77, -15, 55, -25, 'images/char-cartman.png');
+var player = new Player(2, 200, 475, 0, 77, -15, 55, -25, 'images/char-cartman.png');
 
 // Listen for key presses and send the keys to
 // Player.handleInput() method.
