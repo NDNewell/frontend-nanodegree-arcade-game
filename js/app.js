@@ -64,7 +64,7 @@ function checkCollisions () {
                 enemy.y + enemy.bottom > player.y + player.top) {
                     console.log('collision!');
                   //Reset player position
-                    player.startOver();
+                    player.die();
                 }
             });
 }
@@ -76,8 +76,9 @@ Enemy.prototype.render = function() {
 
 // Create player subclass of Sprite
 
-function Player(x, y, speed, right, left, bottom, top, sprite) {
+function Player(lives, x, y, speed, right, left, bottom, top, sprite) {
     Sprite.call(this, x, y, speed, right, left, bottom, top, sprite);
+    this.lives = lives;
 }
 
 // Set Player prototype as a subclass of Sprite
@@ -97,7 +98,7 @@ Player.prototype.render = function() {
 // Still need to create gameOver.render();
 Player.prototype.die = function() {
     if(this.lives < 1) {
-      gameOver.render();
+      gameOver();
       } else {
         player.startOver();
         this.lives--;
@@ -107,7 +108,7 @@ Player.prototype.die = function() {
 // Method for resetting player position
 Player.prototype.startOver = function() {
     this.x = 200;
-    this.y = 400;
+    this.y = 475;
 }
 
 // Key instructions for player movements
@@ -150,8 +151,8 @@ var allEnemies = [
     new Enemy(0, 300, 300, 70, 0, 75, 0, 'images/enemy-bug.png')
     ];
 
-                    // x, y, speed, right, left, bottom, top, sprite
-var player = new Player(200, 475, 0, 77, -15, 55, -25, 'images/char-cartman.png');
+                    // lives, x, y, speed, right, left, bottom, top, sprite
+var player = new Player(1, 200, 475, 0, 77, -15, 55, -25, 'images/char-cartman.png');
 
 // Listen for key presses and send the keys to
 // Player.handleInput() method.
