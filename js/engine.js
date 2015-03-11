@@ -190,9 +190,8 @@ var Engine = (function(global) {
             ctx.strokeStyle = "black";
             ctx.lineWidth = 1;
             ctx.strokeText(prompts[1], 260, 270);
-
-            console.log("Game Over!")
-
+            console.log("Game Over!");
+            reset();
         }
     }
 
