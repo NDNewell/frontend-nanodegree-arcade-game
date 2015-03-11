@@ -1,3 +1,7 @@
+gameState = function() {
+    this.lives = 3;
+}
+
 
 // Create master-class
 function Sprite(x, y, speed, right, left, bottom, top, sprite) {
@@ -60,7 +64,7 @@ function checkCollisions () {
                 enemy.y + enemy.bottom > player.y + player.top) {
                     console.log('collision!');
                   //Reset player position
-                    player.die();
+                    player.startOver();
                 }
             });
 }
@@ -74,7 +78,6 @@ Enemy.prototype.render = function() {
 
 function Player(x, y, speed, right, left, bottom, top, sprite) {
     Sprite.call(this, x, y, speed, right, left, bottom, top, sprite);
-    this.lives = 3;
 }
 
 // Set Player prototype as a subclass of Sprite
@@ -104,7 +107,7 @@ Player.prototype.die = function() {
 // Method for resetting player position
 Player.prototype.startOver = function() {
     this.x = 200;
-    this.y = 475;
+    this.y = 400;
 }
 
 // Key instructions for player movements
