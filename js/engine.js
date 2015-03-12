@@ -23,7 +23,7 @@ var Engine = (function(global) {
         win = global.window,
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
-        lastTime, game_over = false;
+        lastTime;
 
     canvas.width = 505;
     canvas.height = 675;
@@ -115,7 +115,7 @@ var Engine = (function(global) {
         /* This array holds the relative URL to the image used
          * for that particular row of the game level.
          */
-        if(player.lives > 0) {
+
 
             var rowImages = [
                     'images/water-block.png',   // Top row is water
@@ -149,9 +149,7 @@ var Engine = (function(global) {
 
 
             renderEntities();
-        } else {
-            game_over = true;
-        }
+
     }
 
     /* This function is called by the render function and is called on each game

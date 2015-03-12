@@ -1,3 +1,5 @@
+// Set global variable
+var game_over = false;
 
 // Create master-class
 function Sprite(x, y, speed, right, left, bottom, top, spriteImg) {
@@ -30,6 +32,11 @@ Enemy.prototype.update = function(dt) {
 // Parameter to reset enemy's position after moving off screen
     if(this.x > 505) {
         this.x = -100;
+    }
+
+// Check players lives
+    if(player.lives === 0) {
+        game_over = true;
     }
 }
 
@@ -125,21 +132,7 @@ function gameOver () {
     ctx.font = "30px Impact";
     ctx.fillText(prompts[1], 85, 225);
     console.log("Game Over!");
-
-    continueGame();
 }
-
-function continueGame() {
-    player.handleInput = function(key) {
-    switch(key) {
-          case 'space':
-            game_over = true;
-            main();
-            break;
-        }
-    }
-}
-
 
 // Key instructions for player movements
 Player.prototype.handleInput = function(key) {
@@ -170,6 +163,14 @@ Player.prototype.handleInput = function(key) {
                 this.y+=25;
             }
             break;
+
+        case 'space':
+            if(game_over) {
+                this.lives = 2;
+                game_over = false;
+                player.startOver();
+                player.main();
+            }
     }
 }
 
