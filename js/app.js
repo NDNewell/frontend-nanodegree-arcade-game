@@ -74,7 +74,7 @@ Enemy.prototype.render = function() {
 
 function Player(x, y, speed, right, left, bottom, top, spriteImg) {
     Sprite.call(this, x, y, speed, right, left, bottom, top, spriteImg);
-    this.lives = 1;
+    this.lives = 2;
 }
 
 // Set Player prototype as a subclass of Sprite
@@ -93,8 +93,10 @@ Player.prototype.render = function() {
 // Method for ending game or taking player's life before starting over
 // Still need to create gameOver.render();
 Player.prototype.die = function() {
-    player.startOver();
-    this.lives--;
+
+      player.startOver();
+      this.lives--;
+
 }
 
 // Method for resetting player position
@@ -102,38 +104,6 @@ Player.prototype.startOver = function() {
     this.x = 200;
     this.y = 475;
 }
-
-Player.prototype.gameOver = function () {
-      // Draw Game Over prompt
-      console.log("Draw Game Over Box");
-      ctx.rect(55, 100, 400, 200);
-      ctx.fillStyle = '#E8E8BF';
-      ctx.fill();
-      ctx.lineWidth = 1;
-      ctx.strokeStyle = '#FFAD33';
-      ctx.stroke();
-      
-      //Set prompt text
-      var prompts = ["GAME OVER", "Press spacebar to Continue"]
-      
-      //Draw prompt: 'GAME OVER'
-      console.log("Draw Game Over Text");
-      ctx.font = "45px Impact";
-      ctx.fillStyle = "#FFAD33";
-      ctx.fillText(prompts[0], 160, 215);
-      ctx.strokeStyle = "black";
-      ctx.lineWidth = 2;
-      ctx.strokeText(prompts[0], 160, 215);
-
-      //Draw prompt: 'Press spacebar to Continue
-      console.log("Draw Continue Text");
-      ctx.font = "25px Impact";
-      ctx.fillText(prompts[1], 115, 270);
-      ctx.strokeStyle = "black";
-      ctx.lineWidth = 1;
-      ctx.strokeText(prompts[1], 115, 270);
-      console.log("Game Over!");
-  }
 
 // Key instructions for player movements
 Player.prototype.handleInput = function(key) {
