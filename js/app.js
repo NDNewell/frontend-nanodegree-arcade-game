@@ -104,13 +104,13 @@ Player.prototype.startOver = function() {
 }
 
 function gameOver () {
-  // Draw Game Over prompt
+  // Draw Game Over prompt box
     console.log("Draw Game Over Box");
     ctx.rect(55, 100, 400, 200);
-    ctx.fillStyle = '#E8E8BF';
+    ctx.fillStyle = 'white';
     ctx.fill();
-    ctx.lineWidth = 1;
-    ctx.strokeStyle = '#FFAD33';
+    ctx.lineWidth = 7;
+    ctx.strokeStyle = '#47B224';
     ctx.stroke();
     
     //Set prompt text
@@ -118,20 +118,14 @@ function gameOver () {
     
     //Draw prompt: 'GAME OVER'
     console.log("Draw Game Over Text");
-    ctx.font = "45px Impact";
-    ctx.fillStyle = "#FFAD33";
-    ctx.fillText(prompts[0], 160, 215);
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = 2;
-    ctx.strokeText(prompts[0], 160, 215);
+    ctx.font = "60px Impact";
+    ctx.fillStyle = "#47B224";
+    ctx.fillText(prompts[0], 125, 215);
 
     //Draw prompt: 'Press spacebar to Continue
     console.log("Draw Continue Text");
-    ctx.font = "25px Impact";
-    ctx.fillText(prompts[1], 115, 270);
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = 1;
-    ctx.strokeText(prompts[1], 115, 270);
+    ctx.font = "30px Impact";
+    ctx.fillText(prompts[1], 85, 270);
     console.log("Game Over!");
 }
 
