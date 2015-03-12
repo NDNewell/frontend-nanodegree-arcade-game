@@ -107,38 +107,43 @@ var Engine = (function(global) {
         /* This array holds the relative URL to the image used
          * for that particular row of the game level.
          */
-        var rowImages = [
-                'images/water-block.png',   // Top row is water
-                'images/stone-block.png',   // Row 1 of 4 of stone
-                'images/stone-block.png',   // Row 2 of 4 of stone
-                'images/stone-block.png',   // Row 3 of 4 of stone
-                'images/stone-block.png',   // Row 4 of 4 of stone
-                'images/grass-block.png',   // Row 1 of 2 of grass
-                'images/grass-block.png'    // Row 2 of 2 of grass
-            ],
-            numRows = 7,
-            numCols = 5,
-            row, col;
+        if(player.lives > 0) {
 
-        /* Loop through the number of rows and columns we've defined above
-         * and, using the rowImages array, draw the correct image for that
-         * portion of the "grid"
-         */
-        for (row = 0; row < numRows; row++) {
-            for (col = 0; col < numCols; col++) {
-                /* The drawImage function of the canvas' context element
-                 * requires 3 parameters: the image to draw, the x coordinate
-                 * to start drawing and the y coordinate to start drawing.
-                 * We're using our Resources helpers to refer to our images
-                 * so that we get the benefits of caching these images, since
-                 * we're using them over and over.
-                 */
-                ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
+            var rowImages = [
+                    'images/water-block.png',   // Top row is water
+                    'images/stone-block.png',   // Row 1 of 4 of stone
+                    'images/stone-block.png',   // Row 2 of 4 of stone
+                    'images/stone-block.png',   // Row 3 of 4 of stone
+                    'images/stone-block.png',   // Row 4 of 4 of stone
+                    'images/grass-block.png',   // Row 1 of 2 of grass
+                    'images/grass-block.png'    // Row 2 of 2 of grass
+                ],
+                numRows = 7,
+                numCols = 5,
+                row, col;
+
+            /* Loop through the number of rows and columns we've defined above
+             * and, using the rowImages array, draw the correct image for that
+             * portion of the "grid"
+             */
+            for (row = 0; row < numRows; row++) {
+                for (col = 0; col < numCols; col++) {
+                    /* The drawImage function of the canvas' context element
+                     * requires 3 parameters: the image to draw, the x coordinate
+                     * to start drawing and the y coordinate to start drawing.
+                     * We're using our Resources helpers to refer to our images
+                     * so that we get the benefits of caching these images, since
+                     * we're using them over and over.
+                     */
+                    ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
+                }
             }
+
+
+            renderEntities();
+        } else {
+            player.gameOver();
         }
-
-
-        renderEntities();
     }
 
     /* This function is called by the render function and is called on each game
@@ -161,38 +166,6 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        gameOver = function () {
-            // Draw Game Over prompt
-            console.log("Draw Game Over Box");
-            ctx.rect(200, 100, 400, 200);
-            ctx.fillStyle = '#E8E8BF';
-            ctx.fill();
-            ctx.lineWidth = 1;
-            ctx.strokeStyle = '#FFAD33';
-            ctx.stroke();
-            
-            //Set prompt text
-            var prompts = ["GAME OVER", "Press spacebar to Continue"]
-            
-            //Draw prompt: 'GAME OVER'
-            console.log("Draw Game Over Text");
-            ctx.font = "45px Impact";
-            ctx.fillStyle = "#FFAD33";
-            ctx.fillText(prompts[0], 305, 215);
-            ctx.strokeStyle = "black";
-            ctx.lineWidth = 2;
-            ctx.strokeText(prompts[0], 305, 215);
-
-            //Draw prompt: 'Press spacebar to Continue
-            console.log("Draw Continue Text");
-            ctx.font = "25px Impact";
-            ctx.fillText(prompts[1], 260, 270);
-            ctx.strokeStyle = "black";
-            ctx.lineWidth = 1;
-            ctx.strokeText(prompts[1], 260, 270);
-            console.log("Game Over!");
-            reset();
-        }
     }
 
     /* Go ahead and load all of the images we know we're going to need to
