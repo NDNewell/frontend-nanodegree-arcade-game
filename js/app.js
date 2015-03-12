@@ -110,7 +110,7 @@ function gameOver () {
     ctx.fillStyle = 'white';
     ctx.fill();
     ctx.lineWidth = 7;
-    
+
     //Set prompt text
     var prompts = ["GAME OVER", "Press spacebar to Continue"]
     
@@ -125,7 +125,21 @@ function gameOver () {
     ctx.font = "30px Impact";
     ctx.fillText(prompts[1], 85, 225);
     console.log("Game Over!");
+
+    continueGame();
 }
+
+function continueGame() {
+    player.handleInput = function(key) {
+    switch(key) {
+          case 'space':
+            game_over = true;
+            main();
+            break;
+        }
+    }
+}
+
 
 // Key instructions for player movements
 Player.prototype.handleInput = function(key) {
@@ -174,6 +188,7 @@ var player = new Player(200, 475, 0, 77, -15, 55, -25, 'images/char-cartman.png'
 // Player.handleInput() method.
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
+        32: 'space',
         37: 'left',
         38: 'up',
         39: 'right',
