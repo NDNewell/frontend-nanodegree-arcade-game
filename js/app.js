@@ -30,11 +30,6 @@ Enemy.prototype.update = function(dt) {
     if(this.x > 505) {
         this.x = -100;
     }
-
-// Check players lives
-    if(player.lives === 0) {
-        game_over = true;
-    }
 }
 
 // Create subclass evilerEnemy
@@ -87,6 +82,10 @@ Player.prototype.constructor = Player;
 
 // Set variables for enemy dimensions
 Player.prototype.update = function(dt) {
+  // Check player's lives
+    if(player.lives === 0) {
+        game_over = true;
+    }
 }
 
 // Draw the player on the screen
