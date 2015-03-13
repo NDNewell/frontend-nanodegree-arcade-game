@@ -73,7 +73,7 @@ var Engine = (function(global) {
      * particularly setting the lastTime variable that is required for the
      * game loop.
      */
-    init = function() {
+    function init () {
         lastTime = Date.now();
         main();
     }
