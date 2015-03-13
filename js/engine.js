@@ -25,6 +25,8 @@ var Engine = (function(global) {
         ctx = canvas.getContext('2d'),
         lastTime;
 
+    game_over = false;
+
     canvas.width = 505;
     canvas.height = 675;
     doc.body.appendChild(canvas);
@@ -71,8 +73,7 @@ var Engine = (function(global) {
      * particularly setting the lastTime variable that is required for the
      * game loop.
      */
-    function init() {
-        reset();
+    init = function() {
         lastTime = Date.now();
         main();
     }
@@ -172,6 +173,11 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
      reset = function() {
+        console.log("Game Reset");
+        player.startOver();
+        player.lives = 2;
+        game_over = false;
+        main();
     }
 
     /* Go ahead and load all of the images we know we're going to need to
