@@ -106,11 +106,11 @@ Player.prototype.startOver = function() {
     this.y = 475;
 }
 
-function gameOver () {
+var gameOver = function () {
   // Draw Game Over prompt box
     console.log("Draw Game Over Box");
     ctx.rect(40, 100, 430, 150);
-    ctx.fillStyle = 'white';
+    ctx.fillStyle = "rgba(0,0,0,0.75)";
     ctx.fill();
     ctx.lineWidth = 7;
 
@@ -129,6 +129,24 @@ function gameOver () {
     ctx.fillText(prompts[1], 55, 225);
     console.log("Game Over!");
 }
+
+var renderPoints = function () {
+  // Draw points box
+    ctx.rect(2, 625, 499, 45);
+    ctx.fillStyle = 'white';
+    ctx.fill();
+    ctx.strokeStyle = "black";
+    ctx.stroke();
+
+
+}
+
+ /*   var prompts = ["POINTS:"]
+    
+    ctx.font = "50px Impact";
+    ctx.fillStyle = "#47B224";
+    ctx.fillText(prompts[0], 1, 50);
+}*/
 
 // Key instructions for player movements
 Player.prototype.handleInput = function(key) {
