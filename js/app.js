@@ -106,48 +106,6 @@ Player.prototype.startOver = function() {
     this.y = 475;
 }
 
-var gameOver = function () {
-  // Draw Game Over prompt box
-    console.log("Draw Game Over Box");
-    ctx.rect(40, 100, 430, 150);
-    ctx.fillStyle = "rgba(0,0,0,0.75)";
-    ctx.fill();
-    ctx.lineWidth = 7;
-
-    //Set prompt text
-    var prompts = ["GAME OVER", "Press the spacebar to Play Again"]
-    
-    //Draw prompt: 'GAME OVER'
-    console.log("Draw Game Over Text");
-    ctx.font = "60px Impact";
-    ctx.fillStyle = "#47B224";
-    ctx.fillText(prompts[0], 125, 170);
-
-    //Draw prompt: 'Press spacebar to Continue
-    console.log("Draw Continue Text");
-    ctx.font = "30px Impact";
-    ctx.fillText(prompts[1], 55, 225);
-    console.log("Game Over!");
-}
-
-var renderPoints = function () {
-  // Draw points box
-    ctx.rect(2, 625, 499, 45);
-    ctx.fillStyle = 'white';
-    ctx.fill();
-    ctx.strokeStyle = "black";
-    ctx.stroke();
-
-
-}
-
- /*   var prompts = ["POINTS:"]
-    
-    ctx.font = "50px Impact";
-    ctx.fillStyle = "#47B224";
-    ctx.fillText(prompts[0], 1, 50);
-}*/
-
 // Key instructions for player movements
 Player.prototype.handleInput = function(key) {
     switch(key) {

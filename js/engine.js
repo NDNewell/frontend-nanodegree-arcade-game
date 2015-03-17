@@ -117,7 +117,6 @@ var Engine = (function(global) {
          * for that particular row of the game level.
          */
 
-
             var rowImages = [
                     'images/water-block.png',   // Top row is water
                     'images/stone-block.png',   // Row 1 of 4 of stone
@@ -151,6 +150,8 @@ var Engine = (function(global) {
 
             renderEntities();
 
+            renderPoints();
+
     }
 
     /* This function is called by the render function and is called on each game
@@ -166,7 +167,41 @@ var Engine = (function(global) {
         });
 
         player.render();
+
     }
+
+    function gameOver () {
+      // Draw Game Over prompt box
+        console.log("Draw Game Over Box");
+        ctx.rect(40, 100, 430, 150);
+        ctx.fillStyle = "rgba(0,0,0,0.75)";
+        ctx.fill();
+
+        //Set prompt text
+        var prompts = ["GAME OVER", "Press the spacebar to Play Again"]
+        
+        //Draw prompt: 'GAME OVER'
+        console.log("Draw Game Over Text");
+        ctx.font = "60px Impact";
+        ctx.fillStyle = "#47B224";
+        ctx.fillText(prompts[0], 125, 170);
+
+        //Draw prompt: 'Press spacebar to Continue
+        console.log("Draw Continue Text");
+        ctx.font = "30px Impact";
+        ctx.fillText(prompts[1], 55, 225);
+        console.log("Game Over!");
+    }
+
+     function renderPoints() {
+  // Draw points box
+
+        var prompts = ["LIVES:"]
+    
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "#47B224";
+        ctx.fillText(prompts[0], 1, 20);
+}
 
     /* This function does nothing but it could have been a good place to
      * handle game reset states - maybe a new game menu or a game over screen
