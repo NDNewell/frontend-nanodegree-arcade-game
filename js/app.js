@@ -73,7 +73,8 @@ Enemy.prototype.render = function() {
 
 function Player(x, y, speed, right, left, bottom, top, spriteImg) {
     Sprite.call(this, x, y, speed, right, left, bottom, top, spriteImg);
-    this.lives = 2;
+    this.lives = 3;
+    this.points = 0;
 }
 
 // Set Player prototype as a subclass of Sprite
@@ -111,7 +112,7 @@ Player.prototype.handleInput = function(key) {
     switch(key) {
         case 'left':
             if(this.x > 0) {
-                this.x-=25;
+                this.x -= 25;
             }
             break;
 
@@ -124,15 +125,16 @@ Player.prototype.handleInput = function(key) {
         case 'up':
         // when player reaches the water is reset to default position
             if(this.y > 25) {
-                this.y-=25;
+                this.y -= 25;
             } else {
+                this.points += 10;
                 this.startOver();
             }
             break;
 
         case 'down':
             if(this.y < 475) {
-                this.y+=25;
+                this.y += 25;
             }
             break;
 

@@ -151,7 +151,7 @@ var Engine = (function(global) {
 
             renderEntities();
 
-            renderLives();
+            renderStats();
 
     }
 
@@ -195,16 +195,23 @@ var Engine = (function(global) {
     }
 
         
-    function renderLives() {
+    function renderStats() {
 
-        // Draw points box
+        // Draw lives text
 
-        var prompts = ["LIVES:" + " " + player.lives]
+        var prompts = ["LIVES:" + " " + player.lives, "POINTS:" + " " + player.points]
     
         ctx.font = "35px Impact";
         ctx.fillStyle = "#47B224";
         ctx.fillText(prompts[0], 1, 35);
+
+        // Draw points text
+        ctx.font = "35px Impact";
+        ctx.fillStyle = "#47B224";
+        ctx.fillText(prompts[1], 335, 35);
     }
+
+
 
     //clears top portion of the canvas so text doesn't get blurry
     function clearcanvasTop () {
