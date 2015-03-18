@@ -63,10 +63,11 @@ var Engine = (function(global) {
         function animationCheck () {
                 if (!stopGame) {
                   win.requestAnimationFrame(main);
-                } else if (player.lives > 0) {
+                } else if (player.level === 5) {
                   youWin();
-                }
-                else {
+                } else if (player.level === 2) {
+                  passLevel();
+                } else {
                   gameOver();
                 }
             }
@@ -198,7 +199,7 @@ var Engine = (function(global) {
     }
 
       // Draw you win prompt box
-        function youWin () {
+    function youWin () {
         console.log("Draw winner box");
         ctx.rect(40, 100, 430, 150);
         ctx.fillStyle = "rgba(0,0,0,0.75)";
@@ -217,9 +218,42 @@ var Engine = (function(global) {
         console.log("Draw continue text");
         ctx.font = "30px Impact";
         ctx.fillText(prompts[1], 55, 225);
-        console.log("YOU WIN!");
+        console.log("You Win!");
     }
 
+      // Draw pass level prompt box
+    function passLevel () {
+        console.log("Draw pass level box");
+        ctx.rect(40, 100, 430, 300);
+        ctx.fillStyle = "rgba(0,0,0,0.75)";
+        ctx.fill();
+
+        //Set number to reflect level passed
+        var displayLevel = player.level -1;
+        //Set prompt text
+        var prompts = ["YOU PASSED LEVEL", displayLevel, "Press the Spacebar", "for the next level !"]
+        //Draw text: 'You passed level'
+        console.log("Draw pass level text");
+        ctx.font = "50px Impact";
+        ctx.fillStyle = "#47B224";
+        ctx.fillText(prompts[0], 80, 170);
+
+        //Draw text: 'level number'
+        console.log("Draw level number text");
+        ctx.font = "80px Impact";
+        ctx.fillStyle = "#47B224";
+        ctx.fillText(prompts[1], 235, 260);
+
+        //Draw text: 'Press the spacebar'
+        ctx.font = "40px Impact";
+        ctx.fillText(prompts[2], 95, 320);
+
+        //Draw text: 'to Continue'
+        console.log("Draw continue text");
+        ctx.font = "40px Impact";
+        ctx.fillText(prompts[3], 110, 365);
+        console.log("Level Passed!");
+    }
         
     function renderStats() {
 
@@ -234,7 +268,7 @@ var Engine = (function(global) {
         // Draw points text
         ctx.font = "35px Impact";
         ctx.fillStyle = "#47B224";
-        ctx.fillText(prompts[1], 185, 35);
+        ctx.fillText(prompts[1], 180 , 35);
 
         // Draw level text
         ctx.font = "35px Impact";
@@ -270,9 +304,11 @@ var Engine = (function(global) {
     reset = function() {
         console.log("Game Reset");
         player.startOver();
-        player.lives = 3;
-        player.points = 0;
-        player.level = 1;
+            if (player.lives === 0) {
+                player.points = 0;
+                player.lives = 3;
+                player.level = 1;
+            }
         stopGame = false;
         main();
     }
