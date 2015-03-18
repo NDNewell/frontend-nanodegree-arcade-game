@@ -76,7 +76,7 @@ function Player(x, y, speed, right, left, bottom, top, spriteImg) {
     this.lives = 3;
     this.points = 0;
     this.level = 1;
-    this.completion = 0;
+    this.touchWater = 0;
 }
 
 // Set Player prototype as a subclass of Sprite
@@ -90,25 +90,6 @@ Player.prototype.update = function(dt) {
         game_over = true;
     }
 }
-
-/*function levelComplete () {
-
-    if(this.completion === 3) {
-      this.level++;
-    }
-    if(this.completion === 6) {
-      this.level++;
-    }
-    if(this.completion === 9) {
-      this.level++;
-    }
-    if(this.completion === 12) {
-      this.level++;
-    }
-    if(this.completion === 15) {
-      this.level++;
-    }
-} */
 
 // Draw the player on the screen
 Player.prototype.render = function() {
@@ -133,37 +114,37 @@ Player.prototype.handleInput = function(key) {
     switch(key) {
         case 'left':
             if(this.x > 0) {
-                this.x -= 25;
+                this.x -= 35;
             }
             break;
 
         case 'right':
             if(this.x < 400) {
-                this.x+=25;
+                this.x+=35;
             }
             break;
 
         case 'up':
         // when player reaches the water is reset to default position
             if(this.y > 25) {
-                this.y -= 25;
+                this.y -= 35;
             } else {
                 this.points += 10;
-                this.completion++;
+                this.touchWater++;
 
-                    if(this.completion === 3) {
+                    if(this.touchWater === 3) {
                       this.level++;
                     }
 
-                    if(this.completion === 6) {
+                    if(this.touchWater === 6) {
                       this.level++;
                     }
 
-                    if(this.completion === 9) {
+                    if(this.touchWater === 9) {
                       this.level++;
                     }
 
-                    if(this.completion === 12) {
+                    if(this.touchWater === 12) {
                       this.level++;
                     }
                 //levelComplete();
@@ -173,7 +154,7 @@ Player.prototype.handleInput = function(key) {
 
         case 'down':
             if(this.y < 475) {
-                this.y += 25;
+                this.y += 35;
             }
             break;
 
