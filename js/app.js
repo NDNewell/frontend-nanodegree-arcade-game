@@ -94,7 +94,7 @@ Player.prototype.update = function(dt) {
         stopGame = true;
     }
 
-    if(player.level === 5) {
+    if(player.level === 3) {
         winGame = true;
         stopGame = true;
     }
@@ -171,7 +171,7 @@ Player.prototype.handleInput = function(key) {
             break;
 
           case 'p':
-            if (paused) {
+            if (paused && !goUplevel && !winGame && player.lives > 0) {
                 reset();
             } else {
               stopGame = true;
@@ -181,9 +181,11 @@ Player.prototype.handleInput = function(key) {
             break;
 
         case 'space':
-            if(stopGame && !paused) {
+            if(player.lives === 0 || winGame || goUplevel) {
                 reset();
             }
+
+            break;
     } 
 }
 
