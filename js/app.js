@@ -90,7 +90,7 @@ Player.prototype.update = function(dt) {
         stopGame = true;
     }
 
-    if(player.level === 2) {
+    if(goUplevel) {
         stopGame = true;
     }
 }
@@ -138,18 +138,22 @@ Player.prototype.handleInput = function(key) {
 
                     if(this.touchWater === 3) {
                       this.level++;
+                      goUplevel = true;
                     }
 
                     if(this.touchWater === 6) {
                       this.level++;
+                      goUplevel = true;
                     }
 
                     if(this.touchWater === 9) {
                       this.level++;
+                      goUplevel = true;
                     }
 
                     if(this.touchWater === 12) {
                       this.level++;
+                      goUplevel = true;
                     }
                 this.startOver();
             }
