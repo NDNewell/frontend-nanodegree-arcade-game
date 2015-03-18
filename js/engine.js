@@ -240,6 +240,7 @@ var Engine = (function(global) {
         console.log("Game Reset");
         player.startOver();
         player.lives = 2;
+        player.points = 0;
         game_over = false;
         main();
     }
