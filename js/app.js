@@ -94,7 +94,7 @@ Player.prototype.update = function(dt) {
         stopGame = true;
     }
 
-    if(player.level === 5) {
+    if(player.level === 3) {
         winGame = true;
         stopGame = true;
     }

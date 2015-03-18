@@ -96,7 +96,7 @@ var Engine = (function(global) {
     function update(dt) {
         updateEntities(dt);
          checkCollisions();
-          clearcanvasTop();
+          clearCanvas();
     }
 
     /* This is called by the update function  and loops through all of the
@@ -202,6 +202,7 @@ var Engine = (function(global) {
 
       // Draw you win prompt box
     function youWin () {
+
         console.log("Draw winner box");
         ctx.rect(40, 100, 430, 150);
         ctx.fillStyle = "rgba(0,0,0,0.75)";
@@ -258,11 +259,9 @@ var Engine = (function(global) {
     }
         
     function renderStats() {
-
         // Draw lives text
-
         var prompts = ["LIVES:" + " " + player.lives, "POINTS:" + " " + player.points, "LEVEL:" + " " + player.level]
-    
+
         ctx.font = "35px Impact";
         ctx.fillStyle = "#47B224";
         ctx.fillText(prompts[0], 1, 35);
@@ -278,11 +277,9 @@ var Engine = (function(global) {
         ctx.fillText(prompts[2], 390, 35);
     }
 
-
-
-    //clears top portion of the canvas so text doesn't get blurry
-    function clearcanvasTop () {
-        ctx.clearRect(0, 0, canvas.width, 40);
+    //clears the canvas so text doesn't get blurry
+    function clearCanvas () {
+        ctx.clearRect(0, 0, canvas.width, 50);
     }
     /* Go ahead and load all of the images we know we're going to need to
      * draw our game level. Then set init as the callback method, so that when
@@ -316,7 +313,13 @@ var Engine = (function(global) {
                 winGame = false;
             }
         stopGame = false;
-        goUplevel = false; 
+        goUplevel = false;
+
+        player.touchWater = 0;
+
+        //reset path
+        ctx.beginPath();
+
         main();
     }
 
