@@ -244,8 +244,9 @@ var Engine = (function(global) {
     reset = function() {
         console.log("Game Reset");
         player.startOver();
-        player.lives = 2;
+        player.lives = 3;
         player.points = 0;
+        player.level = 1;
         game_over = false;
         main();
     }
