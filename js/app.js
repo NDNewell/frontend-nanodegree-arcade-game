@@ -87,7 +87,11 @@ Player.prototype.constructor = Player;
 Player.prototype.update = function(dt) {
   // Check player's lives
     if(player.lives === 0) {
-        game_over = true;
+        stopGame = true;
+    }
+
+    if(player.level === 5) {
+        stopGame = true;
     }
 }
 
@@ -159,7 +163,7 @@ Player.prototype.handleInput = function(key) {
             break;
 
         case 'space':
-            if(game_over) {
+            if(stopGame) {
                 reset();
             }
     } 

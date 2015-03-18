@@ -25,7 +25,7 @@ var Engine = (function(global) {
         ctx = canvas.getContext('2d'),
         lastTime;
 
-    game_over = false;
+    stopGame = false;
 
     canvas.width = 505;
     canvas.height = 675;
@@ -61,9 +61,12 @@ var Engine = (function(global) {
          * function again as soon as the browser is able to draw another frame.
          */
         function animationCheck () {
-                if (!game_over) {
+                if (!stopGame) {
                   win.requestAnimationFrame(main);
-                } else {
+                } else if (player.lives > 0) {
+                  youWin();
+                }
+                else {
                   gameOver();
                 }
             }
@@ -171,8 +174,8 @@ var Engine = (function(global) {
 
     }
 
-    function gameOver () {
       // Draw Game Over prompt box
+    function gameOver () {
         console.log("Draw Game Over Box");
         ctx.rect(40, 100, 430, 150);
         ctx.fillStyle = "rgba(0,0,0,0.75)";
@@ -192,6 +195,29 @@ var Engine = (function(global) {
         ctx.font = "30px Impact";
         ctx.fillText(prompts[1], 55, 225);
         console.log("Game Over!");
+    }
+
+      // Draw you win prompt box
+        function youWin () {
+        console.log("Draw winner box");
+        ctx.rect(40, 100, 430, 150);
+        ctx.fillStyle = "rgba(0,0,0,0.75)";
+        ctx.fill();
+
+        //Set prompt text
+        var prompts = ["YOU WIN!", "Press the spacebar to Play Again"]
+        
+        //Draw prompt: 'YOU WIN!'
+        console.log("Draw winner text");
+        ctx.font = "60px Impact";
+        ctx.fillStyle = "#47B224";
+        ctx.fillText(prompts[0], 145, 170);
+
+        //Draw prompt: 'Press spacebar to Continue
+        console.log("Draw continue text");
+        ctx.font = "30px Impact";
+        ctx.fillText(prompts[1], 55, 225);
+        console.log("YOU WIN!");
     }
 
         
@@ -247,7 +273,7 @@ var Engine = (function(global) {
         player.lives = 3;
         player.points = 0;
         player.level = 1;
-        game_over = false;
+        stopGame = false;
         main();
     }
 
