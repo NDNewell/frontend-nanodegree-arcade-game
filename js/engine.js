@@ -60,13 +60,13 @@ var Engine = (function(global) {
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
-    function animationCheck () {
-            if (!game_over) {
-              win.requestAnimationFrame(main);
-            } else {
-              gameOver();
+        function animationCheck () {
+                if (!game_over) {
+                  win.requestAnimationFrame(main);
+                } else {
+                  gameOver();
+                }
             }
-        }
     };
 
     /* This function does some initial setup that should only occur once,
@@ -90,6 +90,7 @@ var Engine = (function(global) {
     function update(dt) {
         updateEntities(dt);
          checkCollisions();
+          clearcanvasTop();
     }
 
     /* This is called by the update function  and loops through all of the
@@ -150,7 +151,7 @@ var Engine = (function(global) {
 
             renderEntities();
 
-            renderPoints();
+            renderLives();
 
     }
 
@@ -193,28 +194,22 @@ var Engine = (function(global) {
         console.log("Game Over!");
     }
 
-     function renderPoints() {
-  // Draw points box
+        
+    function renderLives() {
 
-        var prompts = ["LIVES:"]
+        // Draw points box
+
+        var prompts = ["LIVES:" + " " + player.lives]
     
-        ctx.font = "20px Arial";
+        ctx.font = "35px Impact";
         ctx.fillStyle = "#47B224";
-        ctx.fillText(prompts[0], 1, 20);
-}
-
-    /* This function does nothing but it could have been a good place to
-     * handle game reset states - maybe a new game menu or a game over screen
-     * those sorts of things. It's only called once by the init() method.
-     */
-     reset = function() {
-        console.log("Game Reset");
-        player.startOver();
-        player.lives = 2;
-        game_over = false;
-        main();
+        ctx.fillText(prompts[0], 1, 35);
     }
 
+    //clears top portion of the canvas so text doesn't get blurry
+    function clearcanvasTop () {
+        ctx.clearRect(0, 0, canvas.width, 40);
+    }
     /* Go ahead and load all of the images we know we're going to need to
      * draw our game level. Then set init as the callback method, so that when
      * all of these images are properly loaded our game will start.
@@ -229,6 +224,18 @@ var Engine = (function(global) {
         'images/char-cartman.png'
     ]);
     Resources.onReady(init);
+
+        /* This function does nothing but it could have been a good place to
+     * handle game reset states - maybe a new game menu or a game over screen
+     * those sorts of things. It's only called once by the init() method.
+     */
+    reset = function() {
+        console.log("Game Reset");
+        player.startOver();
+        player.lives = 2;
+        game_over = false;
+        main();
+    }
 
     /* Assign the canvas' context object to the global variable (the window
      * object when run in a browser) so that developer's can use it more easily
