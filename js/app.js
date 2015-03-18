@@ -170,8 +170,18 @@ Player.prototype.handleInput = function(key) {
             }
             break;
 
+          case 'p':
+            if (paused) {
+                reset();
+            } else {
+              stopGame = true;
+              paused = true;
+            }
+
+            break;
+
         case 'space':
-            if(stopGame) {
+            if(stopGame && !paused) {
                 reset();
             }
     } 
@@ -196,7 +206,8 @@ document.addEventListener('keyup', function(e) {
         37: 'left',
         38: 'up',
         39: 'right',
-        40: 'down'
+        40: 'down',
+        80: 'p'
     };
 
     player.handleInput(allowedKeys[e.keyCode]);

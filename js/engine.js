@@ -28,6 +28,7 @@ var Engine = (function(global) {
     stopGame = false;
     goUplevel = false;
     winGame = false;
+    paused = false;
 
     canvas.width = 505;
     canvas.height = 675;
@@ -69,6 +70,8 @@ var Engine = (function(global) {
                   youWin();
                 } else if (goUplevel) {
                   passLevel();
+                } else if (paused) {
+                  pauseGame();
                 } else {
                   gameOver();
                 }
@@ -200,6 +203,23 @@ var Engine = (function(global) {
         console.log("Game Over!");
     }
 
+          // Draw pause game prompt box
+    function pauseGame () {
+        console.log("Draw pause box");
+        ctx.rect(40, 100, 430, 150);
+        ctx.fillStyle = "rgba(0,0,0,0.75)";
+        ctx.fill();
+
+        //Set prompt text
+        var prompts = ["PAUSED"]
+        
+        //Draw prompt: 'GAME OVER'
+        console.log("Draw pause text");
+        ctx.font = "60px Impact";
+        ctx.fillStyle = "#47B224";
+        ctx.fillText(prompts[0], 165, 190);
+    }
+
       // Draw you win prompt box
     function youWin () {
 
@@ -302,20 +322,22 @@ var Engine = (function(global) {
      */
     reset = function() {
         console.log("Game Reset");
-        player.startOver();
             if (player.lives === 0) {
                 player.points = 0;
                 player.lives = 3;
                 player.level = 1;
+                player.touchWater = 0;
+                player.startOver();
             } else if (winGame) {
                 player.lives = 3;
                 player.level = 1;
+                player.touchWater = 0;
                 winGame = false;
+                player.startOver();
             }
+        paused = false;
         stopGame = false;
         goUplevel = false;
-
-        player.touchWater = 0;
 
         //reset path
         ctx.beginPath();
