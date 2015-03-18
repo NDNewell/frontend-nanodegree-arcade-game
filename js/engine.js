@@ -199,7 +199,7 @@ var Engine = (function(global) {
 
         // Draw lives text
 
-        var prompts = ["LIVES:" + " " + player.lives, "POINTS:" + " " + player.points]
+        var prompts = ["LIVES:" + " " + player.lives, "POINTS:" + " " + player.points, "LEVEL:" + " " + player.level]
     
         ctx.font = "35px Impact";
         ctx.fillStyle = "#47B224";
@@ -208,7 +208,12 @@ var Engine = (function(global) {
         // Draw points text
         ctx.font = "35px Impact";
         ctx.fillStyle = "#47B224";
-        ctx.fillText(prompts[1], 335, 35);
+        ctx.fillText(prompts[1], 185, 35);
+
+        // Draw level text
+        ctx.font = "35px Impact";
+        ctx.fillStyle = "#47B224";
+        ctx.fillText(prompts[2], 390, 35);
     }
 
 

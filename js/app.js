@@ -75,6 +75,8 @@ function Player(x, y, speed, right, left, bottom, top, spriteImg) {
     Sprite.call(this, x, y, speed, right, left, bottom, top, spriteImg);
     this.lives = 3;
     this.points = 0;
+    this.level = 1;
+    this.completion = 0;
 }
 
 // Set Player prototype as a subclass of Sprite
@@ -88,6 +90,25 @@ Player.prototype.update = function(dt) {
         game_over = true;
     }
 }
+
+/*function levelComplete () {
+
+    if(this.completion === 3) {
+      this.level++;
+    }
+    if(this.completion === 6) {
+      this.level++;
+    }
+    if(this.completion === 9) {
+      this.level++;
+    }
+    if(this.completion === 12) {
+      this.level++;
+    }
+    if(this.completion === 15) {
+      this.level++;
+    }
+} */
 
 // Draw the player on the screen
 Player.prototype.render = function() {
@@ -128,6 +149,24 @@ Player.prototype.handleInput = function(key) {
                 this.y -= 25;
             } else {
                 this.points += 10;
+                this.completion++;
+
+                    if(this.completion === 3) {
+                      this.level++;
+                    }
+
+                    if(this.completion === 6) {
+                      this.level++;
+                    }
+
+                    if(this.completion === 9) {
+                      this.level++;
+                    }
+
+                    if(this.completion === 12) {
+                      this.level++;
+                    }
+                //levelComplete();
                 this.startOver();
             }
             break;
