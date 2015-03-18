@@ -93,6 +93,11 @@ Player.prototype.update = function(dt) {
     if(goUplevel) {
         stopGame = true;
     }
+
+    if(player.level === 5) {
+        winGame = true;
+        stopGame = true;
+    }
 }
 
 // Draw the player on the screen

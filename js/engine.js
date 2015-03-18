@@ -27,6 +27,7 @@ var Engine = (function(global) {
 
     stopGame = false;
     goUplevel = false;
+    winGame = false;
 
     canvas.width = 505;
     canvas.height = 675;
@@ -64,7 +65,7 @@ var Engine = (function(global) {
         function animationCheck () {
                 if (!stopGame) {
                   win.requestAnimationFrame(main);
-                } else if (player.level === 5) {
+                } else if (winGame) {
                   youWin();
                 } else if (goUplevel) {
                   passLevel();
@@ -309,9 +310,13 @@ var Engine = (function(global) {
                 player.points = 0;
                 player.lives = 3;
                 player.level = 1;
+            } else if (winGame) {
+                player.lives = 3;
+                player.level = 1;
+                winGame = false;
             }
         stopGame = false;
-        goUplevel = false;
+        goUplevel = false; 
         main();
     }
 
