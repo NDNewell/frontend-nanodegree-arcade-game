@@ -8,19 +8,9 @@ function Sprite(x, y, right, left, bottom, top, spriteImg) {
     this.bottom = bottom;
     this.top = top;
     this.sprite = spriteImg;
-
-        // generate a random speed
-    this.speed = (function () {
-
-        generateSpeed = Math.random();
-
-        // generate a number in the range of 100 - 300.
-        // eg.(Math.random * (max - min)) + min
-        randomSpeed = Math.floor((generateSpeed * 200) + 100);
-        console.log("Generating speed");
-
-        return randomSpeed;
-    }) ();
+    // generate a number in the range of 100 - 300.
+    // eg. (Math.random * (max - min)) + min
+    this.speed = randomSpeed = Math.floor((Math.random() * 200) + 100);
 }
 
 // Create subclass Enemy
