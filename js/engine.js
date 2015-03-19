@@ -29,6 +29,7 @@ var Engine = (function(global) {
     goUplevel = false;
     winGame = false;
     paused = false;
+    adjustSpeed = false;
 
     canvas.width = 505;
     canvas.height = 675;
@@ -323,11 +324,13 @@ var Engine = (function(global) {
     reset = function() {
         console.log("Game Reset");
             if (player.lives === 0) {
-                player.points = 0;
+                player.points = 0; 
                 player.lives = 3;
                 player.level = 1;
                 player.touchWater = 0;
                 player.startOver();
+                adjustSpeed = true;
+
             } else if (winGame) {
                 player.lives = 3;
                 player.level = 1;
@@ -335,6 +338,8 @@ var Engine = (function(global) {
                 winGame = false;
                 player.startOver();
             }
+
+        adjustSpeed = true;
         paused = false;
         stopGame = false;
         goUplevel = false;
