@@ -10,7 +10,7 @@ function Sprite(x, y, right, left, bottom, top, spriteImg) {
     this.sprite = spriteImg;
 
         // generate a random speed
-    var speed = (function () {
+    this.speed = (function () {
 
         generateSpeed = Math.random();
 
@@ -20,13 +20,8 @@ function Sprite(x, y, right, left, bottom, top, spriteImg) {
         console.log("Generating speed");
 
         return randomSpeed;
-
     }) ();
-
-    this.speed = speed;
-
-
-    }
+}
 
 // Create subclass Enemy
 function Enemy(x, y, right, left, bottom, top, spriteImg) {
