@@ -10,7 +10,7 @@ function Sprite(x, y, right, left, bottom, top, spriteImg) {
     this.sprite = spriteImg;
     // generate a number in the range of 100 - 300.
     // eg. (Math.random * (max - min)) + min
-    this.speed = Math.floor((Math.random() * 40) + 100);
+    this.speed = Math.floor((Math.random() * 65) + 100);
 }
 
 // Create subclass Enemy
@@ -32,39 +32,31 @@ if(adjustSpeed) {
 
       if(player.level === 1) {
           allEnemies.forEach(function(enemy) {
-            enemy.speed = Math.floor((Math.random() * 40) + 100);
+            enemy.speed = Math.floor((Math.random() * 65) + 100);
           });
 
           console.log("level 1 speed!");
 
       } else if (player.level ===2) {
           allEnemies.forEach(function(enemy) {
-            enemy.speed = Math.floor((Math.random() * 40) + 140);
+            enemy.speed = Math.floor((Math.random() * 65) + 165);
           });
 
           console.log("level 2 speed!");
 
       } else if (player.level ===3) {
           allEnemies.forEach(function(enemy) {
-            enemy.speed = Math.floor((Math.random() * 40) + 180);
+            enemy.speed = Math.floor((Math.random() * 65) + 230);
           });
 
           console.log("level 3 speed!");
 
       } else if (player.level ===4) {
           allEnemies.forEach(function(enemy) {
-            enemy.speed = Math.floor((Math.random() * 40) + 220);
+            enemy.speed = Math.floor((Math.random() * 65) + 295);
           });
 
           console.log("level 4 speed!");
-
-      } else if (player.level ===5) {
-          allEnemies.forEach(function(enemy) {
-            enemy.speed = Math.floor((Math.random() * 40) + 260);
-
-          console.log("level 5 speed!");
-
-          });
       }
 
     adjustSpeed = false;

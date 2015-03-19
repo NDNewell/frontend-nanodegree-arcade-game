@@ -255,7 +255,7 @@ var Engine = (function(global) {
         //Set number to reflect level passed
         var displayLevel = player.level -1;
         //Set prompt text
-        var prompts = ["YOU PASSED LEVEL", displayLevel, "Press the Spacebar", "for the next level !"]
+        var prompts = ["YOU PASSED LEVEL", displayLevel, "Press the Spacebar", "for the next level !", "for the FINAL level !"]
         //Draw text: 'You passed level'
         console.log("Draw pass level text");
         ctx.font = "50px Impact";
@@ -275,7 +275,11 @@ var Engine = (function(global) {
         //Draw text: 'to Continue'
         console.log("Draw continue text");
         ctx.font = "40px Impact";
-        ctx.fillText(prompts[3], 110, 365);
+            if(player.level === 4) {
+                ctx.fillText(prompts[4], 110, 365);
+            } else {
+                ctx.fillText(prompts[3], 110, 365);
+            }
         console.log("Level Passed!");
     }
         
