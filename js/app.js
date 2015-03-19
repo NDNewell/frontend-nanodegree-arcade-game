@@ -9,14 +9,22 @@ function Sprite(x, y, right, left, bottom, top, spriteImg) {
     this.top = top;
     this.sprite = spriteImg;
 
-    // generate a random speed
-    generateSpeed = Math.random();
+        // generate a random speed
+    var speed = (function () {
 
-    // generate a number in the range of 100 - 300.
-    // (Math.random * (max - min)) + min
-    randomSpeed = (generateSpeed * 200) + 100;
-    console.log("Generating speed")
-    this.speed = Math.floor(randomSpeed);
+        generateSpeed = Math.random();
+
+        // generate a number in the range of 100 - 300.
+        // eg.(Math.random * (max - min)) + min
+        randomSpeed = Math.floor((generateSpeed * 200) + 100);
+        console.log("Generating speed");
+
+        return randomSpeed;
+
+    }) ();
+
+    this.speed = speed;
+
 
     }
 
