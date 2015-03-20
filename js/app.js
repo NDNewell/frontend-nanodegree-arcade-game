@@ -93,8 +93,8 @@ function evilestEnemy(right, left, bottom, top, spriteImg) {
 evilestEnemy.prototype = Object.create(Enemy.prototype);
 evilestEnemy.prototype.constructor = evilestEnemy;
 
-// Collision detection algorithm using box collision
-function checkCollisions () {
+// Collision detection algorithm using box collision for enemies
+/*function enemyCollisions () {
     allEnemies.forEach(function(enemy) {
              if(enemy.x + enemy.left < player.x + player.right &&
                 enemy.x + enemy.right > player.x + player.left &&
@@ -105,7 +105,7 @@ function checkCollisions () {
                     player.die();
                 }
             });
-}
+}*/
 
 // Draw the enemies on the screen
 Enemy.prototype.render = function() {
@@ -234,13 +234,31 @@ Player.prototype.handleInput = function(key) {
     } 
 }
 
-// Create player subclass of Sprite
+
+// Listen for key presses and send the keys to
+// Player.handleInput() method.
+document.addEventListener('keyup', function(e) {
+    var allowedKeys = {
+        32: 'space',
+        37: 'left',
+        38: 'up',
+        39: 'right',
+        40: 'down',
+        80: 'p'
+    };
+
+    player.handleInput(allowedKeys[e.keyCode]);
+});
+
+
+// Create Gem subclass of Sprite
 
 function Gem(right, left, bottom, top, spriteImg) {
     Sprite.call(this, right, left, bottom, top, spriteImg);
     this.speed = Math.floor((Math.random() * 50) + 50);
     this.x = -500;
 
+// set a random path for this.y
     var randomPath = Math.floor((Math.random() * 4) + 1);
 
         if(randomPath === 1) {
@@ -294,6 +312,21 @@ function blueGem(right, left, bottom, top, spriteImg) {
 blueGem.prototype = Object.create(Gem.prototype);
 blueGem.prototype.constructor = blueGem;
 
+// Collision detection algorithm using box collision
+function gemCollisions () {
+    allGems.forEach(function(gem) {
+             if(gem.x + gem.left < player.x + player.right &&
+                gem.x + gem.right > player.x + player.left &&
+                gem.y + gem.top < player.y + player.bottom &&
+                gem.y + gem.bottom > player.y + player.top) {
+                    console.log('collision!');
+                  //Reset player position
+                    player.die();
+                }
+            });
+}
+
+
 // Instantiate objects
 var allEnemies = [
                     // y, right, left, bottom, top, spriteImg
@@ -307,23 +340,9 @@ var player = new Player(77, -15, 55, -25, 'images/char-cartman.png');
 
 var allGems = [
 
-    new blueGem(70, 0, 75, 0, 'images/Gem-Blue-sm.png'),
-    new orangeGem(70, 0, 75, 0, 'images/Gem-Orange-sm.png'),
-    new greenGem(70, 0, 75, 0, 'images/Gem-Green-sm.png')
+    new blueGem(20, 20, 20, -40, 'images/Gem-Blue-sm.png'),
+    new orangeGem(20, 20, 20, -40, 'images/Gem-Orange-sm.png'),
+    new greenGem(20, 20, 20, -40, 'images/Gem-Green-sm.png')
     ];
 
-// Listen for key presses and send the keys to
-// Player.handleInput() method.
-document.addEventListener('keyup', function(e) {
-    var allowedKeys = {
-        32: 'space',
-        37: 'left',
-        38: 'up',
-        39: 'right',
-        40: 'down',
-        80: 'p'
-    };
-
-    player.handleInput(allowedKeys[e.keyCode]);
-});
-
+35
