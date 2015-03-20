@@ -12,10 +12,10 @@ function Sprite(right, left, bottom, top, spriteImg) {
 }
 
 // Create subclass Enemy
-function Enemy(y, right, left, bottom, top, spriteImg) {
+function Enemy(right, left, bottom, top, spriteImg) {
     Sprite.call(this, right, left, bottom, top, spriteImg);
     this.x = Math.floor((Math.random() * 505) + 1);
-    this.y = y;
+    this.y = 300;
 }
 
 // Set Enemy prototype as a subclass of Sprite
@@ -74,8 +74,9 @@ if(adjustSpeed) {
 }
 
 // Create subclass evilerEnemy
-function evilerEnemy(y, right, left, bottom, top, spriteImg) {
-    Enemy.call(this, y, right, left, bottom, top, spriteImg);
+function evilerEnemy(right, left, bottom, top, spriteImg) {
+    Enemy.call(this, right, left, bottom, top, spriteImg);
+    this.y = 30;
 }
 
 // Set Enemy prototype as a subclass of Enemy
@@ -83,8 +84,9 @@ evilerEnemy.prototype = Object.create(Enemy.prototype);
 evilerEnemy.prototype.constructor = evilerEnemy;
 
 // Create subclass evilestEnemy
-function evilestEnemy(y , right, left, bottom, top, spriteImg) {
-    Enemy.call(this, y, right, left, bottom, top, spriteImg);
+function evilestEnemy(right, left, bottom, top, spriteImg) {
+    Enemy.call(this, right, left, bottom, top, spriteImg);
+    this.y = 125;
 }
 
 // Set evilestEnemy prototype as a subclass of Enemy
@@ -235,9 +237,9 @@ Player.prototype.handleInput = function(key) {
 // Instantiate objects
 var allEnemies = [
                     // y, right, left, bottom, top, spriteImg
-    new evilerEnemy(30, 100, 0, 100, 0, 'images/enemy-bug3.png'),
-    new evilestEnemy(125, 130, 0, 140, 50, 'images/enemy-bug2.png'),
-    new Enemy(300, 70, 0, 75, 0, 'images/enemy-bug.png')
+    new evilerEnemy(100, 0, 100, 0, 'images/enemy-bug3.png'),
+    new evilestEnemy(130, 0, 140, 50, 'images/enemy-bug2.png'),
+    new Enemy(70, 0, 75, 0, 'images/enemy-bug.png')
     ];
 
                     // right, left, bottom, top, spriteImg
