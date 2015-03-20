@@ -278,6 +278,14 @@ function orangeGem(right, left, bottom, top, spriteImg) {
 orangeGem.prototype = Object.create(Gem.prototype);
 orangeGem.prototype.constructor = orangeGem;
 
+function greenGem(right, left, bottom, top, spriteImg) {
+    Gem.call(this, right, left, bottom, top, spriteImg);
+} 
+
+// Set orangeGem prototype as a subclass of Gem
+greenGem.prototype = Object.create(Gem.prototype);
+greenGem.prototype.constructor = greenGem;
+
 // Instantiate objects
 var allEnemies = [
                     // y, right, left, bottom, top, spriteImg
@@ -293,6 +301,7 @@ var allGems = [
 
     new Gem(70, 0, 75, 0, 'images/Gem-Blue-sm.png'),
     new orangeGem(70, 0, 75, 0, 'images/Gem-Orange-sm.png'),
+    new greenGem(70, 0, 75, 0, 'images/Gem-Green-sm.png')
     ];
 
 // Listen for key presses and send the keys to
