@@ -239,17 +239,17 @@ Player.prototype.handleInput = function(key) {
 function Gem(right, left, bottom, top, spriteImg) {
     Sprite.call(this, right, left, bottom, top, spriteImg);
     this.speed = Math.floor((Math.random() * 50) + 50);
-    this.x = -100;
+    this.x = -500;
 
-    var randomSquare = Math.floor((Math.random() * 4) + 1);
+    var randomPath = Math.floor((Math.random() * 4) + 1);
 
-        if(randomSquare === 1) {
+        if(randomPath === 1) {
           this.y = 115;
-        } else if (randomSquare === 2) {
+        } else if (randomPath === 2) {
           this.y = 195;
-        } else if (randomSquare === 3) {
+        } else if (randomPath === 3) {
           this.y = 280;
-        } else if (randomSquare === 4) {
+        } else if (randomPath === 4) {
           this.y = 360;
         }
 } 
@@ -267,7 +267,16 @@ Gem.prototype.update = function(dt) {
 // Draw the gem on the screen
 Gem.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+
 }
+
+function orangeGem(right, left, bottom, top, spriteImg) {
+    Gem.call(this, right, left, bottom, top, spriteImg);
+} 
+
+// Set orangeGem prototype as a subclass of Gem
+orangeGem.prototype = Object.create(Gem.prototype);
+orangeGem.prototype.constructor = orangeGem;
 
 // Instantiate objects
 var allEnemies = [
@@ -280,7 +289,11 @@ var allEnemies = [
                     // right, left, bottom, top, spriteImg
 var player = new Player(77, -15, 55, -25, 'images/char-cartman.png');
 
-var gem = new Gem(70, 0, 75, 0, 'images/Gem-Blue-sm.png');
+var allGems = [
+
+    new Gem(70, 0, 75, 0, 'images/Gem-Blue-sm.png'),
+    new orangeGem(70, 0, 75, 0, 'images/Gem-Orange-sm.png'),
+    ];
 
 // Listen for key presses and send the keys to
 // Player.handleInput() method.
