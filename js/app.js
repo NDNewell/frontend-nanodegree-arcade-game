@@ -128,7 +128,7 @@ function Player(right, left, bottom, top, spriteImg) {
 Player.prototype = Object.create(Sprite.prototype);
 Player.prototype.constructor = Player;
 
-// Set variables for enemy dimensions
+// Set conditions for game continuence
 Player.prototype.update = function(dt) {
   // Check player's lives
     if(player.lives === 0) {
@@ -234,6 +234,41 @@ Player.prototype.handleInput = function(key) {
     } 
 }
 
+// Create player subclass of Sprite
+
+function Gem(right, left, bottom, top, spriteImg) {
+    Sprite.call(this, right, left, bottom, top, spriteImg);
+    this.speed = Math.floor((Math.random() * 50) + 50);
+    this.x = -100;
+
+    var randomSquare = Math.floor((Math.random() * 4) + 1);
+
+        if(randomSquare === 1) {
+          this.y = 115;
+        } else if (randomSquare === 2) {
+          this.y = 195;
+        } else if (randomSquare === 3) {
+          this.y = 280;
+        } else if (randomSquare === 4) {
+          this.y = 360;
+        }
+} 
+
+// Set Gem prototype as a subclass of Sprite
+Gem.prototype = Object.create(Sprite.prototype);
+Gem.prototype.constructor = Gem;
+
+Gem.prototype.update = function(dt) {
+
+// Update the gems's position using time delta between ticks
+    this.x += this.speed * dt;
+}
+
+// Draw the gem on the screen
+Gem.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+}
+
 // Instantiate objects
 var allEnemies = [
                     // y, right, left, bottom, top, spriteImg
@@ -244,6 +279,8 @@ var allEnemies = [
 
                     // right, left, bottom, top, spriteImg
 var player = new Player(77, -15, 55, -25, 'images/char-cartman.png');
+
+var gem = new Gem(70, 0, 75, 0, 'images/Gem-Blue-sm.png');
 
 // Listen for key presses and send the keys to
 // Player.handleInput() method.
