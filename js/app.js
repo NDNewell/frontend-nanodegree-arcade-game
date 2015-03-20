@@ -1,7 +1,5 @@
 // Create master-class
-function Sprite(y, right, left, bottom, top, spriteImg) {
-    this.x = Math.floor((Math.random() * 505) + 1);
-    this.y = y;
+function Sprite(right, left, bottom, top, spriteImg) {
     // Set variables for enemy dimensions
     this.right = right;
     this.left = left;
@@ -15,7 +13,9 @@ function Sprite(y, right, left, bottom, top, spriteImg) {
 
 // Create subclass Enemy
 function Enemy(y, right, left, bottom, top, spriteImg) {
-    Sprite.call(this, y, right, left, bottom, top, spriteImg);
+    Sprite.call(this, right, left, bottom, top, spriteImg);
+    this.x = Math.floor((Math.random() * 505) + 1);
+    this.y = y;
 }
 
 // Set Enemy prototype as a subclass of Sprite
@@ -112,13 +112,14 @@ Enemy.prototype.render = function() {
 
 // Create player subclass of Sprite
 
-function Player(y, right, left, bottom, top, spriteImg) {
-    Sprite.call(this, y, right, left, bottom, top, spriteImg);
+function Player(right, left, bottom, top, spriteImg) {
+    Sprite.call(this, right, left, bottom, top, spriteImg);
     this.lives = 3;
     this.points = 0;
     this.level = 1;
     this.touchWater = 0;
     this.x = 200;
+    this.y = 475;
 }
 
 // Set Player prototype as a subclass of Sprite
@@ -239,8 +240,8 @@ var allEnemies = [
     new Enemy(300, 70, 0, 75, 0, 'images/enemy-bug.png')
     ];
 
-                    // y, right, left, bottom, top, spriteImg
-var player = new Player(475, 77, -15, 55, -25, 'images/char-cartman.png');
+                    // right, left, bottom, top, spriteImg
+var player = new Player(77, -15, 55, -25, 'images/char-cartman.png');
 
 // Listen for key presses and send the keys to
 // Player.handleInput() method.
