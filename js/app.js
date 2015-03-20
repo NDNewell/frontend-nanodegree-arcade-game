@@ -282,9 +282,17 @@ function greenGem(right, left, bottom, top, spriteImg) {
     Gem.call(this, right, left, bottom, top, spriteImg);
 } 
 
-// Set orangeGem prototype as a subclass of Gem
+// Set greenGem prototype as a subclass of Gem
 greenGem.prototype = Object.create(Gem.prototype);
 greenGem.prototype.constructor = greenGem;
+
+function blueGem(right, left, bottom, top, spriteImg) {
+    Gem.call(this, right, left, bottom, top, spriteImg);
+} 
+
+// Set blueGem prototype as a subclass of Gem
+blueGem.prototype = Object.create(Gem.prototype);
+blueGem.prototype.constructor = blueGem;
 
 // Instantiate objects
 var allEnemies = [
@@ -299,7 +307,7 @@ var player = new Player(77, -15, 55, -25, 'images/char-cartman.png');
 
 var allGems = [
 
-    new Gem(70, 0, 75, 0, 'images/Gem-Blue-sm.png'),
+    new blueGem(70, 0, 75, 0, 'images/Gem-Blue-sm.png'),
     new orangeGem(70, 0, 75, 0, 'images/Gem-Orange-sm.png'),
     new greenGem(70, 0, 75, 0, 'images/Gem-Green-sm.png')
     ];
