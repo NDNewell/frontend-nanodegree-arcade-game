@@ -256,7 +256,7 @@ document.addEventListener('keyup', function(e) {
 function Gem(right, left, bottom, top, spriteImg) {
     Sprite.call(this, right, left, bottom, top, spriteImg);
     this.speed = Math.floor((Math.random() * 50) + 50);
-    this.x = -500;
+    this.x = -Math.floor((Math.random() * 2000) + 1000);
 
 // set a random path for this.y
     var randomPath = Math.floor((Math.random() * 4) + 1);
@@ -280,6 +280,27 @@ Gem.prototype.update = function(dt) {
 
 // Update the gems's position using time delta between ticks
     this.x += this.speed * dt;
+
+
+// Reset gem if it moves off the screen
+    if(this.x > 505) {
+
+        // set random x and y coordinates for gem
+
+        this.x = -Math.floor((Math.random() * 2000) + 1000);
+
+        var randomPath = Math.floor((Math.random() * 4) + 1);
+
+        if(randomPath === 1) {
+          this.y = 115;
+        } else if (randomPath === 2) {
+          this.y = 195;
+        } else if (randomPath === 3) {
+          this.y = 280;
+        } else if (randomPath === 4) {
+          this.y = 360;
+        }
+    }
 }
 
 // Draw the gem on the screen
@@ -330,8 +351,24 @@ function gemCollisions () {
                     player.points += 500;
                     console.log('You got a green gem!');
                  }
-                  delete gem.x, gem.y;
-              }
+
+                // set random starting point
+                  gem.x = -Math.floor((Math.random() * 2000) + 1000);
+
+                  // set a random path for this.y
+
+                  var randomPath = Math.floor((Math.random() * 4) + 1);
+
+                  if(randomPath === 1) {
+                    this.y = 115;
+                  } else if (randomPath === 2) {
+                    this.y = 195;
+                  } else if (randomPath === 3) {
+                    this.y = 280;
+                  } else if (randomPath === 4) {
+                    this.y = 360;
+                  }
+             }
     });
 }
 
