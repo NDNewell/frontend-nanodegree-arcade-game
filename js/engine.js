@@ -99,7 +99,7 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // enemyCollisions();
+         enemyCollisions();
           gemCollisions();
            clearCanvas();
     }

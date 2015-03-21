@@ -94,7 +94,7 @@ evilestEnemy.prototype = Object.create(Enemy.prototype);
 evilestEnemy.prototype.constructor = evilestEnemy;
 
 // Collision detection algorithm using box collision for enemies
-/*function enemyCollisions () {
+function enemyCollisions () {
     allEnemies.forEach(function(enemy) {
              if(enemy.x + enemy.left < player.x + player.right &&
                 enemy.x + enemy.right > player.x + player.left &&
@@ -105,7 +105,7 @@ evilestEnemy.prototype.constructor = evilestEnemy;
                     player.die();
                 }
             });
-}*/
+}
 
 // Draw the enemies on the screen
 Enemy.prototype.render = function() {
@@ -319,13 +319,21 @@ function gemCollisions () {
                 gem.x + gem.right > player.x + player.left &&
                 gem.y + gem.top < player.y + player.bottom &&
                 gem.y + gem.bottom > player.y + player.top) {
-                    console.log('collision!');
-                  //Reset player position
-                    player.die();
-                }
-            });
-}
 
+                 if(gem.sprite === 'images/Gem-Blue-sm.png') {
+                    player.points += 100;
+                    console.log('You got a blue gem!');
+                 } else if (gem.sprite === 'images/Gem-Orange-sm.png') {
+                    player.points += 300;
+                    console.log('You got an orange gem!');
+                 } else {
+                    player.points += 500;
+                    console.log('You got a green gem!');
+                 }
+                  delete gem.x, gem.y;
+              }
+    });
+}
 
 // Instantiate objects
 var allEnemies = [
@@ -344,5 +352,3 @@ var allGems = [
     new orangeGem(20, 20, 20, -40, 'images/Gem-Orange-sm.png'),
     new greenGem(20, 20, 20, -40, 'images/Gem-Green-sm.png')
     ];
-
-35
