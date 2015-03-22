@@ -363,6 +363,9 @@ function relicCollisions () {
                  } else if (relic.sprite === 'images/Gem-Orange-sm.png') {
                     player.points += 300;
                     console.log('You got an orange gem!');
+                 } else if (relic.sprite === 'images/Heart.png') {
+                    player.lives++;
+                    console.log('Extra life!');
                  } else if (relic.sprite === 'images/Key.png') {
                     player.level++;
                     goUplevel = true;
@@ -421,5 +424,5 @@ var allRelics = [
     new orangeGem(20, 20, 20, -40, 'images/Gem-Orange-sm.png'),
     new greenGem(20, 20, 20, -40, 'images/Gem-Green-sm.png'),
     new Key(0, 0, 0, 0, 'images/Key.png'),
-    new Heart(0, 0, 0, 0, 'images/Heart.png')
+    new Heart(30, -5, 0, -70, 'images/Heart.png')
     ];
