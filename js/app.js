@@ -341,6 +341,14 @@ function Key(right, left, bottom, top, spriteImg) {
 Key.prototype = Object.create(Relic.prototype);
 Key.prototype.constructor = Key;
 
+function Heart(right, left, bottom, top, spriteImg) {
+    Relic.call(this, right, left, bottom, top, spriteImg);
+} 
+
+// Set Heart prototype as a subclass of Relic
+Heart.prototype = Object.create(Relic.prototype);
+Heart.prototype.constructor = Heart;
+
 // Collision detection algorithm using box collision
 function relicCollisions () {
     allRelics.forEach(function(relic) {
@@ -412,5 +420,6 @@ var allRelics = [
     new blueGem(20, 20, 20, -40, 'images/Gem-Blue-sm.png'),
     new orangeGem(20, 20, 20, -40, 'images/Gem-Orange-sm.png'),
     new greenGem(20, 20, 20, -40, 'images/Gem-Green-sm.png'),
-    new Key(0, 0, 0, 0, 'images/Key.png')
+    new Key(0, 0, 0, 0, 'images/Key.png'),
+    new Heart(0, 0, 0, 0, 'images/Heart.png')
     ];
