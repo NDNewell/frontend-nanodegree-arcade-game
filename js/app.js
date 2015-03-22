@@ -349,6 +349,17 @@ function Heart(right, left, bottom, top, spriteImg) {
 Heart.prototype = Object.create(Relic.prototype);
 Heart.prototype.constructor = Heart;
 
+function Star(right, left, bottom, top, spriteImg) {
+    Relic.call(this, right, left, bottom, top, spriteImg);
+    this.x = 237;
+    this.y = 235;
+    this.speed = 0;
+} 
+
+// Set Star prototype as a subclass of Relic
+Star.prototype = Object.create(Relic.prototype);
+Star.prototype.constructor = Star;
+
 // Collision detection algorithm using box collision
 function relicCollisions () {
     allRelics.forEach(function(relic) {
@@ -366,6 +377,9 @@ function relicCollisions () {
                  } else if (relic.sprite === 'images/Heart.png') {
                     player.lives++;
                     console.log('Extra life!');
+                  } else if (relic.sprite === 'images/Star.png') {
+                    player.invincibility = true;
+                    console.log('invincibility!');
                  } else if (relic.sprite === 'images/Key.png') {
                     player.level++;
                     goUplevel = true;
@@ -410,9 +424,9 @@ function relicCollisions () {
 // Instantiate objects
 var allEnemies = [
                     // y, right, left, bottom, top, spriteImg
-    new evilerEnemy(100, 0, 100, 0, 'images/enemy-bug3.png'),
-    new evilestEnemy(130, 0, 140, 50, 'images/enemy-bug2.png'),
-    new Enemy(70, 0, 75, 0, 'images/enemy-bug.png')
+   // new evilerEnemy(100, 0, 100, 0, 'images/enemy-bug3.png'),
+   // new evilestEnemy(130, 0, 140, 50, 'images/enemy-bug2.png'),
+   // new Enemy(70, 0, 75, 0, 'images/enemy-bug.png')
     ];
 
                     // right, left, bottom, top, spriteImg
@@ -424,5 +438,6 @@ var allRelics = [
     new orangeGem(20, 20, 20, -40, 'images/Gem-Orange-sm.png'),
     new greenGem(20, 20, 20, -40, 'images/Gem-Green-sm.png'),
     new Key(0, 0, 0, 0, 'images/Key.png'),
-    new Heart(30, -5, 0, -70, 'images/Heart.png')
+    new Heart(30, -5, 0, -70, 'images/Heart.png'),
+    new Star(15, 0, 5, -25, 'images/Star.png')
     ];
