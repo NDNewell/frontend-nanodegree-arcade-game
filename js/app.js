@@ -251,9 +251,9 @@ document.addEventListener('keyup', function(e) {
 });
 
 
-// Create Gem subclass of Sprite
+// Create Relic subclass of Sprite
 
-function Gem(right, left, bottom, top, spriteImg) {
+function Relic(right, left, bottom, top, spriteImg) {
     Sprite.call(this, right, left, bottom, top, spriteImg);
     this.speed = Math.floor((Math.random() * 50) + 50);
     this.x = -Math.floor((Math.random() * 2000) + 1000);
@@ -272,20 +272,20 @@ function Gem(right, left, bottom, top, spriteImg) {
         }
 } 
 
-// Set Gem prototype as a subclass of Sprite
-Gem.prototype = Object.create(Sprite.prototype);
-Gem.prototype.constructor = Gem;
+// Set Relic prototype as a subclass of Sprite
+Relic.prototype = Object.create(Sprite.prototype);
+Relic.prototype.constructor = Relic;
 
-Gem.prototype.update = function(dt) {
+Relic.prototype.update = function(dt) {
 
-// Update the gems's position using time delta between ticks
+// Update the Relic's position using time delta between ticks
     this.x += this.speed * dt;
 
 
-// Reset gem if it moves off the screen
+// Reset Relic if it moves off the screen
     if(this.x > 505) {
 
-        // set random x and y coordinates for gem
+        // set random x and y coordinates for Relic
 
         this.x = -Math.floor((Math.random() * 2000) + 1000);
 
@@ -303,48 +303,48 @@ Gem.prototype.update = function(dt) {
     }
 }
 
-// Draw the gem on the screen
-Gem.prototype.render = function() {
+// Draw the Relic on the screen
+Relic.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 
 }
 
 function orangeGem(right, left, bottom, top, spriteImg) {
-    Gem.call(this, right, left, bottom, top, spriteImg);
+    Relic.call(this, right, left, bottom, top, spriteImg);
 } 
 
-// Set orangeGem prototype as a subclass of Gem
-orangeGem.prototype = Object.create(Gem.prototype);
+// Set orangeGem prototype as a subclass of Relic
+orangeGem.prototype = Object.create(Relic.prototype);
 orangeGem.prototype.constructor = orangeGem;
 
 function greenGem(right, left, bottom, top, spriteImg) {
-    Gem.call(this, right, left, bottom, top, spriteImg);
+    Relic.call(this, right, left, bottom, top, spriteImg);
 } 
 
-// Set greenGem prototype as a subclass of Gem
-greenGem.prototype = Object.create(Gem.prototype);
+// Set greenGem prototype as a subclass of Relic
+greenGem.prototype = Object.create(Relic.prototype);
 greenGem.prototype.constructor = greenGem;
 
 function blueGem(right, left, bottom, top, spriteImg) {
-    Gem.call(this, right, left, bottom, top, spriteImg);
+    Relic.call(this, right, left, bottom, top, spriteImg);
 } 
 
-// Set blueGem prototype as a subclass of Gem
-blueGem.prototype = Object.create(Gem.prototype);
+// Set blueGem prototype as a subclass of Relic
+blueGem.prototype = Object.create(Relic.prototype);
 blueGem.prototype.constructor = blueGem;
 
 // Collision detection algorithm using box collision
-function gemCollisions () {
-    allGems.forEach(function(gem) {
-             if(gem.x + gem.left < player.x + player.right &&
-                gem.x + gem.right > player.x + player.left &&
-                gem.y + gem.top < player.y + player.bottom &&
-                gem.y + gem.bottom > player.y + player.top) {
+function relicCollisions () {
+    allRelics.forEach(function(relic) {
+             if(relic.x + relic.left < player.x + player.right &&
+                relic.x + relic.right > player.x + player.left &&
+                relic.y + relic.top < player.y + player.bottom &&
+                relic.y + relic.bottom > player.y + player.top) {
 
-                 if(gem.sprite === 'images/Gem-Blue-sm.png') {
+                 if(relic.sprite === 'images/Gem-Blue-sm.png') {
                     player.points += 100;
                     console.log('You got a blue gem!');
-                 } else if (gem.sprite === 'images/Gem-Orange-sm.png') {
+                 } else if (relic.sprite === 'images/Gem-Orange-sm.png') {
                     player.points += 300;
                     console.log('You got an orange gem!');
                  } else {
@@ -353,7 +353,7 @@ function gemCollisions () {
                  }
 
                 // set random starting point
-                  gem.x = -Math.floor((Math.random() * 2000) + 1000);
+                  relic.x = -Math.floor((Math.random() * 2000) + 1000);
 
                   // set a random path for this.y
 
@@ -383,7 +383,7 @@ var allEnemies = [
                     // right, left, bottom, top, spriteImg
 var player = new Player(77, -15, 55, -25, 'images/char-cartman.png');
 
-var allGems = [
+var allRelics = [
 
     new blueGem(20, 20, 20, -40, 'images/Gem-Blue-sm.png'),
     new orangeGem(20, 20, 20, -40, 'images/Gem-Orange-sm.png'),

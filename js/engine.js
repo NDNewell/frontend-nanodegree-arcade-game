@@ -100,7 +100,7 @@ var Engine = (function(global) {
     function update(dt) {
         updateEntities(dt);
          enemyCollisions();
-          gemCollisions();
+          relicCollisions();
            clearCanvas();
     }
 
@@ -116,8 +116,8 @@ var Engine = (function(global) {
             enemy.update(dt);
         });
 
-        allGems.forEach(function(gem) {
-            gem.update(dt);
+        allRelics.forEach(function(relic) {
+            relic.update(dt);
         });
 
         player.update();
@@ -180,8 +180,8 @@ var Engine = (function(global) {
          * the render function you have defined.
          */
 
-        allGems.forEach(function(gem) {
-            gem.render();
+        allRelics.forEach(function(relic) {
+            relic.render();
         });
 
         allEnemies.forEach(function(enemy) {
