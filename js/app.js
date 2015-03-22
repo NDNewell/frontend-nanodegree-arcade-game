@@ -333,6 +333,16 @@ function blueGem(right, left, bottom, top, spriteImg) {
 blueGem.prototype = Object.create(Relic.prototype);
 blueGem.prototype.constructor = blueGem;
 
+function Key(right, left, bottom, top, spriteImg) {
+    Relic.call(this, right, left, bottom, top, spriteImg);
+    this.x = 1;
+    this.y = 250;
+} 
+
+// Set Key prototype as a subclass of Relic
+Key.prototype = Object.create(Relic.prototype);
+Key.prototype.constructor = Key;
+
 // Collision detection algorithm using box collision
 function relicCollisions () {
     allRelics.forEach(function(relic) {
@@ -347,7 +357,23 @@ function relicCollisions () {
                  } else if (relic.sprite === 'images/Gem-Orange-sm.png') {
                     player.points += 300;
                     console.log('You got an orange gem!');
-                 } else {
+                 } else if (relic.sprite === 'images/Key.png') {
+                    player.level++;
+                    goUplevel = true;
+
+                    if(player.level === 2) {
+                      player.touchWater = 3;
+                    } else if (player.level === 3) {
+                      player.touchWater = 6;
+                    } else if (player.level === 4) {
+                      player.touchWater = 9;
+                    } else if (player.level === 5) {
+                      player.touchWater = 12;
+                    }
+                        
+                    player.startOver();
+                    console.log('You unlocked the next level!');
+                 } else { 
                     player.points += 500;
                     console.log('You got a green gem!');
                  }
@@ -387,5 +413,6 @@ var allRelics = [
 
     new blueGem(20, 20, 20, -40, 'images/Gem-Blue-sm.png'),
     new orangeGem(20, 20, 20, -40, 'images/Gem-Orange-sm.png'),
-    new greenGem(20, 20, 20, -40, 'images/Gem-Green-sm.png')
+    new greenGem(20, 20, 20, -40, 'images/Gem-Green-sm.png'),
+    new Key(20, 20, 20, -40, 'images/Key.png')
     ];

@@ -333,7 +333,8 @@ var Engine = (function(global) {
         'images/char-cartman.png',
         'images/Gem-Blue-sm.png',
         'images/Gem-Orange-sm.png',
-        'images/Gem-Green-sm.png'
+        'images/Gem-Green-sm.png',
+        'images/Key.png'
     ]);
     Resources.onReady(init);
 
