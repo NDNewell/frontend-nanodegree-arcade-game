@@ -335,8 +335,6 @@ blueGem.prototype.constructor = blueGem;
 
 function Key(right, left, bottom, top, spriteImg) {
     Relic.call(this, right, left, bottom, top, spriteImg);
-    this.x = 1;
-    this.y = 250;
 } 
 
 // Set Key prototype as a subclass of Relic
@@ -386,13 +384,13 @@ function relicCollisions () {
                   var randomPath = Math.floor((Math.random() * 4) + 1);
 
                   if(randomPath === 1) {
-                    this.y = 115;
+                    relic.y = 115;
                   } else if (randomPath === 2) {
-                    this.y = 195;
+                    relic.y = 195;
                   } else if (randomPath === 3) {
-                    this.y = 280;
+                    relic.y = 280;
                   } else if (randomPath === 4) {
-                    this.y = 360;
+                    relic.y = 360;
                   }
              }
     });
@@ -414,5 +412,5 @@ var allRelics = [
     new blueGem(20, 20, 20, -40, 'images/Gem-Blue-sm.png'),
     new orangeGem(20, 20, 20, -40, 'images/Gem-Orange-sm.png'),
     new greenGem(20, 20, 20, -40, 'images/Gem-Green-sm.png'),
-    new Key(20, 20, 20, -40, 'images/Key.png')
+    new Key(0, 0, 0, 0, 'images/Key.png')
     ];
