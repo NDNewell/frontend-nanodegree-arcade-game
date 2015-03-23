@@ -392,13 +392,12 @@ function relicCollisions () {
 
                             if(i === 0) {
                                 collisionsOn = true;
+                                player.sprite = 'images/char-cartman.png';
                                 clearInterval(timer);
                             }
 
                           }, 1000);
-
-
-
+                    player.sprite = 'images/char-cartman-wizard.png';
                     collisionsOn = false;
                     console.log('invincibility!');
 
