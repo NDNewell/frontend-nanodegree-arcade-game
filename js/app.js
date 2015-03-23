@@ -95,16 +95,18 @@ evilestEnemy.prototype.constructor = evilestEnemy;
 
 // Collision detection algorithm using box collision for enemies
 function enemyCollisions () {
-    allEnemies.forEach(function(enemy) {
-             if(enemy.x + enemy.left < player.x + player.right &&
-                enemy.x + enemy.right > player.x + player.left &&
-                enemy.y + enemy.top < player.y + player.bottom &&
-                enemy.y + enemy.bottom > player.y + player.top) {
-                    console.log('collision!');
-                  //Reset player position
-                    player.die();
-                }
-            });
+        if(collisionsOn) {
+            allEnemies.forEach(function(enemy) {
+                     if(enemy.x + enemy.left < player.x + player.right &&
+                        enemy.x + enemy.right > player.x + player.left &&
+                        enemy.y + enemy.top < player.y + player.bottom &&
+                        enemy.y + enemy.bottom > player.y + player.top) {
+                            console.log('collision!');
+                          //Reset player position
+                            player.die();
+                        }
+                    });
+          }
 }
 
 // Draw the enemies on the screen
@@ -301,6 +303,12 @@ Relic.prototype.update = function(dt) {
           this.y = 360;
         }
     }
+
+
+
+
+
+
 }
 
 // Draw the Relic on the screen
@@ -351,9 +359,6 @@ Heart.prototype.constructor = Heart;
 
 function Star(right, left, bottom, top, spriteImg) {
     Relic.call(this, right, left, bottom, top, spriteImg);
-    this.x = 237;
-    this.y = 235;
-    this.speed = 0;
 } 
 
 // Set Star prototype as a subclass of Relic
@@ -368,19 +373,36 @@ function relicCollisions () {
                 relic.y + relic.top < player.y + player.bottom &&
                 relic.y + relic.bottom > player.y + player.top) {
 
-                 if(relic.sprite === 'images/Gem-Blue-sm.png') {
+                  if(relic.sprite === 'images/Gem-Blue-sm.png') {
                     player.points += 100;
                     console.log('You got a blue gem!');
-                 } else if (relic.sprite === 'images/Gem-Orange-sm.png') {
+                  } else if (relic.sprite === 'images/Gem-Orange-sm.png') {
                     player.points += 300;
                     console.log('You got an orange gem!');
-                 } else if (relic.sprite === 'images/Heart.png') {
+                  } else if (relic.sprite === 'images/Heart.png') {
                     player.lives++;
                     console.log('Extra life!');
                   } else if (relic.sprite === 'images/Star.png') {
-                    player.invincibility = true;
+
+                    var i = 10
+                    var timer = setInterval(function() { 
+                        
+                            i--;
+                            console.log(i);
+
+                            if(i === 0) {
+                                collisionsOn = true;
+                                clearInterval(timer);
+                            }
+
+                          }, 1000);
+
+
+
+                    collisionsOn = false;
                     console.log('invincibility!');
-                 } else if (relic.sprite === 'images/Key.png') {
+
+                  } else if (relic.sprite === 'images/Key.png') {
                     player.level++;
                     goUplevel = true;
 
@@ -396,10 +418,10 @@ function relicCollisions () {
                         
                     player.startOver();
                     console.log('You unlocked the next level!');
-                 } else { 
+                  } else { 
                     player.points += 500;
                     console.log('You got a green gem!');
-                 }
+                  }
 
                 // set random starting point
                   relic.x = -Math.floor((Math.random() * 2000) + 1000);
@@ -424,9 +446,9 @@ function relicCollisions () {
 // Instantiate objects
 var allEnemies = [
                     // y, right, left, bottom, top, spriteImg
-   // new evilerEnemy(100, 0, 100, 0, 'images/enemy-bug3.png'),
-   // new evilestEnemy(130, 0, 140, 50, 'images/enemy-bug2.png'),
-   // new Enemy(70, 0, 75, 0, 'images/enemy-bug.png')
+    new evilerEnemy(100, 0, 100, 0, 'images/enemy-bug3.png'),
+    new evilestEnemy(130, 0, 140, 50, 'images/enemy-bug2.png'),
+    new Enemy(70, 0, 75, 0, 'images/enemy-bug.png')
     ];
 
                     // right, left, bottom, top, spriteImg
@@ -441,3 +463,7 @@ var allRelics = [
     new Heart(30, -5, 0, -70, 'images/Heart.png'),
     new Star(15, 0, 5, -25, 'images/Star.png')
     ];
+
+
+
+

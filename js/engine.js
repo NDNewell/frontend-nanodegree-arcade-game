@@ -30,6 +30,7 @@ var Engine = (function(global) {
     winGame = false;
     paused = false;
     adjustSpeed = false;
+    collisionsOn = true;
 
     canvas.width = 505;
     canvas.height = 675;
