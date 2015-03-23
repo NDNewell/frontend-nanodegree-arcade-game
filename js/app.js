@@ -132,7 +132,8 @@ Player.prototype.constructor = Player;
 
 // Set conditions for game continuence
 Player.prototype.update = function(dt) {
-  // Check player's lives
+    
+    // Check player's lives
     if(player.lives === 0) {
         stopGame = true;
     }
@@ -144,6 +145,12 @@ Player.prototype.update = function(dt) {
     if(player.level === 5) {
         winGame = true;
         stopGame = true;
+    }
+
+    // Give the player an extra life for every 2500 points
+    if (player.points >= bonus*2500) {
+        bonus ++;
+        player.lives ++;
     }
 }
 
