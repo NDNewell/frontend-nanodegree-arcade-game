@@ -287,9 +287,29 @@ Relic.prototype.update = function(dt) {
 // Reset Relic if it moves off the screen
     if(this.x > 505) {
 
-        // set random x and y coordinates for Relic
+      // set random starting point for x
+      // Key, Star, and Heart are reset to further points away in order to make them less common.
 
-        this.x = -Math.floor((Math.random() * 2000) + 1000);
+        if(this.sprite === 'images/Key.png') {
+
+          this.x = -Math.floor((Math.random() * 2000) + 5000);
+
+        } else if(this.sprite === 'images/Heart.png') {
+
+          this.x = -Math.floor((Math.random() * 2000) + 5000);
+
+        } else if(this.sprite === 'images/Star.png') {
+
+          this.x = -Math.floor((Math.random() * 2000) + 5000);
+
+        } else {
+
+
+      // Gems get set to the default starting point
+
+          this.x = -Math.floor((Math.random() * 2000) + 1000);
+
+        }
 
         var randomPath = Math.floor((Math.random() * 4) + 1);
 
@@ -303,11 +323,6 @@ Relic.prototype.update = function(dt) {
           this.y = 360;
         }
     }
-
-
-
-
-
 
 }
 
@@ -343,6 +358,7 @@ blueGem.prototype.constructor = blueGem;
 
 function Key(right, left, bottom, top, spriteImg) {
     Relic.call(this, right, left, bottom, top, spriteImg);
+    this.x = -Math.floor((Math.random() * 2000) + 5000);
 } 
 
 // Set Key prototype as a subclass of Relic
@@ -351,6 +367,7 @@ Key.prototype.constructor = Key;
 
 function Heart(right, left, bottom, top, spriteImg) {
     Relic.call(this, right, left, bottom, top, spriteImg);
+    this.x = -Math.floor((Math.random() * 2000) + 5000);
 } 
 
 // Set Heart prototype as a subclass of Relic
@@ -359,6 +376,7 @@ Heart.prototype.constructor = Heart;
 
 function Star(right, left, bottom, top, spriteImg) {
     Relic.call(this, right, left, bottom, top, spriteImg);
+    this.x = -Math.floor((Math.random() * 2000) + 5000);
 } 
 
 // Set Star prototype as a subclass of Relic
@@ -386,7 +404,7 @@ function relicCollisions () {
 
                     var i = 10
                     var timer = setInterval(function() { 
-                        
+
                             i--;
                             console.log(i);
 
@@ -422,8 +440,28 @@ function relicCollisions () {
                     console.log('You got a green gem!');
                   }
 
-                // set random starting point
-                  relic.x = -Math.floor((Math.random() * 2000) + 1000);
+                // set random starting point for x
+                // Key, Star, and Heart are reset to further points away in order to make them less common.
+
+                  if(relic.sprite === 'images/Key.png') {
+
+                    relic.x = -Math.floor((Math.random() * 2000) + 5000);
+
+                  } else if(relic.sprite === 'images/Heart.png') {
+
+                    relic.x = -Math.floor((Math.random() * 2000) + 5000);
+
+                  } else if(relic.sprite === 'images/Star.png') {
+
+                    relic.x = -Math.floor((Math.random() * 2000) + 5000);
+
+                  } else {
+
+                // Gems get set to the default starting point
+
+                    relic.x = -Math.floor((Math.random() * 2000) + 1000);
+
+                  }
 
                   // set a random path for this.y
 
