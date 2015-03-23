@@ -258,7 +258,7 @@ document.addEventListener('keyup', function(e) {
 function Relic(right, left, bottom, top, spriteImg) {
     Sprite.call(this, right, left, bottom, top, spriteImg);
     this.speed = Math.floor((Math.random() * 50) + 50);
-    this.x = -Math.floor((Math.random() * 2000) + 1000);
+    this.x = -Math.floor((Math.random() * 1000) + 500);
 
 // set a random path for this.y
     var randomPath = Math.floor((Math.random() * 4) + 1);
@@ -307,7 +307,7 @@ Relic.prototype.update = function(dt) {
 
       // Gems get set to the default starting point
 
-          this.x = -Math.floor((Math.random() * 2000) + 1000);
+          this.x = -Math.floor((Math.random() * 1000) + 500);
 
         }
 
@@ -459,7 +459,7 @@ function relicCollisions () {
 
                 // Gems get set to the default starting point
 
-                    relic.x = -Math.floor((Math.random() * 2000) + 1000);
+                    relic.x = -Math.floor((Math.random() * 1000) + 500);
 
                   }
 
