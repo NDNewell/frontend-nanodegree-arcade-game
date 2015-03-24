@@ -221,7 +221,7 @@ var Engine = (function(global) {
         ctx.fillStyle = "#47B224";
         ctx.fillText(prompts[1], 55, 185);
         ctx.fillText(prompts[2], 55, 215);
-        ctx.fillText(prompts[12], 75, 265);
+        ctx.fillText(prompts[12], 55, 265);
         ctx.drawImage(Resources.get('images/enemy-bug-begin.png'), 230, 200);
         ctx.drawImage(Resources.get('images/enemy-bug2-begin.png'), 300, 200);
         ctx.drawImage(Resources.get('images/enemy-bug3-begin.png'), 370, 200);
