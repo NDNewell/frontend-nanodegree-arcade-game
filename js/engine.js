@@ -218,7 +218,7 @@ var Engine = (function(global) {
         ctx.font = "32px Impact";
         ctx.fillText(prompts[11], 65, 650);
         ctx.font = "25px Impact";
-        ctx.fillStyle = "#47B224";
+        ctx.fillStyle = "#7ACC52";
         ctx.fillText(prompts[1], 55, 185);
         ctx.fillText(prompts[2], 55, 215);
         ctx.fillText(prompts[12], 55, 265);
@@ -264,7 +264,7 @@ var Engine = (function(global) {
         //Draw prompt: 'Press spacebar to Continue
         console.log("Draw Continue Text");
         ctx.font = "30px Impact";
-        ctx.fillStyle = "#47B224";
+        ctx.fillStyle = "#7ACC52";
         ctx.fillText(prompts[1], 55, 225);
         console.log("Game Over!");
     }
@@ -306,7 +306,7 @@ var Engine = (function(global) {
         //Draw prompt: 'Press spacebar to Continue
         console.log("Draw continue text");
         ctx.font = "30px Impact";
-        ctx.fillStyle = "#47B224";
+        ctx.fillStyle = "#7ACC52";
         ctx.fillText(prompts[1], 55, 225);
         console.log("You Win!");
     }
@@ -335,7 +335,7 @@ var Engine = (function(global) {
 
         //Draw text: 'Press the spacebar'
         ctx.font = "40px Impact";
-        ctx.fillStyle = "#47B224";
+        ctx.fillStyle = "#7ACC52";
         ctx.fillText(prompts[2], 95, 320);
 
         //Draw text: 'to Continue'
@@ -363,7 +363,7 @@ var Engine = (function(global) {
         ctx.fillText(prompts[0], 10, y);
 
         // Draw points text
-        ctx.fillStyle = "#47B224";
+        ctx.fillStyle = "#7ACC52";
         ctx.fillText(prompts[1], 175 , y);
 
         // Draw level text;
