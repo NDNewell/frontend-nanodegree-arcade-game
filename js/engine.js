@@ -353,23 +353,22 @@ var Engine = (function(global) {
 
         var prompts = ["LIVES:" + " " + player.lives, "POINTS:" + " " + player.points, "LEVEL:" + " " + player.level]
 
+        var y = 45;
         // Draw lives text
         ctx.font = "35px Impact";
         ctx.fillStyle = "yellow";
         ctx.strokeStyle = "black";
-        ctx.lineWidth = 4;
-        ctx.strokeText(prompts[0], 10, 40);
-        ctx.fillText(prompts[0], 10, 40);
+        ctx.lineWidth = 2.5;
+        ctx.strokeText(prompts[0], 10, y);
+        ctx.fillText(prompts[0], 10, y);
 
         // Draw points text
-        ctx.fillStyle = "orange";
-        ctx.strokeText(prompts[1], 175 , 40);
-        ctx.fillText(prompts[1], 175 , 40);
+        ctx.fillStyle = "#47B224";
+        ctx.fillText(prompts[1], 175 , y);
 
         // Draw level text;
-        ctx.fillStyle = "#47B224";
-        ctx.strokeText(prompts[2], 385, 40);
-        ctx.fillText(prompts[2], 385, 40);
+        ctx.fillStyle = "orange";
+        ctx.fillText(prompts[2], 385, y);
     }
 
     //clears the canvas so text doesn't get blurry
