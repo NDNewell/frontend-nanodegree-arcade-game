@@ -201,7 +201,7 @@ var Engine = (function(global) {
       // Draw gameBegin prompt box
     function gameBegin () {
         console.log("Draw game begin box");
-        ctx.rect(40, 75, 430, 655);
+        ctx.rect(40, 75, 430, 590);
         ctx.fillStyle = "rgba(0,0,0,0.75)";
         ctx.fill();
 
