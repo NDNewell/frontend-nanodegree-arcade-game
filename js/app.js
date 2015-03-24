@@ -235,7 +235,7 @@ Player.prototype.handleInput = function(key) {
             break;
 
         case 'space':
-            if(player.lives === 0 || winGame || goUplevel) {
+            if(player.lives === 0 || winGame || goUplevel || beginGame) {
                 reset();
             }
 
