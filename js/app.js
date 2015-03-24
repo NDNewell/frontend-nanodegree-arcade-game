@@ -399,53 +399,83 @@ function relicCollisions () {
                 relic.y + relic.bottom > player.y + player.top) {
 
                   if(relic.sprite === 'images/Gem-Blue-sm.png') {
-                    player.points += 100;
-                    console.log('You got a blue gem!');
+                    
+                      gemValue = 100;
+                      player.points += gemValue;
+                      console.log('You got a blue gem!');
+
                   } else if (relic.sprite === 'images/Gem-Orange-sm.png') {
-                    player.points += 300;
-                    console.log('You got an orange gem!');
+
+                      gemValue = 300;
+                      player.points += gemValue;
+                      console.log('You got an orange gem!');
+
                   } else if (relic.sprite === 'images/Heart.png') {
-                    player.lives++;
-                    console.log('Extra life!');
+
+                      player.lives++;
+                      console.log('Extra life!');
+
                   } else if (relic.sprite === 'images/Star.png') {
 
-                    var i = 10
-                    var timer = setInterval(function() { 
+                      var i = 10
+                      var timer = setInterval(function() { 
 
-                            i--;
-                            console.log(i);
+                              i--;
+                              console.log(i);
 
-                            if(i === 0) {
-                                collisionsOn = true;
-                                player.sprite = 'images/char-cartman.png';
-                                clearInterval(timer);
-                            }
+                              if(i === 0) {
+                                  collisionsOn = true;
+                                  player.sprite = 'images/char-cartman.png';
+                                  clearInterval(timer);
+                              }
 
-                          }, 1000);
-                    player.sprite = 'images/char-cartman-wizard.png';
-                    collisionsOn = false;
-                    console.log('invincibility!');
+                            }, 1000);
+
+                      player.sprite = 'images/char-cartman-wizard.png';
+                      collisionsOn = false;
+                      console.log('invincibility!');
 
                   } else if (relic.sprite === 'images/Key.png') {
-                    player.level++;
-                    goUplevel = true;
 
-                    if(player.level === 2) {
-                      player.touchWater = 3;
-                    } else if (player.level === 3) {
-                      player.touchWater = 6;
-                    } else if (player.level === 4) {
-                      player.touchWater = 9;
-                    } else if (player.level === 5) {
-                      player.touchWater = 12;
-                    }
-                        
-                    player.startOver();
-                    console.log('You unlocked the next level!');
+                      player.level++;
+                      goUplevel = true;
+
+                      if(player.level === 2) {
+                        player.touchWater = 3;
+                      } else if (player.level === 3) {
+                        player.touchWater = 6;
+                      } else if (player.level === 4) {
+                        player.touchWater = 9;
+                      } else if (player.level === 5) {
+                        player.touchWater = 12;
+                      }
+
+                      player.startOver();
+                      console.log('You unlocked the next level!');
+
                   } else { 
-                    player.points += 500;
-                    console.log('You got a green gem!');
+
+                      gemValue = 500;
+                      player.points += gemValue;
+                      console.log('You got a green gem!');
+
                   }
+
+                // Set timer for how long relic text (eg pts) appear on screen
+                  var i = 15;
+                  var timer = setInterval(function() { 
+
+                      i--;
+                      console.log(i);
+
+                      if(i > 0) {
+                          getGem = true;
+                      } else {
+                          clearInterval(timer);
+                          getGem = false;
+                      }
+
+                  }, 100);
 
                 // set random starting point for x
                 // Key, Star, and Heart are reset to further points away in order to make them less common.

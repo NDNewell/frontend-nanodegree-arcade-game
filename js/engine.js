@@ -34,6 +34,7 @@ var Engine = (function(global) {
     bonus = 1;
     stopGame = true;
     beginGame = true;
+    getGem = false;
 
     canvas.width = 505;
     canvas.height = 675;
@@ -373,6 +374,15 @@ var Engine = (function(global) {
             } else {
                 ctx.fillText(prompts[2], 385, y);
             }
+
+        if(getGem) {
+            ctx.font = "30px Impact";
+            ctx.fillStyle = "white";
+            ctx.fillStroke = "black";
+            ctx.lineWidth = 1;
+            ctx.fillText(gemValue, player.x + 25, player.y);
+            ctx.strokeText(gemValue, player.x + 25, player.y);
+        }
     }
 
     //clears the canvas so text doesn't get blurry
