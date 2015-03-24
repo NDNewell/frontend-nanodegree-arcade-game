@@ -208,7 +208,7 @@ var Engine = (function(global) {
         //Set number to reflect level passed
         var displayLevel = player.level -1;
         //Set prompt text
-        var prompts = ["CARTMAN CRUSH", "Cartman must reach the water 3 times", "to pass each level.", "Try to obtain the following items:", "500 pts", "300 pts", "100 pts", "Pass Level", "Extra life", "Invincibility", "Every 2500 pts = 1 extra life.", "Press the Spacebar to begin!", "Avoid the bugs:", "Press 'P' to Pause the Game"]
+        var prompts = ["CARTMAN CRUSH", "Cartman must reach the water 3 times", "to pass each level. There are 4 levels.", "Try to obtain the following items:", "500 pts", "300 pts", "100 pts", "Pass Level", "Extra life", "Invincibility", "Every 2500 pts = 1 extra life.", "Press the Spacebar to begin!", "Avoid the bugs:", "Press 'P' to Pause the Game"]
 
         //Draw text: 'Welcome screen'
         console.log("Draw game begin text");
@@ -351,7 +351,7 @@ var Engine = (function(global) {
         
     function renderStats() {
 
-        var prompts = ["LIVES:" + " " + player.lives, "POINTS:" + " " + player.points, "LEVEL:" + " " + player.level]
+        var prompts = ["LIVES:" + " " + player.lives, "POINTS:" + " " + player.points, "LEVEL:" + " " + player.level, "WINNER"]
 
         var y = 45;
         // Draw lives text
@@ -368,7 +368,11 @@ var Engine = (function(global) {
 
         // Draw level text;
         ctx.fillStyle = "orange";
-        ctx.fillText(prompts[2], 385, y);
+            if (player.level === 5) {
+                ctx.fillText(prompts[3], 385, y);
+            } else {
+                ctx.fillText(prompts[2], 385, y);
+            }
     }
 
     //clears the canvas so text doesn't get blurry
