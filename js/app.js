@@ -182,8 +182,14 @@ Player.prototype.handleInput = function(key) {
             break;
 
         case 'right':
-            if(this.x < 400) {
+            if(this.sprite === 'images/char-cartman-wizard.png') {
+                if (this.x < 340) {
                 this.x+=35;
+                }
+            } else {
+                if (this.x < 400) {
+                this.x+=35;
+                }
             }
             break;
 
