@@ -418,7 +418,7 @@ function relicCollisions () {
                   } else if (relic.sprite === 'images/Star.png') {
 
                       var i = 10
-                      var timer = setInterval(function() { 
+                      var starTimer = setInterval(function() { 
 
                               i--;
                               console.log(i);
@@ -426,7 +426,7 @@ function relicCollisions () {
                               if(i === 0) {
                                   collisionsOn = true;
                                   player.sprite = 'images/char-cartman.png';
-                                  clearInterval(timer);
+                                  clearInterval(starTimer);
                               }
 
                             }, 1000);
@@ -462,16 +462,16 @@ function relicCollisions () {
                   }
 
                 // Set timer for how long relic text (eg pts) appear on screen
-                  var i = 15;
-                  var timer = setInterval(function() { 
+                  var k = 15;
+                  var pointsTimer = setInterval(function() { 
 
-                      i--;
+                      k--;
                       console.log(i);
 
-                      if(i > 0) {
+                      if(k > 0) {
                           getGem = true;
                       } else {
-                          clearInterval(timer);
+                          clearInterval(pointsTimer);
                           getGem = false;
                       }
 

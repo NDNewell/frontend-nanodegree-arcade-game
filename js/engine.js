@@ -357,10 +357,7 @@ var Engine = (function(global) {
         var y = 45;
         // Draw lives text
         ctx.font = "35px Impact";
-        ctx.fillStyle = "yellow";
-        ctx.strokeStyle = "black";
-        ctx.lineWidth = 2.5;
-        ctx.strokeText(prompts[0], 10, y);
+        ctx.fillStyle = "#70B8FF";
         ctx.fillText(prompts[0], 10, y);
 
         // Draw points text
@@ -380,8 +377,8 @@ var Engine = (function(global) {
             ctx.fillStyle = "white";
             ctx.fillStroke = "black";
             ctx.lineWidth = 1;
-            ctx.fillText(gemValue, player.x + 25, player.y);
-            ctx.strokeText(gemValue, player.x + 25, player.y);
+            ctx.fillText(gemValue, player.x + 30, player.y);
+            ctx.strokeText(gemValue, player.x + 30, player.y);
         }
     }
 
