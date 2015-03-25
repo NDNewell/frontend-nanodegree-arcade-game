@@ -452,6 +452,7 @@ var Engine = (function(global) {
         stopGame = false;
         goUplevel = false;
         beginGame = false;
+        starPower = false;
 
         //reset path/canvas formatting
         ctx.beginPath();

@@ -1,3 +1,4 @@
+
 // Create master-class
 function Sprite(right, left, bottom, top, spriteImg) {
     // Set variables for enemy dimensions
@@ -103,6 +104,7 @@ function enemyCollisions () {
                         enemy.y + enemy.bottom > player.y + player.top) {
                             console.log('collision!');
                           //Reset player position
+                            hey.play();
                             player.die();
                         }
                     });
@@ -136,14 +138,19 @@ Player.prototype.update = function(dt) {
     // Check player's lives
     if(player.lives === 0) {
         stopGame = true;
+        sonOfa.play();
     }
 
     if(goUplevel) {
         stopGame = true;
+            if(player.level < 5) {
+                respect.play();
+            }
     }
 
     if(player.level === 5) {
         winGame = true;
+        screwYou.play();
         stopGame = true;
     }
 
@@ -200,6 +207,7 @@ Player.prototype.handleInput = function(key) {
             } else {
                 this.points += 10;
                 this.touchWater++;
+                reachTopSound.play();
 
                     if(this.touchWater === 3) {
                       this.level++;
@@ -408,18 +416,21 @@ function relicCollisions () {
 
                   if(relic.sprite === 'images/Gem-Blue-sm.png') {
 
+                      blueGemSound.play();
                       getGem = true;
                       gemValue = 100;
                       player.points += gemValue;
 
                   } else if (relic.sprite === 'images/Gem-Orange-sm.png') {
 
+                      orangeGemSound.play();
                       getGem = true;
                       gemValue = 300;
                       player.points += gemValue;
 
                   } else if (relic.sprite === 'images/Gem-Green-sm.png') {
 
+                      greenGemSound.play();
                       getGem = true;
                       gemValue = 500;
                       player.points += gemValue;
@@ -429,6 +440,7 @@ function relicCollisions () {
                   } else if (relic.sprite === 'images/Heart.png') {
 
                       player.lives++;
+                      heartSound.play();
                       console.log('Extra life!');
 
                   } else if (relic.sprite === 'images/Star.png') {
@@ -448,6 +460,7 @@ function relicCollisions () {
 
                             }, 1000);
 
+                      starSound.play();
                       player.sprite = 'images/char-cartman-wizard.png';
                       player.right = 100;
                       player.left = -15;
@@ -459,6 +472,7 @@ function relicCollisions () {
 
                   } else if (relic.sprite === 'images/Key.png') {
 
+                      keySound.play();
                       player.level++;
                       goUplevel = true;
 
@@ -558,6 +572,26 @@ var allRelics = [
     new Star(15, 0, 5, -25, 'images/Star.png')
     ];
 
+// Player sounds
+
+var hey = new Audio('sounds/hey.wav');
+var respect = new Audio('sounds/respect.wav');
+var screwYou = new Audio('sounds/screwYou.wav');
+var sonOfa = new Audio('sounds/son_of_a.wav');
+
+
+// Relic sounds
+
+var blueGemSound = new Audio('sounds/blueGem.wav');
+var greenGemSound = new Audio('sounds/greenGem.wav');
+var orangeGemSound = new Audio('sounds/orangeGem.wav');
+var heartSound = new Audio('sounds/heart.wav');
+var keySound = new Audio('sounds/key.wav');
+var starSound = new Audio('sounds/star.wav');
+
+// Other game sounds
+
+var reachTopSound = new Audio('sounds/touchWater.wav');
 
 
 
