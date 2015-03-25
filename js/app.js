@@ -270,7 +270,7 @@ document.addEventListener('keyup', function(e) {
 
 function Relic(right, left, bottom, top, spriteImg) {
     Sprite.call(this, right, left, bottom, top, spriteImg);
-    this.speed = 0;//Math.floor((Math.random() * 50) + 50);
+    this.speed = Math.floor((Math.random() * 50) + 50);
     this.x = -Math.floor((Math.random() * 1000) + 500);
 
 // set a random path for this.y
@@ -346,8 +346,6 @@ Relic.prototype.render = function() {
 
 function orangeGem(right, left, bottom, top, spriteImg) {
     Relic.call(this, right, left, bottom, top, spriteImg);
-    this.y = 400;
-    this.x = 100;
 } 
 
 // Set orangeGem prototype as a subclass of Relic
@@ -356,8 +354,6 @@ orangeGem.prototype.constructor = orangeGem;
 
 function greenGem(right, left, bottom, top, spriteImg) {
     Relic.call(this, right, left, bottom, top, spriteImg);
-    this.y = 400;
-    this.x = 50;
 } 
 
 // Set greenGem prototype as a subclass of Relic
@@ -366,8 +362,6 @@ greenGem.prototype.constructor = greenGem;
 
 function blueGem(right, left, bottom, top, spriteImg) {
     Relic.call(this, right, left, bottom, top, spriteImg);
-    this.y = 400;
-    this.x = 150;
 } 
 
 // Set blueGem prototype as a subclass of Relic
@@ -394,8 +388,8 @@ Heart.prototype.constructor = Heart;
 
 function Star(right, left, bottom, top, spriteImg) {
     Relic.call(this, right, left, bottom, top, spriteImg);
-    this.x = 100;-Math.floor((Math.random() * 2000) + 5000);
-    this.y = 425;
+    this.x = -Math.floor((Math.random() * 2000) + 5000);
+
 } 
 
 // Set Star prototype as a subclass of Relic
@@ -548,7 +542,7 @@ var allEnemies = [
                     // y, right, left, bottom, top, spriteImg
     new evilerEnemy(100, 0, 100, 0, 'images/enemy-bug3.png'),
     new evilestEnemy(130, 0, 140, 50, 'images/enemy-bug2.png'),
-    //new Enemy(70, 0, 75, 0, 'images/enemy-bug.png')
+    new Enemy(70, 0, 75, 0, 'images/enemy-bug.png')
     ];
 
                     // right, left, bottom, top, spriteImg
@@ -559,8 +553,8 @@ var allRelics = [
     new blueGem(20, -10, 20, -40, 'images/Gem-Blue-sm.png'),
     new orangeGem(20, -10, 20, -40, 'images/Gem-Orange-sm.png'),
     new greenGem(20, -10, 20, -40, 'images/Gem-Green-sm.png'),
-    //new Key(10, -5, 0, -40, 'images/Key.png'),
-   // new Heart(30, -5, 10, -65, 'images/Heart.png'),
+    new Key(10, -5, 0, -40, 'images/Key.png'),
+    new Heart(30, -5, 10, -65, 'images/Heart.png'),
     new Star(15, 0, 5, -25, 'images/Star.png')
     ];
 
