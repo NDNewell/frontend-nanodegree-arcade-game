@@ -35,6 +35,7 @@ var Engine = (function(global) {
     stopGame = true;
     beginGame = true;
     getGem = false;
+    starPower = false;
 
     canvas.width = 505;
     canvas.height = 675;
@@ -173,8 +174,8 @@ var Engine = (function(global) {
 
 
             renderEntities();
-
             renderStats();
+            renderRelicInfo();
 
     }
 
@@ -209,7 +210,7 @@ var Engine = (function(global) {
         //Set number to reflect level passed
         var displayLevel = player.level -1;
         //Set prompt text
-        var prompts = ["CARTMAN CRUSH", "Cartman must reach the water 3 times", "to pass each level. There are 4 levels.", "Try to obtain the following items:", "500 pts", "300 pts", "100 pts", "Pass Level", "Extra life", "Invincibility", "Every 2500 pts = 1 extra life.", "Press the Spacebar to begin!", "Avoid the bugs:", "Press 'P' to Pause the Game"]
+        var prompts = ["CARTMAN CRUSH", "Cartman must reach the water 3 times", "to pass each level. There are 4 levels.", "Try to obtain the following items:", "500 pts", "300 pts", "100 pts", "Pass Level", "Extra life", "Invincibility", "Every 1000 pts = 1 extra life.", "Press the Spacebar to begin!", "Avoid the bugs:", "Press 'P' to Pause the Game"]
 
         //Draw text: 'Welcome screen'
         console.log("Draw game begin text");
@@ -371,6 +372,18 @@ var Engine = (function(global) {
             } else {
                 ctx.fillText(prompts[2], 385, y);
             }
+    }
+
+    function renderRelicInfo  () {
+
+        if(starPower) {
+            ctx.font = "35px Impact";
+            ctx.fillStyle = "Yellow";
+            ctx.fillStroke = "black";
+            ctx.lineWidth = 1;
+            ctx.fillText(starTime, player.x + 75, player.y + 190);
+            ctx.strokeText(starTime, player.x + 75, player.y + 190);
+        }
 
         if(getGem) {
             ctx.font = "30px Impact";
@@ -380,6 +393,7 @@ var Engine = (function(global) {
             ctx.fillText(gemValue, player.x + 30, player.y);
             ctx.strokeText(gemValue, player.x + 30, player.y);
         }
+
     }
 
     //clears the canvas so text doesn't get blurry

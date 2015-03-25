@@ -148,7 +148,7 @@ Player.prototype.update = function(dt) {
     }
 
     // Give the player an extra life for every 2500 points
-    if (player.points >= bonus*2500) {
+    if (player.points >= bonus*1000) {
         bonus ++;
         player.lives ++;
     }
@@ -336,7 +336,6 @@ Relic.prototype.update = function(dt) {
 // Draw the Relic on the screen
 Relic.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-
 }
 
 function orangeGem(right, left, bottom, top, spriteImg) {
@@ -398,41 +397,78 @@ function relicCollisions () {
                 relic.y + relic.top < player.y + player.bottom &&
                 relic.y + relic.bottom > player.y + player.top) {
 
+                  // set conditions for Gem collisions
+
                   if(relic.sprite === 'images/Gem-Blue-sm.png') {
                     
                       gemValue = 100;
+                      getGem = true;
                       player.points += gemValue;
-                      console.log('You got a blue gem!');
 
                   } else if (relic.sprite === 'images/Gem-Orange-sm.png') {
 
                       gemValue = 300;
+                      getGem = true;
                       player.points += gemValue;
-                      console.log('You got an orange gem!');
 
-                  } else if (relic.sprite === 'images/Heart.png') {
+                  } else if (relic.sprite === 'images/Gem-Green-sm.png') {
+
+                      gemValue = 500;
+                      getGem = true;
+                      player.points += gemValue;
+                  }
+
+                      // Set timer for how long Gem text (eg points) appears on screen
+
+                      if (getGem) {
+
+                              gemTime = 1;
+                              var gemTimer = setInterval(function() { 
+
+                              gemTime--;
+
+                              if(gemTime <= 0) {
+
+                                  clearInterval(gemTimer);
+                                  getGem = false;
+
+                              }
+
+                          }, 1000);
+
+                      }
+
+                  // set conditions for special relic collisions
+
+                  else if (relic.sprite === 'images/Heart.png') {
 
                       player.lives++;
                       console.log('Extra life!');
 
                   } else if (relic.sprite === 'images/Star.png') {
 
-                      var i = 10
+                      starTime = 10;
                       var starTimer = setInterval(function() { 
 
-                              i--;
-                              console.log(i);
+                              starTime--;
+                              console.log(starTime);
 
-                              if(i === 0) {
+                              if(starTime <= 0) {
                                   collisionsOn = true;
                                   player.sprite = 'images/char-cartman.png';
                                   clearInterval(starTimer);
+                                  starPower = false;
                               }
 
                             }, 1000);
 
                       player.sprite = 'images/char-cartman-wizard.png';
+                      player.right = 100;
+                      player.left = -15;
+                      player.bottom = 70;
+                      player.top = -25;
                       collisionsOn = false;
+                      starPower = true;
                       console.log('invincibility!');
 
                   } else if (relic.sprite === 'images/Key.png') {
@@ -453,31 +489,9 @@ function relicCollisions () {
                       player.startOver();
                       console.log('You unlocked the next level!');
 
-                  } else { 
-
-                      gemValue = 500;
-                      player.points += gemValue;
-                      console.log('You got a green gem!');
-
                   }
 
-                // Set timer for how long relic text (eg pts) appear on screen
-                  var k = 15;
-                  var pointsTimer = setInterval(function() { 
-
-                      k--;
-                      console.log(i);
-
-                      if(k > 0) {
-                          getGem = true;
-                      } else {
-                          clearInterval(pointsTimer);
-                          getGem = false;
-                      }
-
-                  }, 100);
-
-                // set random starting point for x
+                // Reset random starting point for x
                 // Key, Star, and Heart are reset to further points away in order to make them less common.
 
                   if(relic.sprite === 'images/Key.png') {
@@ -500,7 +514,7 @@ function relicCollisions () {
 
                   }
 
-                  // set a random path for this.y
+                  // set a random path for this.y for all relics
 
                   var randomPath = Math.floor((Math.random() * 4) + 1);
 
@@ -530,11 +544,11 @@ var player = new Player(77, -15, 55, -25, 'images/char-cartman.png');
 
 var allRelics = [
 
-    new blueGem(20, 20, 20, -40, 'images/Gem-Blue-sm.png'),
-    new orangeGem(20, 20, 20, -40, 'images/Gem-Orange-sm.png'),
-    new greenGem(20, 20, 20, -40, 'images/Gem-Green-sm.png'),
-    new Key(0, 0, 0, 0, 'images/Key.png'),
-    new Heart(30, -5, 0, -70, 'images/Heart.png'),
+    new blueGem(20, -10, 20, -40, 'images/Gem-Blue-sm.png'),
+    new orangeGem(20, -10, 20, -40, 'images/Gem-Orange-sm.png'),
+    new greenGem(20, -10, 20, -40, 'images/Gem-Green-sm.png'),
+    new Key(10, -5, 0, -40, 'images/Key.png'),
+    new Heart(30, -5, 10, -65, 'images/Heart.png'),
     new Star(15, 0, 5, -25, 'images/Star.png')
     ];
 
