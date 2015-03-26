@@ -2,7 +2,9 @@
 
 function Enemy() {
 
-    // Set intitial enemy position
+    // set random horizontal position
+    // generate a number in the range of 100 - 300.
+    // eg. (Math.random * (max - min)) + min
 
     this.x = Math.floor((Math.random() * 505) + 1);
     this.y = 300;
@@ -24,9 +26,11 @@ function Enemy() {
 }
 
 // Update enemy objects
+
 Enemy.prototype.update = function(dt) {
 
 // Check if speed needs to be adjusted for the specific level
+
 if(adjustSpeed) {
 
     console.log("adjust speed");
@@ -65,10 +69,12 @@ if(adjustSpeed) {
 } 
 
 // Update the enemy's position using time delta between ticks
+
     this.x += this.speed * dt;
 
 
 // Parameter to reset enemy's position after moving off screen
+
     if(this.x > 505) {
         this.x = -100;
     }
@@ -124,10 +130,12 @@ function evilestEnemy() {
 }
 
 // Set evilestEnemy prototype as a subclass of Enemy
+
 evilestEnemy.prototype = Object.create(Enemy.prototype);
 evilestEnemy.prototype.constructor = evilestEnemy;
 
 // Collision detection algorithm using box collision for enemies
+
 function enemyCollisions () {
         if(collisionsOn) {
             allEnemies.forEach(function(enemy) {
@@ -145,25 +153,38 @@ function enemyCollisions () {
 }
 
 // Draw the enemies on the screen
+
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
 // Create player class
 
-function Player(right, left, bottom, top, spriteImg) {
-    // Set variables for player dimensions
-    this.right = right;
-    this.left = left;
-    this.bottom = bottom;
-    this.top = top;
-    this.sprite = spriteImg;
+function Player() {
+
+    // set intitial player position
+
+    this.x = 200;
+    this.y = 475;
+
+    // set variables for player dimensions
+
+    this.right = 77;
+    this.left = -15;
+    this.bottom = 55;
+    this.top = -25;
+
+    // set player image
+
+    this.sprite = 'images/char-cartman.png';
+
+    // set player game conditions
+
     this.lives = 3;
     this.points = 0;
     this.level = 1;
     this.touchWater = 0;
-    this.x = 200;
-    this.y = 475;
+
 }
 
 // Set conditions for game continuence
@@ -620,14 +641,13 @@ function relicCollisions () {
 
 // Instantiate objects
 var allEnemies = [
-                    // y, right, left, bottom, top, spriteImg
+
     new evilerEnemy(),
     new evilestEnemy(),
     new Enemy()
     ];
 
-                    // right, left, bottom, top, spriteImg
-var player = new Player(77, -15, 55, -25, 'images/char-cartman.png');
+var player = new Player();
 
 var allRelics = [
 
