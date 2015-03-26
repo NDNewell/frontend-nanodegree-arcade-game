@@ -429,8 +429,7 @@ Heart.prototype.constructor = Heart;
 
 function Star(right, left, bottom, top, spriteImg) {
     Relic.call(this, right, left, bottom, top, spriteImg);
-    this.x = 100; -Math.floor((Math.random() * 2000) + 5000);
-    this.y = 425;
+    this.x = -Math.floor((Math.random() * 2000) + 5000);
 } 
 
 // Set Star prototype as a subclass of Relic
