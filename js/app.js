@@ -1,20 +1,5 @@
-
-// Create master-class
-function Sprite(right, left, bottom, top, spriteImg) {
-    // Set variables for sprite dimensions
-    this.right = right;
-    this.left = left;
-    this.bottom = bottom;
-    this.top = top;
-    this.sprite = spriteImg;
-    // generate a number in the range of 100 - 300.
-    // eg. (Math.random * (max - min)) + min
-    this.speed = Math.floor((Math.random() * 65) + 50);
-}
-
-// Create subclass Enemy
+// Create class Enemy
 function Enemy(right, left, bottom, top, spriteImg) {
-    Sprite.call(this);
         // Set variables for enemy dimensions
     this.right = right;
     this.left = left;
@@ -27,10 +12,6 @@ function Enemy(right, left, bottom, top, spriteImg) {
     // eg. (Math.random * (max - min)) + min
     this.speed = Math.floor((Math.random() * 65) + 50);
 }
-
-// Set Enemy prototype as a subclass of Sprite
-Enemy.prototype = Object.create(Sprite.prototype);
-Enemy.prototype.constructor = Enemy;
 
 // Update enemy objects
 Enemy.prototype.update = function(dt) {
@@ -125,10 +106,9 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-// Create player subclass of Sprite
+// Create player class
 
 function Player(right, left, bottom, top, spriteImg) {
-    Sprite.call(this);
     // Set variables for player dimensions
     this.right = right;
     this.left = left;
@@ -142,10 +122,6 @@ function Player(right, left, bottom, top, spriteImg) {
     this.x = 200;
     this.y = 475;
 }
-
-// Set Player prototype as a subclass of Sprite
-Player.prototype = Object.create(Sprite.prototype);
-Player.prototype.constructor = Player;
 
 // Set conditions for game continuence
 Player.prototype.update = function(dt) {
@@ -318,10 +294,9 @@ document.addEventListener('keyup', function(e) {
 });
 
 
-// Create Relic subclass of Sprite
+// Create Relic class
 
 function Relic(right, left, bottom, top, spriteImg) {
-    Sprite.call(this);
     // Set variables for sprite dimensions
     this.right = right;
     this.left = left;
@@ -344,10 +319,6 @@ function Relic(right, left, bottom, top, spriteImg) {
           this.y = 360;
         }
 } 
-
-// Set Relic prototype as a subclass of Sprite
-Relic.prototype = Object.create(Sprite.prototype);
-Relic.prototype.constructor = Relic;
 
 Relic.prototype.update = function(dt) {
 
