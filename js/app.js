@@ -1,16 +1,26 @@
 // Create class Enemy
-function Enemy(right, left, bottom, top, spriteImg) {
-        // Set variables for enemy dimensions
-    this.right = right;
-    this.left = left;
-    this.bottom = bottom;
-    this.top = top;
-    this.sprite = spriteImg;
+
+function Enemy() {
+
+    // Set intitial enemy position
+
     this.x = Math.floor((Math.random() * 505) + 1);
     this.y = 300;
+
+    // Set variables for enemy dimensions
+
+    this.right = 70;
+    this.left = 0;
+    this.bottom = 75;
+    this.top = 0;
+    this.sprite = 'images/enemy-bug.png';
+
+    // set random enemy speed
     // generate a number in the range of 100 - 300.
     // eg. (Math.random * (max - min)) + min
+
     this.speed = Math.floor((Math.random() * 65) + 50);
+
 }
 
 // Update enemy objects
@@ -65,19 +75,52 @@ if(adjustSpeed) {
 }
 
 // Create subclass evilerEnemy
-function evilerEnemy(right, left, bottom, top, spriteImg) {
-    Enemy.call(this, right, left, bottom, top, spriteImg);
+
+function evilerEnemy() {
+
+    //Call prototype properties from Enemy
+
+    Enemy.call(this);
+
+    // Set vertical position
+
     this.y = 30;
+
+    // Set variables for evilerEnemy dimensions
+
+    this.right = 100;
+    this.left = 0;
+    this.bottom = 100;
+    this.top = 0;
+    this.sprite = 'images/enemy-bug3.png';
+
 }
 
 // Set Enemy prototype as a subclass of Enemy
+
 evilerEnemy.prototype = Object.create(Enemy.prototype);
 evilerEnemy.prototype.constructor = evilerEnemy;
 
 // Create subclass evilestEnemy
-function evilestEnemy(right, left, bottom, top, spriteImg) {
-    Enemy.call(this, right, left, bottom, top, spriteImg);
+
+function evilestEnemy() {
+
+    //Call prototype properties from Enemy
+
+    Enemy.call(this);
+
+    // Set vertical position
+
     this.y = 125;
+
+    // Set variables for evilestEnemy dimensions
+
+    this.right = 130;
+    this.left = 0;
+    this.bottom = 140;
+    this.top = 50;
+    this.sprite = 'images/enemy-bug2.png';
+
 }
 
 // Set evilestEnemy prototype as a subclass of Enemy
@@ -578,9 +621,9 @@ function relicCollisions () {
 // Instantiate objects
 var allEnemies = [
                     // y, right, left, bottom, top, spriteImg
-    new evilerEnemy(100, 0, 100, 0, 'images/enemy-bug3.png'),
-    new evilestEnemy(130, 0, 140, 50, 'images/enemy-bug2.png'),
-    new Enemy(70, 0, 75, 0, 'images/enemy-bug.png')
+    new evilerEnemy(),
+    new evilestEnemy(),
+    new Enemy()
     ];
 
                     // right, left, bottom, top, spriteImg
