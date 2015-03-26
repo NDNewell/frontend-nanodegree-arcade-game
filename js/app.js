@@ -143,6 +143,7 @@ Player.prototype.update = function(dt) {
     }
 
     if(goUplevel) {
+        removeStarPower();
         stopGame = true;
             if(player.level < 5) {
                 completeLevelSound.play();
@@ -151,6 +152,14 @@ Player.prototype.update = function(dt) {
     }
 
     if(player.level === 5) {
+
+        // If the player has star power invoked, this will check and get rid
+        // it.
+
+        if(starPower) {
+            removeStarPower();
+        }
+
         winGame = true;
         winGameSound.play();
         screwYou.play();
@@ -171,6 +180,14 @@ Player.prototype.update = function(dt) {
     if (stopGame) {
         gameMusicSound.pause();
     }
+}
+
+removeStarPower = function () {
+    console.log("removing star power")
+    player.sprite = 'images/char-cartman.png';
+    starTime = 0;
+    starPower = false;
+    starBackgroundSound.pause();
 }
 
 // Draw the player on the screen
@@ -412,7 +429,8 @@ Heart.prototype.constructor = Heart;
 
 function Star(right, left, bottom, top, spriteImg) {
     Relic.call(this, right, left, bottom, top, spriteImg);
-    this.x = -Math.floor((Math.random() * 2000) + 5000);
+    this.x = 100; -Math.floor((Math.random() * 2000) + 5000);
+    this.y = 425;
 } 
 
 // Set Star prototype as a subclass of Relic
@@ -466,9 +484,11 @@ function relicCollisions () {
                               starTime--;
                               console.log(starTime);
 
-                              if(starTime <= 0) {
+                              if(starTime <= 0 || player.level === 5) {
+                                  if(!winGame && !goUplevel) {
+                                    untransformSound.play();
+                                  }
                                   collisionsOn = true;
-                                  untransformSound.play();
                                   player.sprite = 'images/char-cartman.png';
                                   clearInterval(starTimer);
                                   starPower = false;
