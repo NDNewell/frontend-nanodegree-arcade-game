@@ -138,26 +138,38 @@ Player.prototype.update = function(dt) {
     // Check player's lives
     if(player.lives === 0) {
         stopGame = true;
+        gameOverSound.play();
         sonOfa.play();
     }
 
     if(goUplevel) {
         stopGame = true;
             if(player.level < 5) {
+                completeLevelSound.play();
                 respect.play();
             }
     }
 
     if(player.level === 5) {
         winGame = true;
+        winGameSound.play();
         screwYou.play();
         stopGame = true;
     }
 
-    // Give the player an extra life for every 2500 points
+    // Give the player an extra life for every 1000 points
     if (player.points >= bonus*1000) {
         bonus ++;
         player.lives ++;
+        extraLifeSound.play();
+    }
+
+    // Loop keeps play the background music for the game
+    gameMusicSound.play();
+
+    // Whenver the game stops, the background music is paused
+    if (stopGame) {
+        gameMusicSound.pause();
     }
 }
 
@@ -239,9 +251,12 @@ Player.prototype.handleInput = function(key) {
             break;
 
           case 'p':
-            if (paused && !goUplevel && !winGame && player.lives > 0) {
+            if (paused && !goUplevel && !winGame && player.lives > 0 && !beginGame) {
+                unPauseSound.play();
                 reset();
-            } else {
+            } else if (!beginGame && !goUplevel && player.lives > 0) {
+
+              pauseSound.play();
               stopGame = true;
               paused = true;
             }
@@ -250,6 +265,7 @@ Player.prototype.handleInput = function(key) {
 
         case 'space':
             if(player.lives === 0 || winGame || goUplevel || beginGame) {
+                spacebarClickSound.play();
                 reset();
             }
 
@@ -397,7 +413,6 @@ Heart.prototype.constructor = Heart;
 function Star(right, left, bottom, top, spriteImg) {
     Relic.call(this, right, left, bottom, top, spriteImg);
     this.x = -Math.floor((Math.random() * 2000) + 5000);
-
 } 
 
 // Set Star prototype as a subclass of Relic
@@ -453,6 +468,7 @@ function relicCollisions () {
 
                               if(starTime <= 0) {
                                   collisionsOn = true;
+                                  untransformSound.play();
                                   player.sprite = 'images/char-cartman.png';
                                   clearInterval(starTimer);
                                   starPower = false;
@@ -460,7 +476,8 @@ function relicCollisions () {
 
                             }, 1000);
 
-                      starSound.play();
+                      transformSound.play();
+                      starBackgroundSound.play();
                       player.sprite = 'images/char-cartman-wizard.png';
                       player.right = 100;
                       player.left = -15;
@@ -572,7 +589,7 @@ var allRelics = [
     new Star(15, 0, 5, -25, 'images/Star.png')
     ];
 
-// Player sounds
+// Player sound instances
 
 var hey = new Audio('sounds/hey.wav');
 var respect = new Audio('sounds/respect.wav');
@@ -580,18 +597,28 @@ var screwYou = new Audio('sounds/screwYou.wav');
 var sonOfa = new Audio('sounds/son_of_a.wav');
 
 
-// Relic sounds
+// Relic sound instances
 
 var blueGemSound = new Audio('sounds/blueGem.wav');
 var greenGemSound = new Audio('sounds/greenGem.wav');
 var orangeGemSound = new Audio('sounds/orangeGem.wav');
 var heartSound = new Audio('sounds/heart.wav');
 var keySound = new Audio('sounds/key.wav');
-var starSound = new Audio('sounds/star.wav');
+var transformSound = new Audio('sounds/transform.wav');
+var untransformSound = new Audio('sounds/transform.wav');
+var starBackgroundSound = new Audio('sounds/starPower.wav');
 
-// Other game sounds
+// Other game sound instances
 
 var reachTopSound = new Audio('sounds/touchWater.wav');
+var extraLifeSound = new Audio('sounds/extraLife.wav');
+var gameOverSound = new Audio('sounds/gameOver.wav');
+var completeLevelSound = new Audio('sounds/completeLevel.wav');
+var pauseSound = new Audio('sounds/pause.mp3');
+var unPauseSound = new Audio('sounds/unPause.mp3');
+var spacebarClickSound = new Audio('sounds/spaceBarClick.wav');
+var winGameSound = new Audio('sounds/winGame.wav');
+var gameMusicSound = new Audio('sounds/gameMusic.mp3');
 
 
 
