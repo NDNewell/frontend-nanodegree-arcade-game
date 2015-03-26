@@ -1,7 +1,7 @@
 
 // Create master-class
 function Sprite(right, left, bottom, top, spriteImg) {
-    // Set variables for enemy dimensions
+    // Set variables for sprite dimensions
     this.right = right;
     this.left = left;
     this.bottom = bottom;
@@ -14,9 +14,18 @@ function Sprite(right, left, bottom, top, spriteImg) {
 
 // Create subclass Enemy
 function Enemy(right, left, bottom, top, spriteImg) {
-    Sprite.call(this, right, left, bottom, top, spriteImg);
+    Sprite.call(this);
+        // Set variables for enemy dimensions
+    this.right = right;
+    this.left = left;
+    this.bottom = bottom;
+    this.top = top;
+    this.sprite = spriteImg;
     this.x = Math.floor((Math.random() * 505) + 1);
     this.y = 300;
+    // generate a number in the range of 100 - 300.
+    // eg. (Math.random * (max - min)) + min
+    this.speed = Math.floor((Math.random() * 65) + 50);
 }
 
 // Set Enemy prototype as a subclass of Sprite
@@ -119,7 +128,13 @@ Enemy.prototype.render = function() {
 // Create player subclass of Sprite
 
 function Player(right, left, bottom, top, spriteImg) {
-    Sprite.call(this, right, left, bottom, top, spriteImg);
+    Sprite.call(this);
+    // Set variables for player dimensions
+    this.right = right;
+    this.left = left;
+    this.bottom = bottom;
+    this.top = top;
+    this.sprite = spriteImg;
     this.lives = 3;
     this.points = 0;
     this.level = 1;
@@ -269,7 +284,6 @@ Player.prototype.handleInput = function(key) {
                 unPauseSound.play();
                 reset();
             } else if (!beginGame && !goUplevel && player.lives > 0) {
-
               pauseSound.play();
               stopGame = true;
               paused = true;
@@ -307,7 +321,13 @@ document.addEventListener('keyup', function(e) {
 // Create Relic subclass of Sprite
 
 function Relic(right, left, bottom, top, spriteImg) {
-    Sprite.call(this, right, left, bottom, top, spriteImg);
+    Sprite.call(this);
+    // Set variables for sprite dimensions
+    this.right = right;
+    this.left = left;
+    this.bottom = bottom;
+    this.top = top;
+    this.sprite = spriteImg;
     this.speed = Math.floor((Math.random() * 50) + 50);
     this.x = -Math.floor((Math.random() * 1000) + 500);
 
