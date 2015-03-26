@@ -173,9 +173,6 @@ Player.prototype.update = function(dt) {
         extraLifeSound.play();
     }
 
-    // Loop keeps play the background music for the game
-    gameMusicSound.play();
-
     // Whenver the game stops, the background music is paused
     if (stopGame) {
         gameMusicSound.pause();
@@ -638,6 +635,10 @@ var unPauseSound = new Audio('sounds/unPause.mp3');
 var spacebarClickSound = new Audio('sounds/spaceBarClick.wav');
 var winGameSound = new Audio('sounds/winGame.wav');
 var gameMusicSound = new Audio('sounds/gameMusic.mp3');
+var introMusicSound = new Audio('sounds/introMusic.wav');
 
+
+introMusicSound.play();
+introMusicSound.loop = true;
 
 

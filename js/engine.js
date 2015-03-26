@@ -454,6 +454,11 @@ var Engine = (function(global) {
         beginGame = false;
         starPower = false;
 
+        introMusicSound.pause();
+
+        gameMusicSound.play();
+        gameMusicSound.loop = true;
+
         //reset path/canvas formatting
         ctx.beginPath();
 
