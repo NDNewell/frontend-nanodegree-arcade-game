@@ -7,14 +7,10 @@
 function Enemy() {
 
     // set random horizontal position
-    // generate a number in the range of 1 - 505.
-    // eg. Math.floor((Math.random * (max - min)) + min
 
     this.x = randomRange(505, 1);
 
     // set random enemy speed
-    // generate a number in the range of 50 - 115.
-    // eg. Math.floor((Math.random * (max - min)) + min
 
     this.speed = randomRange(115, 50);
 
@@ -181,7 +177,7 @@ function enemyCollisions () {
                         enemy.y + enemy.bottom > player.y + player.top) {
                             console.log('collision!');
                           //Reset player position
-                            hey.play();
+                            heySound.play();
                             player.die();
                         }
                     });
@@ -230,7 +226,7 @@ Player.prototype.update = function(dt) {
     if(player.lives === 0) {
         stopGame = true;
         gameOverSound.play();
-        sonOfa.play();
+        sonBitchSound.play();
     }
 
     if(goUplevel) {
@@ -238,7 +234,7 @@ Player.prototype.update = function(dt) {
         stopGame = true;
             if(player.level < 5) {
                 completeLevelSound.play();
-                respect.play();
+                respectSound.play();
             }
     }
 
@@ -252,7 +248,7 @@ Player.prototype.update = function(dt) {
 
         winGame = true;
         winGameSound.play();
-        screwYou.play();
+        screwYouSound.play();
         stopGame = true;
     }
 
@@ -397,14 +393,10 @@ document.addEventListener('keyup', function(e) {
 function Relic() {
 
     // set random horizontal position
-    // generate a number in the range of -500 to -1500
-    // eg. Math.floor((Math.random * (max - min)) + min
 
     this.x = randomRange(-1500, -500);
 
     // set random row
-    // generate a number in the range of 1 - 4
-    // eg. Math.floor((Math.random * (max - min)) + min
 
     var randomRow = randomRange(5, 1);
 
@@ -429,8 +421,6 @@ function Relic() {
     }
 
     // set random relic speed
-    // generate a number in the range of 50 - 150
-    // eg. Math.floor(Math.random * (max - min)) + min
 
     this.speed = randomRange(100, 50);
 
@@ -527,9 +517,7 @@ function Key() {
 
     Relic.call(this);
 
-    // set random horizontal position (this is calculated with a larger range in order to reduce its frequency)
-    // generate a number in the range of -3000 to -5000
-    // eg. Math.floor((Math.random * (max - min)) + min
+    // set random horizontal position
 
     this.x = randomRange(-5000, -3000);
 
@@ -562,9 +550,7 @@ function Heart() {
 
     Relic.call(this);
 
-    // set random horizontal position (this is calculated with a larger range in order to reduce its frequency)
-    // generate a number in the range of -3000 to -5000
-    // eg. Math.floor((Math.random * (max - min)) + min
+    // set random horizontal position
 
     this.x = randomRange(-5000, -3000);
 
@@ -595,9 +581,7 @@ function Star() {
 
     Relic.call(this);
 
-    // set random horizontal position (this is calculated with a larger range in order to reduce its frequency)
-    // generate a number in the range of -3000 to -5000
-    // eg. Math.floor((Math.random * (max - min)) + min
+    // set random horizontal position
 
     this.x = randomRange(-5000, -3000);
 
@@ -786,10 +770,13 @@ function relicCollisions () {
 // eg. Math.floor((Math.random * (max - min)) + min
 
 function randomRange (max, min) {
-  return Math.floor((Math.random() * (max - min)) + min);
+
+    return Math.floor((Math.random() * (max - min)) + min);
+
 }
 
-// Instantiate objects
+// instantiate objects
+
 var allEnemies = [
 
     new evilerEnemy(),
@@ -811,10 +798,10 @@ var allRelics = [
 
 // Player sound instances
 
-var hey = new Audio('sounds/hey.wav');
-var respect = new Audio('sounds/respect.wav');
-var screwYou = new Audio('sounds/screwYou.wav');
-var sonOfa = new Audio('sounds/son_of_a.wav');
+var heySound = new Audio('sounds/hey.wav');
+var respectSound = new Audio('sounds/respect.wav');
+var screwYouSound = new Audio('sounds/screwYou.wav');
+var sonBitchSound = new Audio('sounds/son_of_a.wav');
 
 
 // Relic sound instances
@@ -828,7 +815,7 @@ var transformSound = new Audio('sounds/transform.wav');
 var untransformSound = new Audio('sounds/transform.wav');
 var starBackgroundSound = new Audio('sounds/starPower.wav');
 
-// Other game sound instances
+// misc game sound instances
 
 var reachTopSound = new Audio('sounds/touchWater.wav');
 var extraLifeSound = new Audio('sounds/extraLife.wav');
@@ -841,8 +828,7 @@ var winGameSound = new Audio('sounds/winGame.wav');
 var gameMusicSound = new Audio('sounds/gameMusic.mp3');
 var introMusicSound = new Audio('sounds/introMusic.wav');
 
+// initiate intro music and loop
 
 introMusicSound.play();
 introMusicSound.loop = true;
-
-
