@@ -1,15 +1,15 @@
-// Create class Enemy
+// create class Enemy
 
 function Enemy() {
 
     // set random horizontal position
-    // generate a number in the range of 100 - 300.
+    // generate a number in the range of 1 - 505.
     // eg. (Math.random * (max - min)) + min
 
     this.x = Math.floor((Math.random() * 505) + 1);
     this.y = 300;
 
-    // Set variables for enemy dimensions
+    // set variables for enemy dimensions
 
     this.right = 70;
     this.left = 0;
@@ -18,18 +18,18 @@ function Enemy() {
     this.sprite = 'images/enemy-bug.png';
 
     // set random enemy speed
-    // generate a number in the range of 100 - 300.
+    // generate a number in the range of 50 - 115.
     // eg. (Math.random * (max - min)) + min
 
     this.speed = Math.floor((Math.random() * 65) + 50);
 
 }
 
-// Update enemy objects
+// update enemy objects
 
 Enemy.prototype.update = function(dt) {
 
-// Check if speed needs to be adjusted for the specific level
+// check if speed needs to be adjusted for the specific level
 
 if(adjustSpeed) {
 
@@ -68,31 +68,31 @@ if(adjustSpeed) {
 
 } 
 
-// Update the enemy's position using time delta between ticks
+// update the enemy's position using time delta between ticks
 
     this.x += this.speed * dt;
 
 
-// Parameter to reset enemy's position after moving off screen
+// parameter to reset enemy's position after moving off screen
 
     if(this.x > 505) {
         this.x = -100;
     }
 }
 
-// Create subclass evilerEnemy
+// create subclass evilerEnemy
 
 function evilerEnemy() {
 
-    //Call prototype properties from Enemy
+    // call prototype properties from Enemy
 
     Enemy.call(this);
 
-    // Set vertical position
+    // set vertical position
 
     this.y = 30;
 
-    // Set variables for evilerEnemy dimensions
+    // set variables for evilerEnemy dimensions
 
     this.right = 100;
     this.left = 0;
@@ -102,24 +102,24 @@ function evilerEnemy() {
 
 }
 
-// Set Enemy prototype as a subclass of Enemy
+// set Enemy prototype as a subclass of Enemy
 
 evilerEnemy.prototype = Object.create(Enemy.prototype);
 evilerEnemy.prototype.constructor = evilerEnemy;
 
-// Create subclass evilestEnemy
+// create subclass evilestEnemy
 
 function evilestEnemy() {
 
-    //Call prototype properties from Enemy
+    // call prototype properties from Enemy
 
     Enemy.call(this);
 
-    // Set vertical position
+    // set vertical position
 
     this.y = 125;
 
-    // Set variables for evilestEnemy dimensions
+    // set variables for evilestEnemy dimensions
 
     this.right = 130;
     this.left = 0;
@@ -187,7 +187,7 @@ function Player() {
 
 }
 
-// Set conditions for game continuence
+// set conditions for game continuence
 Player.prototype.update = function(dt) {
     
     // Check player's lives
@@ -208,8 +208,7 @@ Player.prototype.update = function(dt) {
 
     if(player.level === 5) {
 
-        // If the player has star power invoked, this will check and get rid
-        // it.
+        // if the player has star power invoked, this will check and get rid of it.
 
         if(starPower) {
             removeStarPower();
@@ -221,14 +220,14 @@ Player.prototype.update = function(dt) {
         stopGame = true;
     }
 
-    // Give the player an extra life for every 1000 points
+    // give the player an extra life for every 1000 points
     if (player.points >= bonus*1000) {
         bonus ++;
         player.lives ++;
         extraLifeSound.play();
     }
 
-    // Whenver the game stops, the background music is paused
+    // whenver the game stops, the background music is paused
     if (stopGame) {
         gameMusicSound.pause();
     }
@@ -242,25 +241,25 @@ removeStarPower = function () {
     starBackgroundSound.pause();
 }
 
-// Draw the player on the screen
+// draw the player on the screen
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-// Method for ending game or taking player's life before starting over
-// Still need to create gameOver.render();
+// method for ending game or taking player's life before starting over
+// still need to create gameOver.render();
 Player.prototype.die = function() {
     player.startOver();
     this.lives--;
 }
 
-// Method for resetting player position
+// method for resetting player position
 Player.prototype.startOver = function() {
     this.x = 200;
     this.y = 475;
 }
 
-// Key instructions for player movements
+// key instructions for player movements
 Player.prototype.handleInput = function(key) {
     switch(key) {
         case 'left':
@@ -342,7 +341,7 @@ Player.prototype.handleInput = function(key) {
 }
 
 
-// Listen for key presses and send the keys to
+// listen for key presses and send the keys to
 // Player.handleInput() method.
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
@@ -357,44 +356,61 @@ document.addEventListener('keyup', function(e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
+// create Relic class
 
-// Create Relic class
+function Relic() {
 
-function Relic(right, left, bottom, top, spriteImg) {
-    // Set variables for sprite dimensions
-    this.right = right;
-    this.left = left;
-    this.bottom = bottom;
-    this.top = top;
-    this.sprite = spriteImg;
-    this.speed = Math.floor((Math.random() * 50) + 50);
+    // set random horizontal position
+    // generate a number in the range of -500 to -1500
+    // eg. (Math.random * (max - min)) + min
+
     this.x = -Math.floor((Math.random() * 1000) + 500);
 
-// set a random path for this.y
+    // set random vertical path
+    // generate a number in the range of 1 - 4
+    // eg. (Math.random * (max - min)) + min
+
     var randomPath = Math.floor((Math.random() * 4) + 1);
 
+    // assign a specific path depending on the number generated from randomPath
+
         if(randomPath === 1) {
-          this.y = 115;
+
+            this.y = 115;
+
         } else if (randomPath === 2) {
-          this.y = 195;
+
+            this.y = 195;
+
         } else if (randomPath === 3) {
-          this.y = 280;
+
+            this.y = 280;
+
         } else if (randomPath === 4) {
-          this.y = 360;
+
+            this.y = 360;
+
         }
-} 
+
+    // set random relic speed
+    // generate a number in the range of 50 - 100
+    // eg. (Math.random * (max - min)) + min
+
+    this.speed = Math.floor((Math.random() * 50) + 50);
+
+}
 
 Relic.prototype.update = function(dt) {
 
-// Update the Relic's position using time delta between ticks
+// update the Relic's position using time delta between ticks
     this.x += this.speed * dt;
 
 
-// Reset Relic if it moves off the screen
+// reset Relic if it moves off the screen
     if(this.x > 505) {
 
       // set random starting point for x
-      // Key, Star, and Heart are reset to further points away in order to make them less common.
+      // key, Star, and Heart are reset to further points away in order to make them less common.
 
         if(this.sprite === 'images/Key.png') {
 
@@ -411,7 +427,7 @@ Relic.prototype.update = function(dt) {
         } else {
 
 
-      // Gems get set to the default starting point
+      // gems get set to the default starting point
 
           this.x = -Math.floor((Math.random() * 1000) + 500);
 
@@ -432,63 +448,130 @@ Relic.prototype.update = function(dt) {
 
 }
 
-// Draw the Relic on the screen
+// draw the Relic on the screen
+
 Relic.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-function orangeGem(right, left, bottom, top, spriteImg) {
-    Relic.call(this, right, left, bottom, top, spriteImg);
-} 
+// create Gem subclass of Relic
 
-// Set orangeGem prototype as a subclass of Relic
-orangeGem.prototype = Object.create(Relic.prototype);
-orangeGem.prototype.constructor = orangeGem;
+function Gem(spriteImg) {
 
-function greenGem(right, left, bottom, top, spriteImg) {
-    Relic.call(this, right, left, bottom, top, spriteImg);
-} 
+    // call prototype properties from Relic
 
-// Set greenGem prototype as a subclass of Relic
-greenGem.prototype = Object.create(Relic.prototype);
-greenGem.prototype.constructor = greenGem;
+    Relic.call(this);
 
-function blueGem(right, left, bottom, top, spriteImg) {
-    Relic.call(this, right, left, bottom, top, spriteImg);
-} 
+    // set variable dimensions for Gem
 
-// Set blueGem prototype as a subclass of Relic
-blueGem.prototype = Object.create(Relic.prototype);
-blueGem.prototype.constructor = blueGem;
+    this.right = 20;
+    this.left = -10;
+    this.bottom = 20;
+    this.top = -40;
 
-function Key(right, left, bottom, top, spriteImg) {
-    Relic.call(this, right, left, bottom, top, spriteImg);
+    // set Gem image
+
+    this.sprite = spriteImg;
+
+}
+
+// set Gem prototype as a subclass of Relic
+
+Gem.prototype = Object.create(Relic.prototype);
+Gem.prototype.constructor = Gem;
+
+function Key() {
+
+    // call prototype properties from Relic
+
+    Relic.call(this);
+
+    // set random horizontal position (this is calculated with a larger range in order to reduce its frequency)
+    // generate a number in the range of -2000 to -7000
+    // eg. (Math.random * (max - min)) + min
+
     this.x = -Math.floor((Math.random() * 2000) + 5000);
-} 
 
-// Set Key prototype as a subclass of Relic
+    // set variable dimensions for Key
+
+    this.right = 10;
+    this.left = -5;
+    this.bottom = 0;
+    this.top = -40;
+
+    // set Key image
+
+    this.sprite = 'images/Key.png';
+
+}
+
+// set Key prototype as a subclass of Relic
+
 Key.prototype = Object.create(Relic.prototype);
 Key.prototype.constructor = Key;
 
-function Heart(right, left, bottom, top, spriteImg) {
-    Relic.call(this, right, left, bottom, top, spriteImg);
-    this.x = -Math.floor((Math.random() * 2000) + 5000);
-} 
+function Heart() {
 
-// Set Heart prototype as a subclass of Relic
+    // call prototype properties from Relic
+
+    Relic.call(this);
+
+    // set random horizontal position (this is calculated with a larger range in order to reduce its frequency)
+    // generate a number in the range of -2000 to -7000
+    // eg. (Math.random * (max - min)) + min
+
+    this.x = -Math.floor((Math.random() * 2000) + 5000);
+
+    // set variable dimensions for Heart
+
+    this.right = 30;
+    this.left = -5;
+    this.bottom = 10;
+    this.top = -65;
+
+    // set Heart image
+
+    this.sprite = 'images/Heart.png';
+
+}
+
+// set Heart prototype as a subclass of Relic
+
 Heart.prototype = Object.create(Relic.prototype);
 Heart.prototype.constructor = Heart;
 
-function Star(right, left, bottom, top, spriteImg) {
-    Relic.call(this, right, left, bottom, top, spriteImg);
-    this.x = -Math.floor((Math.random() * 2000) + 5000);
-} 
+function Star() {
 
-// Set Star prototype as a subclass of Relic
+    // call prototype properties from Relic
+
+    Relic.call(this);
+
+    // set random horizontal position (this is calculated with a larger range in order to reduce its frequency)
+    // generate a number in the range of -2000 to -7000
+    // eg. (Math.random * (max - min)) + min
+
+    this.x = -Math.floor((Math.random() * 2000) + 5000);
+
+    // set variable dimensions for Star
+
+    this.right = 15;
+    this.left = 0;
+    this.bottom = 5;
+    this.top = -25;
+
+    // set Star image
+
+    this.sprite = 'images/Star.png';
+
+}
+
+// set Star prototype as a subclass of Relic
+
 Star.prototype = Object.create(Relic.prototype);
 Star.prototype.constructor = Star;
 
-// Collision detection algorithm using box collision
+// collision detection algorithm using box collision
+
 function relicCollisions () {
     allRelics.forEach(function(relic) {
              if(relic.x + relic.left < player.x + player.right &&
@@ -651,12 +734,12 @@ var player = new Player();
 
 var allRelics = [
 
-    new blueGem(20, -10, 20, -40, 'images/Gem-Blue-sm.png'),
-    new orangeGem(20, -10, 20, -40, 'images/Gem-Orange-sm.png'),
-    new greenGem(20, -10, 20, -40, 'images/Gem-Green-sm.png'),
-    new Key(10, -5, 0, -40, 'images/Key.png'),
-    new Heart(30, -5, 10, -65, 'images/Heart.png'),
-    new Star(15, 0, 5, -25, 'images/Star.png')
+    new Gem('images/Gem-Blue-sm.png'),
+    new Gem('images/Gem-Orange-sm.png'),
+    new Gem('images/Gem-Green-sm.png'),
+    new Key(),
+    new Heart(),
+    new Star()
     ];
 
 // Player sound instances
