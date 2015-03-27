@@ -1,15 +1,98 @@
-// create class Enemy
+// set global variables
+
+
+
+// create superclass Enemy
 
 function Enemy() {
 
     // set random horizontal position
     // generate a number in the range of 1 - 505.
-    // eg. (Math.random * (max - min)) + min
+    // eg. Math.floor((Math.random * (max - min)) + min
 
-    this.x = Math.floor((Math.random() * 505) + 1);
+    this.x = randomRange(505, 1);
+
+    // set random enemy speed
+    // generate a number in the range of 50 - 115.
+    // eg. Math.floor((Math.random * (max - min)) + min
+
+    this.speed = randomRange(115, 50);
+
+}
+
+// update Enemy objects
+
+Enemy.prototype.update = function(dt) {
+
+    // update the enemy's position using time delta between ticks
+
+    this.x += this.speed * dt;
+
+    // check if speed needs to be adjusted for the specific level
+
+    if(adjustSpeed) {
+
+        if(player.level === 1) {
+
+            allEnemies.forEach(function(enemy) {
+
+                enemy.speed = randomRange(115, 50);
+
+            });
+
+        } else if (player.level ===2) {
+
+            allEnemies.forEach(function(enemy) {
+
+                enemy.speed = randomRange(180, 115);
+
+            });
+
+        } else if (player.level ===3) {
+
+            allEnemies.forEach(function(enemy) {
+
+                enemy.speed = randomRange(245, 180);
+
+            });
+
+        } else if (player.level ===4) {
+
+            allEnemies.forEach(function(enemy) {
+
+                enemy.speed = randomRange(310, 245);
+
+            });
+
+        }
+
+    adjustSpeed = false;
+
+}
+
+    // reset enemy's position after moving off screen
+
+    if(this.x > 505) {
+
+        this.x = -100;
+
+    }
+
+}
+
+// create subclass evilEnemy from Enemy
+
+function evilEnemy() {
+
+    // call prototype properties from Enemy
+
+    Enemy.call(this);
+
+    // set vertical position
+
     this.y = 300;
 
-    // set variables for enemy dimensions
+    // set variables for evilEnemy dimensions
 
     this.right = 70;
     this.left = 0;
@@ -17,70 +100,17 @@ function Enemy() {
     this.top = 0;
     this.sprite = 'images/enemy-bug.png';
 
-    // set random enemy speed
-    // generate a number in the range of 50 - 115.
-    // eg. (Math.random * (max - min)) + min
-
-    this.speed = Math.floor((Math.random() * 65) + 50);
-
 }
 
-// update enemy objects
+// set evilEnemy prototype as a subclass of Enemy
 
-Enemy.prototype.update = function(dt) {
+evilEnemy.prototype = Object.create(Enemy.prototype);
 
-// check if speed needs to be adjusted for the specific level
+// set evilEnemy constructor
 
-if(adjustSpeed) {
+evilEnemy.prototype.constructor = evilEnemy;
 
-    console.log("adjust speed");
-
-      if(player.level === 1) {
-          allEnemies.forEach(function(enemy) {
-            enemy.speed = Math.floor((Math.random() * 65) + 50);
-          });
-
-          console.log("level 1 speed!");
-
-      } else if (player.level ===2) {
-          allEnemies.forEach(function(enemy) {
-            enemy.speed = Math.floor((Math.random() * 65) + 115);
-          });
-
-          console.log("level 2 speed!");
-
-      } else if (player.level ===3) {
-          allEnemies.forEach(function(enemy) {
-            enemy.speed = Math.floor((Math.random() * 65) + 180);
-          });
-
-          console.log("level 3 speed!");
-
-      } else if (player.level ===4) {
-          allEnemies.forEach(function(enemy) {
-            enemy.speed = Math.floor((Math.random() * 65) + 245);
-          });
-
-          console.log("level 4 speed!");
-      }
-
-    adjustSpeed = false;
-
-} 
-
-// update the enemy's position using time delta between ticks
-
-    this.x += this.speed * dt;
-
-
-// parameter to reset enemy's position after moving off screen
-
-    if(this.x > 505) {
-        this.x = -100;
-    }
-}
-
-// create subclass evilerEnemy
+// create subclass evilerEnemy from Enemy
 
 function evilerEnemy() {
 
@@ -102,12 +132,15 @@ function evilerEnemy() {
 
 }
 
-// set Enemy prototype as a subclass of Enemy
+// set evilerEnemy prototype as a subclass of Enemy
 
 evilerEnemy.prototype = Object.create(Enemy.prototype);
+
+// set evilerEnemy constructor
+
 evilerEnemy.prototype.constructor = evilerEnemy;
 
-// create subclass evilestEnemy
+// create subclass evilestEnemy from Enemy
 
 function evilestEnemy() {
 
@@ -132,6 +165,9 @@ function evilestEnemy() {
 // Set evilestEnemy prototype as a subclass of Enemy
 
 evilestEnemy.prototype = Object.create(Enemy.prototype);
+
+// set evilestEnemy constructor
+
 evilestEnemy.prototype.constructor = evilestEnemy;
 
 // Collision detection algorithm using box collision for enemies
@@ -356,94 +392,94 @@ document.addEventListener('keyup', function(e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
-// create Relic class
+// create Relic superclass
 
 function Relic() {
 
     // set random horizontal position
     // generate a number in the range of -500 to -1500
-    // eg. (Math.random * (max - min)) + min
+    // eg. Math.floor((Math.random * (max - min)) + min
 
-    this.x = -Math.floor((Math.random() * 1000) + 500);
+    this.x = randomRange(-1500, -500);
 
-    // set random vertical path
+    // set random row
     // generate a number in the range of 1 - 4
-    // eg. (Math.random * (max - min)) + min
+    // eg. Math.floor((Math.random * (max - min)) + min
 
-    var randomPath = Math.floor((Math.random() * 4) + 1);
+    var randomRow = randomRange(5, 1);
 
-    // assign a specific path depending on the number generated from randomPath
+    // assign a specific row depending on the number generated from randomRow
 
-        if(randomPath === 1) {
+    if(randomRow === 1) {
 
-            this.y = 115;
+        this.y = 115;
 
-        } else if (randomPath === 2) {
+    } else if (randomRow === 2) {
 
-            this.y = 195;
+        this.y = 195;
 
-        } else if (randomPath === 3) {
+    } else if (randomRow === 3) {
 
-            this.y = 280;
+        this.y = 280;
 
-        } else if (randomPath === 4) {
+    } else if (randomRow === 4) {
 
-            this.y = 360;
+        this.y = 360;
 
-        }
+    }
 
     // set random relic speed
-    // generate a number in the range of 50 - 100
-    // eg. (Math.random * (max - min)) + min
+    // generate a number in the range of 50 - 150
+    // eg. Math.floor(Math.random * (max - min)) + min
 
-    this.speed = Math.floor((Math.random() * 50) + 50);
+    this.speed = randomRange(100, 50);
 
 }
 
 Relic.prototype.update = function(dt) {
 
-// update the Relic's position using time delta between ticks
+    // update the Relic's position using time delta between ticks
+
     this.x += this.speed * dt;
 
+    // reset Relic if it moves off the screen
+    // set random starting point for x
+    // key, Star, and Heart are reset to further points away in order to make them less common
 
-// reset Relic if it moves off the screen
     if(this.x > 505) {
 
-      // set random starting point for x
-      // key, Star, and Heart are reset to further points away in order to make them less common.
+        if(this.sprite === 'images/Key.png' || 'images/Heart.png' || 'images/Heart.png' || 'images/Star.png') {
 
-        if(this.sprite === 'images/Key.png') {
-
-          this.x = -Math.floor((Math.random() * 2000) + 5000);
-
-        } else if(this.sprite === 'images/Heart.png') {
-
-          this.x = -Math.floor((Math.random() * 2000) + 5000);
-
-        } else if(this.sprite === 'images/Star.png') {
-
-          this.x = -Math.floor((Math.random() * 2000) + 5000);
+            this.x = randomRange(-5000, -3000);
 
         } else {
 
+            // gems get set to the default starting point
 
-      // gems get set to the default starting point
-
-          this.x = -Math.floor((Math.random() * 1000) + 500);
+            this.x = randomRange(-1500, -500);
 
         }
 
-        var randomPath = Math.floor((Math.random() * 4) + 1);
+        var randomRow = randomRange(5, 1);
 
-        if(randomPath === 1) {
+        if(randomRow === 1) {
+
           this.y = 115;
-        } else if (randomPath === 2) {
+
+        } else if (randomRow === 2) {
+
           this.y = 195;
-        } else if (randomPath === 3) {
+
+        } else if (randomRow === 3) {
+
           this.y = 280;
-        } else if (randomPath === 4) {
+
+        } else if (randomRow === 4) {
+
           this.y = 360;
+
         }
+
     }
 
 }
@@ -478,7 +514,12 @@ function Gem(spriteImg) {
 // set Gem prototype as a subclass of Relic
 
 Gem.prototype = Object.create(Relic.prototype);
+
+// set Gem constructor
+
 Gem.prototype.constructor = Gem;
+
+// create Key subclass of Relic
 
 function Key() {
 
@@ -487,10 +528,10 @@ function Key() {
     Relic.call(this);
 
     // set random horizontal position (this is calculated with a larger range in order to reduce its frequency)
-    // generate a number in the range of -2000 to -7000
-    // eg. (Math.random * (max - min)) + min
+    // generate a number in the range of -3000 to -5000
+    // eg. Math.floor((Math.random * (max - min)) + min
 
-    this.x = -Math.floor((Math.random() * 2000) + 5000);
+    this.x = randomRange(-5000, -3000);
 
     // set variable dimensions for Key
 
@@ -508,7 +549,12 @@ function Key() {
 // set Key prototype as a subclass of Relic
 
 Key.prototype = Object.create(Relic.prototype);
+
+// set Key constructor
+
 Key.prototype.constructor = Key;
+
+// create Heart subclass of Relic
 
 function Heart() {
 
@@ -517,10 +563,10 @@ function Heart() {
     Relic.call(this);
 
     // set random horizontal position (this is calculated with a larger range in order to reduce its frequency)
-    // generate a number in the range of -2000 to -7000
-    // eg. (Math.random * (max - min)) + min
+    // generate a number in the range of -3000 to -5000
+    // eg. Math.floor((Math.random * (max - min)) + min
 
-    this.x = -Math.floor((Math.random() * 2000) + 5000);
+    this.x = randomRange(-5000, -3000);
 
     // set variable dimensions for Heart
 
@@ -538,6 +584,9 @@ function Heart() {
 // set Heart prototype as a subclass of Relic
 
 Heart.prototype = Object.create(Relic.prototype);
+
+// set Heart constructor
+
 Heart.prototype.constructor = Heart;
 
 function Star() {
@@ -547,10 +596,10 @@ function Star() {
     Relic.call(this);
 
     // set random horizontal position (this is calculated with a larger range in order to reduce its frequency)
-    // generate a number in the range of -2000 to -7000
-    // eg. (Math.random * (max - min)) + min
+    // generate a number in the range of -3000 to -5000
+    // eg. Math.floor((Math.random * (max - min)) + min
 
-    this.x = -Math.floor((Math.random() * 2000) + 5000);
+    this.x = randomRange(-5000, -3000);
 
     // set variable dimensions for Star
 
@@ -568,158 +617,176 @@ function Star() {
 // set Star prototype as a subclass of Relic
 
 Star.prototype = Object.create(Relic.prototype);
+
+// set Star constructor
+
 Star.prototype.constructor = Star;
 
 // collision detection algorithm using box collision
 
 function relicCollisions () {
+
     allRelics.forEach(function(relic) {
-             if(relic.x + relic.left < player.x + player.right &&
-                relic.x + relic.right > player.x + player.left &&
-                relic.y + relic.top < player.y + player.bottom &&
-                relic.y + relic.bottom > player.y + player.top) {
 
-                  // set conditions for Gem collisions
+        if(relic.x + relic.left < player.x + player.right &&
+          relic.x + relic.right > player.x + player.left &&
+          relic.y + relic.top < player.y + player.bottom &&
+          relic.y + relic.bottom > player.y + player.top) {
 
-                  if(relic.sprite === 'images/Gem-Blue-sm.png') {
+            // set conditions for Gem collisions
 
-                      blueGemSound.play();
-                      getGem = true;
-                      gemValue = 100;
-                      player.points += gemValue;
+            if(relic.sprite === 'images/Gem-Blue-sm.png') {
 
-                  } else if (relic.sprite === 'images/Gem-Orange-sm.png') {
+                blueGemSound.play();
+                getGem = true;
+                gemValue = 100;
+                player.points += gemValue;
 
-                      orangeGemSound.play();
-                      getGem = true;
-                      gemValue = 300;
-                      player.points += gemValue;
+            } else if (relic.sprite === 'images/Gem-Orange-sm.png') {
 
-                  } else if (relic.sprite === 'images/Gem-Green-sm.png') {
+                orangeGemSound.play();
+                getGem = true;
+                gemValue = 300;
+                player.points += gemValue;
 
-                      greenGemSound.play();
-                      getGem = true;
-                      gemValue = 500;
-                      player.points += gemValue;
+            } else if (relic.sprite === 'images/Gem-Green-sm.png') {
 
-                  // set conditions for special relic collisions
+                greenGemSound.play();
+                getGem = true;
+                gemValue = 500;
+                player.points += gemValue;
 
-                  } else if (relic.sprite === 'images/Heart.png') {
+            // set conditions for special relic collisions
 
-                      player.lives++;
-                      heartSound.play();
-                      console.log('Extra life!');
+            } else if (relic.sprite === 'images/Heart.png') {
 
-                  } else if (relic.sprite === 'images/Star.png') {
+                player.lives++;
+                heartSound.play();
+                console.log('Extra life!');
 
-                      starTime = 10;
-                      var starTimer = setInterval(function() { 
+            } else if (relic.sprite === 'images/Star.png') {
 
-                              starTime--;
-                              console.log(starTime);
+                starTime = 10;
+                var starTimer = setInterval(function() { 
 
-                              if(starTime <= 0 || player.level === 5) {
-                                  if(!winGame && !goUplevel) {
-                                    untransformSound.play();
-                                  }
-                                  collisionsOn = true;
-                                  player.sprite = 'images/char-cartman.png';
-                                  clearInterval(starTimer);
-                                  starPower = false;
-                              }
+                        starTime--;
+                        console.log(starTime);
 
-                            }, 1000);
-
-                      transformSound.play();
-                      starBackgroundSound.play();
-                      player.sprite = 'images/char-cartman-wizard.png';
-                      player.right = 100;
-                      player.left = -15;
-                      player.bottom = 70;
-                      player.top = -25;
-                      collisionsOn = false;
-                      starPower = true;
-                      console.log('invincibility!');
-
-                  } else if (relic.sprite === 'images/Key.png') {
-
-                      keySound.play();
-                      player.level++;
-                      goUplevel = true;
-
-                      if(player.level === 2) {
-                        player.touchWater = 3;
-                      } else if (player.level === 3) {
-                        player.touchWater = 6;
-                      } else if (player.level === 4) {
-                        player.touchWater = 9;
-                      } else if (player.level === 5) {
-                        player.touchWater = 12;
-                      }
-
-                      player.startOver();
-                      console.log('You unlocked the next level!');
-
-                  }
-
-                  // Set timer for how long Gem text (eg points) appears on screen
-
-                  if (getGem) {
-
-                          gemTime = 1;
-                          var gemTimer = setInterval(function() { 
-
-                          gemTime--;
-
-                          if(gemTime <= 0) {
-
-                              clearInterval(gemTimer);
-                              getGem = false;
-
-                          }
+                        if(starTime <= 0 || player.level === 5) {
+                            if(!winGame && !goUplevel) {
+                              untransformSound.play();
+                            }
+                            collisionsOn = true;
+                            player.sprite = 'images/char-cartman.png';
+                            clearInterval(starTimer);
+                            starPower = false;
+                        }
 
                       }, 1000);
 
-                  }
+                transformSound.play();
+                starBackgroundSound.play();
+                player.sprite = 'images/char-cartman-wizard.png';
+                player.right = 100;
+                player.left = -15;
+                player.bottom = 70;
+                player.top = -25;
+                collisionsOn = false;
+                starPower = true;
+                console.log('invincibility!');
 
-                // Reset random starting point for x
-                // Key, Star, and Heart are reset to further points away in order to make them less common.
+            } else if (relic.sprite === 'images/Key.png') {
 
-                  if(relic.sprite === 'images/Key.png') {
+                keySound.play();
+                player.level++;
+                goUplevel = true;
 
-                    relic.x = -Math.floor((Math.random() * 2000) + 5000);
+                if(player.level === 2) {
+                  player.touchWater = 3;
+                } else if (player.level === 3) {
+                  player.touchWater = 6;
+                } else if (player.level === 4) {
+                  player.touchWater = 9;
+                } else if (player.level === 5) {
+                  player.touchWater = 12;
+                }
 
-                  } else if(relic.sprite === 'images/Heart.png') {
+                player.startOver();
+                console.log('You unlocked the next level!');
 
-                    relic.x = -Math.floor((Math.random() * 2000) + 5000);
+            }
 
-                  } else if(relic.sprite === 'images/Star.png') {
+            // Set timer for how long Gem text (eg points) appears on screen
 
-                    relic.x = -Math.floor((Math.random() * 2000) + 5000);
+            if (getGem) {
 
-                  } else {
+                gemTime = 1;
+
+                var gemTimer = setInterval(function() { 
+
+                    gemTime--;
+
+                    if(gemTime <= 0) {
+
+                        clearInterval(gemTimer);
+                        getGem = false;
+
+                        }
+
+                }, 1000);
+
+            }
+
+            // Reset random starting point for x
+            // Key, Star, and Heart are reset to further points away in order to make them less common.
+
+            if(relic.sprite === 'images/Key.png' || 'images/Heart.png' || 'images/Star.png') {
+
+                relic.x = randomRange(-5000, -3000);
+
+            } else {
 
                 // Gems get set to the default starting point
 
-                    relic.x = -Math.floor((Math.random() * 1000) + 500);
+                relic.x = randomRange(-500, -1500);
 
-                  }
+            }
 
-                  // set a random path for this.y for all relics
+            // set a random row for this.y for all relics
 
-                  var randomPath = Math.floor((Math.random() * 4) + 1);
+            var randomRow = randomRange(5, 1);
 
-                  if(randomPath === 1) {
-                    relic.y = 115;
-                  } else if (randomPath === 2) {
-                    relic.y = 195;
-                  } else if (randomPath === 3) {
-                    relic.y = 280;
-                  } else if (randomPath === 4) {
-                    relic.y = 360;
-                  }
-             }
+            if(randomRow === 1) {
+
+                relic.y = 115;
+
+            } else if (randomRow === 2) {
+
+                relic.y = 195;
+
+            } else if (randomRow === 3) {
+
+                relic.y = 280;
+
+            } else if (randomRow === 4) {
+
+                relic.y = 360;
+
+            }
+
+        }
+
     });
+
+}
+
+// this function sets a random number within a given range
+// it generates a number between min and max
+// it is used to generate numbers for objects' x and y positions, and speeds
+// eg. Math.floor((Math.random * (max - min)) + min
+
+function randomRange (max, min) {
+  return Math.floor((Math.random() * (max - min)) + min);
 }
 
 // Instantiate objects
@@ -727,7 +794,7 @@ var allEnemies = [
 
     new evilerEnemy(),
     new evilestEnemy(),
-    new Enemy()
+    new evilEnemy()
     ];
 
 var player = new Player();
