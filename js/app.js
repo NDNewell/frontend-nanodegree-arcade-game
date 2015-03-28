@@ -38,6 +38,33 @@ Enemy.prototype.update = function(dt) {
 
 }
 
+// collision detection method using box collision for enemies
+
+Enemy.prototype.collisions = function () {
+
+    // check if collisions are activated (eg. that star power isn't activated)
+
+        if(!starPower) {
+
+            allEnemies.forEach(function(enemy) {
+
+                if(enemy.x + enemy.left < player.x + player.right &&
+                   enemy.x + enemy.right > player.x + player.left &&
+                   enemy.y + enemy.top < player.y + player.bottom &&
+                   enemy.y + enemy.bottom > player.y + player.top) {
+
+                    // reset player
+
+                    player.die();
+
+                }
+
+            });
+
+        }
+
+}
+
 // create subclass evilEnemy from Enemy
 
 function evilEnemy() {
@@ -127,24 +154,6 @@ evilestEnemy.prototype = Object.create(Enemy.prototype);
 // set evilestEnemy constructor
 
 evilestEnemy.prototype.constructor = evilestEnemy;
-
-// Collision detection algorithm using box collision for enemies
-
-function enemyCollisions () {
-        if(collisionsOn) {
-            allEnemies.forEach(function(enemy) {
-                     if(enemy.x + enemy.left < player.x + player.right &&
-                        enemy.x + enemy.right > player.x + player.left &&
-                        enemy.y + enemy.top < player.y + player.bottom &&
-                        enemy.y + enemy.bottom > player.y + player.top) {
-                            console.log('collision!');
-                          //Reset player position
-                            heySound.play();
-                            player.die();
-                        }
-                    });
-          }
-}
 
 // Draw the enemies on the screen
 
@@ -240,11 +249,14 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-// method for ending game or taking player's life before starting over
-// still need to create gameOver.render();
+// method to play appropriate sound, reset player position, subtract 1 life
+
 Player.prototype.die = function() {
+
+    heySound.play();
     player.startOver();
     this.lives--;
+
 }
 
 // method for resetting player position
@@ -527,9 +539,13 @@ Relic.prototype.collisionConditions = function () {
         transformSound.play();
         starBackgroundSound.play();
 
-        // disable Enemy collisions
+        // initiate canvas rendering of countdown and disable Enemy collisions
 
-        collisionsOn = false;
+        starPower = true;
+
+        // display time remaining for star power and reset player conditions/properties after time runs out
+
+        starTimerDisplay();
 
         // change Player sprite image
 
@@ -541,10 +557,6 @@ Relic.prototype.collisionConditions = function () {
         player.left = -15;
         player.bottom = 70;
         player.top = -25;
-
-        // display time remaining for star power and reset player conditions/properties after time runs out
-
-        starTimerDisplay();
 
     // check for Key
 
@@ -819,10 +831,6 @@ function pointsDisplay () {
 
 function starTimerDisplay () {
 
-    // initiate canvas rendering of countdown
-
-    starPower = true;
-
     // set countdown time
 
     starTime = 10;
@@ -850,7 +858,6 @@ function starTimerDisplay () {
             // reset the original player properties/conditions
 
             starPower = false;
-            collisionsOn = true;
             player.sprite = 'images/char-cartman.png';
             player.right = 77;
             player.left = -15;
