@@ -26,45 +26,7 @@ Enemy.prototype.update = function(dt) {
 
     // check if speed needs to be adjusted for the specific level
 
-    if(adjustSpeed) {
-
-        if(player.level === 1) {
-
-            allEnemies.forEach(function(enemy) {
-
-                enemy.speed = randomRange(115, 50);
-
-            });
-
-        } else if (player.level ===2) {
-
-            allEnemies.forEach(function(enemy) {
-
-                enemy.speed = randomRange(180, 115);
-
-            });
-
-        } else if (player.level ===3) {
-
-            allEnemies.forEach(function(enemy) {
-
-                enemy.speed = randomRange(245, 180);
-
-            });
-
-        } else if (player.level ===4) {
-
-            allEnemies.forEach(function(enemy) {
-
-                enemy.speed = randomRange(310, 245);
-
-            });
-
-        }
-
-    adjustSpeed = false;
-
-}
+    speedAdjust();
 
     // reset enemy's position after moving off screen
 
@@ -631,7 +593,9 @@ Relic.prototype.collisionConditions = function () {
 // draw the Relic on the screen
 
 Relic.prototype.render = function() {
+
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+
 }
 
 // create Gem subclass of Relic
@@ -743,7 +707,8 @@ function Star() {
 
     // set random horizontal position
 
-    this.x = randomRange(-5000, -3000);
+    this.x = 1; //randomRange(-5000, -3000);
+    this.y = 425;
 
     // set variable dimensions for Star
 
@@ -773,6 +738,52 @@ function randomRange (max, min) {
     // generate a number between min and max for objects' x and y positions, and speeds
 
     return Math.floor((Math.random() * (max - min)) + min);
+
+}
+
+// check conditions for Enemy speed adjustment according to level
+
+function speedAdjust () {
+
+    if(adjustSpeed) {
+
+        if(player.level === 1) {
+
+            allEnemies.forEach(function(enemy) {
+
+                enemy.speed = randomRange(115, 50);
+
+            });
+
+        } else if (player.level ===2) {
+
+            allEnemies.forEach(function(enemy) {
+
+                enemy.speed = randomRange(180, 115);
+
+            });
+
+        } else if (player.level ===3) {
+
+            allEnemies.forEach(function(enemy) {
+
+                enemy.speed = randomRange(245, 180);
+
+            });
+
+        } else if (player.level ===4) {
+
+            allEnemies.forEach(function(enemy) {
+
+                enemy.speed = randomRange(310, 245);
+
+            });
+
+        }
+
+    adjustSpeed = false;
+
+    }
 
 }
 
@@ -859,6 +870,7 @@ var allEnemies = [
     new evilerEnemy(),
     new evilestEnemy(),
     new evilEnemy()
+
     ];
 
 var player = new Player();
@@ -871,6 +883,7 @@ var allRelics = [
     new Key(),
     new Heart(),
     new Star()
+
     ];
 
 // Player sound instances
@@ -879,7 +892,6 @@ var heySound = new Audio('sounds/hey.wav');
 var respectSound = new Audio('sounds/respect.wav');
 var screwYouSound = new Audio('sounds/screwYou.wav');
 var sonBitchSound = new Audio('sounds/son_of_a.wav');
-
 
 // Relic sound instances
 
