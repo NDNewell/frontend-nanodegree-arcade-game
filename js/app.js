@@ -484,6 +484,85 @@ Relic.prototype.reset = function() {
     }
 }
 
+// set conditions for what happens after the player Collides with a Relic
+
+Relic.prototype.collisionConditions = function () {
+
+    if(this.sprite === 'images/Gem-Blue-sm.png') {
+
+        blueGemSound.play();
+        getGem = true;
+        gemValue = 100;
+        player.points += gemValue;
+
+    } else if (this.sprite === 'images/Gem-Orange-sm.png') {
+
+        orangeGemSound.play();
+        getGem = true;
+        gemValue = 300;
+        player.points += gemValue;
+
+    } else if (this.sprite === 'images/Gem-Green-sm.png') {
+
+        greenGemSound.play();
+        getGem = true;
+        gemValue = 500;
+        player.points += gemValue;
+
+    // set conditions for special relic collisions
+
+    } else if (this.sprite === 'images/Heart.png') {
+
+        player.lives++;
+        heartSound.play();
+        console.log('Extra life!');
+
+    } else if (this.sprite === 'images/Star.png') {
+
+        // display time remaining for star power and reset player conditions/properties after time runs out
+
+        starTimerDisplay();
+
+        // set new star power player conditions characteristics
+
+        transformSound.play();
+        starBackgroundSound.play();
+        player.sprite = 'images/char-cartman-wizard.png';
+        player.right = 100;
+        player.left = -15;
+        player.bottom = 70;
+        player.top = -25;
+        collisionsOn = false;
+        starPower = true;
+        console.log('invincibility!');
+
+    } else if (this.sprite === 'images/Key.png') {
+
+        keySound.play();
+        player.level++;
+        goUplevel = true;
+
+        if(player.level === 2) {
+          player.touchWater = 3;
+        } else if (player.level === 3) {
+          player.touchWater = 6;
+        } else if (player.level === 4) {
+          player.touchWater = 9;
+        } else if (player.level === 5) {
+          player.touchWater = 12;
+        }
+
+        player.startOver();
+        console.log('You unlocked the next level!');
+
+    }
+
+    // set points display timer
+
+    pointsDisplay ();
+
+}
+
 // draw the Relic on the screen
 
 Relic.prototype.render = function() {
@@ -595,8 +674,7 @@ function Star() {
 
     // set random horizontal position
 
-    this.x = 1; //randomRange(-5000, -3000);
-    this.y = 425;
+    this.x = randomRange(-5000, -3000);
 
     // set variable dimensions for Star
 
@@ -630,78 +708,9 @@ function relicCollisions () {
           relic.y + relic.top < player.y + player.bottom &&
           relic.y + relic.bottom > player.y + player.top) {
 
-            // set conditions for Gem collisions
+            // set conditions for Relic collisions
 
-            if(relic.sprite === 'images/Gem-Blue-sm.png') {
-
-                blueGemSound.play();
-                getGem = true;
-                gemValue = 100;
-                player.points += gemValue;
-
-            } else if (relic.sprite === 'images/Gem-Orange-sm.png') {
-
-                orangeGemSound.play();
-                getGem = true;
-                gemValue = 300;
-                player.points += gemValue;
-
-            } else if (relic.sprite === 'images/Gem-Green-sm.png') {
-
-                greenGemSound.play();
-                getGem = true;
-                gemValue = 500;
-                player.points += gemValue;
-
-            // set conditions for special relic collisions
-
-            } else if (relic.sprite === 'images/Heart.png') {
-
-                player.lives++;
-                heartSound.play();
-                console.log('Extra life!');
-
-            } else if (relic.sprite === 'images/Star.png') {
-
-                // display time remaining for star power
-
-                starTimerDisplay();
-
-                transformSound.play();
-                starBackgroundSound.play();
-                player.sprite = 'images/char-cartman-wizard.png';
-                player.right = 100;
-                player.left = -15;
-                player.bottom = 70;
-                player.top = -25;
-                collisionsOn = false;
-                starPower = true;
-                console.log('invincibility!');
-
-            } else if (relic.sprite === 'images/Key.png') {
-
-                keySound.play();
-                player.level++;
-                goUplevel = true;
-
-                if(player.level === 2) {
-                  player.touchWater = 3;
-                } else if (player.level === 3) {
-                  player.touchWater = 6;
-                } else if (player.level === 4) {
-                  player.touchWater = 9;
-                } else if (player.level === 5) {
-                  player.touchWater = 12;
-                }
-
-                player.startOver();
-                console.log('You unlocked the next level!');
-
-            }
-
-            // set points disply timer
-
-            pointsDisplay ();
+            relic.collisionConditions();
 
             // reset Relic position
 
@@ -713,12 +722,11 @@ function relicCollisions () {
 
 }
 
-// this function sets a random number within a given range
-// it generates a number between min and max
-// it is used to generate numbers for objects' x and y positions, and speeds
-// eg. Math.floor((Math.random * (max - min)) + min
+// set a random number within a given range
 
 function randomRange (max, min) {
+
+    // generate a number between min and max for objects' x and y positions, and speeds
 
     return Math.floor((Math.random() * (max - min)) + min);
 
@@ -727,6 +735,8 @@ function randomRange (max, min) {
 // set timer for how long points appear on screen after obtaining a Gem
 
 function pointsDisplay () {
+
+    // if a Gem has been collected, getGem will be true, intiating the timer
 
     if (getGem) {
 
@@ -749,6 +759,8 @@ function pointsDisplay () {
     }
 }
 
+// set timer for star power timer and reset player properties/conditions when the timer is finished
+
 function starTimerDisplay () {
 
     starTime = 10;
@@ -757,7 +769,11 @@ function starTimerDisplay () {
 
         starTime--;
 
+        // if timer gets to zero or the player wins the game, the timer resets the original player properties/conditions
+
         if(starTime <= 0 || player.level === 5) {
+
+            // the untransform sound is only played if the player hasn't completed a level or won the game so as not to interfere with game sounds (eg. passing a level, game over, or winning the game)
 
             if(!winGame && !goUplevel) {
 
@@ -767,6 +783,8 @@ function starTimerDisplay () {
 
             clearInterval(starTimer);
 
+            // reset the original player properties/conditions
+
             starPower = false;
             collisionsOn = true;
             player.sprite = 'images/char-cartman.png';
@@ -774,6 +792,7 @@ function starTimerDisplay () {
         }
 
           }, 1000);
+
 }
 
 // instantiate objects
