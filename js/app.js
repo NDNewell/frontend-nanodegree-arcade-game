@@ -438,7 +438,7 @@ Relic.prototype.update = function(dt) {
 
     if(this.x > 505) {
 
-        if(this.sprite === 'images/Key.png' || 'images/Heart.png' || 'images/Heart.png' || 'images/Star.png') {
+        if(this.sprite === 'images/Key.png' || this.sprite === 'images/Heart.png' || this.sprite === 'images/Star.png') {
 
             this.x = randomRange(-5000, -3000);
 
@@ -450,23 +450,25 @@ Relic.prototype.update = function(dt) {
 
         }
 
+        // set a random row for Relics
+
         var randomRow = randomRange(5, 1);
 
         if(randomRow === 1) {
 
-          this.y = 115;
+            this.y = 115;
 
         } else if (randomRow === 2) {
 
-          this.y = 195;
+            this.y = 195;
 
         } else if (randomRow === 3) {
 
-          this.y = 280;
+            this.y = 280;
 
         } else if (randomRow === 4) {
 
-          this.y = 360;
+            this.y = 360;
 
         }
 
@@ -575,6 +577,8 @@ Heart.prototype = Object.create(Relic.prototype);
 
 Heart.prototype.constructor = Heart;
 
+// create Star subclass of Relic
+
 function Star() {
 
     // call prototype properties from Relic
@@ -606,7 +610,7 @@ Star.prototype = Object.create(Relic.prototype);
 
 Star.prototype.constructor = Star;
 
-// collision detection algorithm using box collision
+// collision detection algorithm for Relics using box collision
 
 function relicCollisions () {
 
@@ -724,7 +728,7 @@ function relicCollisions () {
             // Reset random starting point for x
             // Key, Star, and Heart are reset to further points away in order to make them less common.
 
-            if(relic.sprite === 'images/Key.png' || 'images/Heart.png' || 'images/Star.png') {
+            if(relic.sprite === 'images/Key.png' || relic.sprite === 'images/Heart.png' || relic.sprite === 'images/Star.png') {
 
                 relic.x = randomRange(-5000, -3000);
 
