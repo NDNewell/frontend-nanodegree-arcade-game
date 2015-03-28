@@ -438,42 +438,49 @@ Relic.prototype.update = function(dt) {
 
     if(this.x > 505) {
 
-        if(this.sprite === 'images/Key.png' || this.sprite === 'images/Heart.png' || this.sprite === 'images/Star.png') {
-
-            this.x = randomRange(-5000, -3000);
-
-        } else {
-
-            // gems get set to the default starting point
-
-            this.x = randomRange(-1500, -500);
-
-        }
-
-        // set a random row for Relics
-
-        var randomRow = randomRange(5, 1);
-
-        if(randomRow === 1) {
-
-            this.y = 115;
-
-        } else if (randomRow === 2) {
-
-            this.y = 195;
-
-        } else if (randomRow === 3) {
-
-            this.y = 280;
-
-        } else if (randomRow === 4) {
-
-            this.y = 360;
-
-        }
+        this.reset();
 
     }
 
+}
+
+Relic.prototype.reset = function() {
+
+    console.log("reset position after collision");
+
+    if(this.sprite === 'images/Key.png' || this.sprite === 'images/Heart.png' || this.sprite === 'images/Star.png') {
+
+        this.x = randomRange(-5000, -3000);
+
+    } else {
+
+        // Gems get set to the default starting point
+
+        this.x = randomRange(-500, -1500);
+
+    }
+
+    // set a random row for this.y for all relics
+
+    var randomRow = randomRange(5, 1);
+
+    if(randomRow === 1) {
+
+        this.y = 115;
+
+    } else if (randomRow === 2) {
+
+        this.y = 195;
+
+    } else if (randomRow === 3) {
+
+        this.y = 280;
+
+    } else if (randomRow === 4) {
+
+        this.y = 360;
+
+    }
 }
 
 // draw the Relic on the screen
@@ -728,39 +735,7 @@ function relicCollisions () {
             // Reset random starting point for x
             // Key, Star, and Heart are reset to further points away in order to make them less common.
 
-            if(relic.sprite === 'images/Key.png' || relic.sprite === 'images/Heart.png' || relic.sprite === 'images/Star.png') {
-
-                relic.x = randomRange(-5000, -3000);
-
-            } else {
-
-                // Gems get set to the default starting point
-
-                relic.x = randomRange(-500, -1500);
-
-            }
-
-            // set a random row for this.y for all relics
-
-            var randomRow = randomRange(5, 1);
-
-            if(randomRow === 1) {
-
-                relic.y = 115;
-
-            } else if (randomRow === 2) {
-
-                relic.y = 195;
-
-            } else if (randomRow === 3) {
-
-                relic.y = 280;
-
-            } else if (randomRow === 4) {
-
-                relic.y = 360;
-
-            }
+            relic.reset();
 
         }
 
