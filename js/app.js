@@ -484,6 +484,31 @@ Relic.prototype.reset = function() {
     }
 }
 
+// collision detection algorithm for Relics using box collision
+
+Relic.prototype.collisions = function () {
+
+    allRelics.forEach(function(relic) {
+
+        if(relic.x + relic.left < player.x + player.right &&
+          relic.x + relic.right > player.x + player.left &&
+          relic.y + relic.top < player.y + player.bottom &&
+          relic.y + relic.bottom > player.y + player.top) {
+
+            // set conditions for Relic collisions
+
+            relic.collisionConditions();
+
+            // reset Relic position
+
+            relic.reset();
+
+        }
+
+    });
+
+}
+
 // set conditions for what happens after the player Collides with a Relic
 
 Relic.prototype.collisionConditions = function () {
@@ -696,31 +721,6 @@ Star.prototype = Object.create(Relic.prototype);
 // set Star constructor
 
 Star.prototype.constructor = Star;
-
-// collision detection algorithm for Relics using box collision
-
-function relicCollisions () {
-
-    allRelics.forEach(function(relic) {
-
-        if(relic.x + relic.left < player.x + player.right &&
-          relic.x + relic.right > player.x + player.left &&
-          relic.y + relic.top < player.y + player.bottom &&
-          relic.y + relic.bottom > player.y + player.top) {
-
-            // set conditions for Relic collisions
-
-            relic.collisionConditions();
-
-            // reset Relic position
-
-            relic.reset();
-
-        }
-
-    });
-
-}
 
 // set a random number within a given range
 

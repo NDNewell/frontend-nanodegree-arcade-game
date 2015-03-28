@@ -107,9 +107,7 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-         enemyCollisions();
-          relicCollisions();
-           clearCanvas();
+        clearCanvas();
     }
 
     /* This is called by the update function  and loops through all of the
@@ -122,10 +120,12 @@ var Engine = (function(global) {
     function updateEntities(dt) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
+            enemyCollisions();
         });
 
         allRelics.forEach(function(relic) {
             relic.update(dt);
+            relic.collisions();
         });
 
         player.update();
