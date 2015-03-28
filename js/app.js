@@ -444,9 +444,10 @@ Relic.prototype.update = function(dt) {
 
 }
 
-Relic.prototype.reset = function() {
+// Reset random starting point for x and y
+// Key, Star, and Heart are reset to further points away in order to make them less common.
 
-    console.log("reset position after collision");
+Relic.prototype.reset = function() {
 
     if(this.sprite === 'images/Key.png' || this.sprite === 'images/Heart.png' || this.sprite === 'images/Star.png') {
 
@@ -711,29 +712,11 @@ function relicCollisions () {
 
             }
 
-            // Set timer for how long Gem text (eg points) appears on screen
+            // set points disply timer
 
-            if (getGem) {
+            pointsDisplay ();
 
-                gemTime = 1;
-
-                var gemTimer = setInterval(function() { 
-
-                    gemTime--;
-
-                    if(gemTime <= 0) {
-
-                        clearInterval(gemTimer);
-                        getGem = false;
-
-                        }
-
-                }, 1000);
-
-            }
-
-            // Reset random starting point for x
-            // Key, Star, and Heart are reset to further points away in order to make them less common.
+            // reset Relic position
 
             relic.reset();
 
@@ -752,6 +735,30 @@ function randomRange (max, min) {
 
     return Math.floor((Math.random() * (max - min)) + min);
 
+}
+
+// set timer for how long points appear on screen after obtaining a Gem
+
+function pointsDisplay () {
+
+    if (getGem) {
+
+        gemTime = 1;
+
+        var gemTimer = setInterval(function() { 
+
+            gemTime--;
+
+            if(gemTime <= 0) {
+
+                clearInterval(gemTimer);
+                getGem = false;
+
+                }
+
+        }, 1000);
+
+    }
 }
 
 // instantiate objects
