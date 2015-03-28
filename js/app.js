@@ -595,7 +595,8 @@ function Star() {
 
     // set random horizontal position
 
-    this.x = randomRange(-5000, -3000);
+    this.x = 1; //randomRange(-5000, -3000);
+    this.y = 425;
 
     // set variable dimensions for Star
 
@@ -662,23 +663,9 @@ function relicCollisions () {
 
             } else if (relic.sprite === 'images/Star.png') {
 
-                starTime = 10;
-                var starTimer = setInterval(function() { 
+                // display time remaining for star power
 
-                        starTime--;
-                        console.log(starTime);
-
-                        if(starTime <= 0 || player.level === 5) {
-                            if(!winGame && !goUplevel) {
-                              untransformSound.play();
-                            }
-                            collisionsOn = true;
-                            player.sprite = 'images/char-cartman.png';
-                            clearInterval(starTimer);
-                            starPower = false;
-                        }
-
-                      }, 1000);
+                starTimerDisplay();
 
                 transformSound.play();
                 starBackgroundSound.play();
@@ -752,6 +739,7 @@ function pointsDisplay () {
             if(gemTime <= 0) {
 
                 clearInterval(gemTimer);
+
                 getGem = false;
 
                 }
@@ -759,6 +747,33 @@ function pointsDisplay () {
         }, 1000);
 
     }
+}
+
+function starTimerDisplay () {
+
+    starTime = 10;
+
+    var starTimer = setInterval(function() { 
+
+        starTime--;
+
+        if(starTime <= 0 || player.level === 5) {
+
+            if(!winGame && !goUplevel) {
+
+                untransformSound.play();
+
+            }
+
+            clearInterval(starTimer);
+
+            starPower = false;
+            collisionsOn = true;
+            player.sprite = 'images/char-cartman.png';
+
+        }
+
+          }, 1000);
 }
 
 // instantiate objects
