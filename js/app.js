@@ -484,7 +484,7 @@ Relic.prototype.reset = function() {
     }
 }
 
-// collision detection algorithm for Relics using box collision
+// collision detection method for Relics using box collision
 
 Relic.prototype.collisions = function () {
 
@@ -513,78 +513,118 @@ Relic.prototype.collisions = function () {
 
 Relic.prototype.collisionConditions = function () {
 
-    if(this.sprite === 'images/Gem-Blue-sm.png') {
+    // check type of Relic, play appropriate sound, update player conditions and properties
 
-        blueGemSound.play();
+    // check for Gems
+
+    if(this.sprite === 'images/Gem-Blue-sm.png' || this.sprite === 'images/Gem-Orange-sm.png' || this.sprite === 'images/Gem-Green-sm.png') {
+
+        // play appropriate Gem sounds
+
+        if(this.sprite === 'images/Gem-Blue-sm.png') {
+
+            blueGemSound.play();
+
+        } else if (this.sprite === 'images/Gem-Orange-sm.png') {
+
+            orangeGemSound.play();
+
+        } else if (this.sprite === 'images/Gem-Green-sm.png') {
+
+            greenGemSound.play();
+        }
+
+        // initiate canvas rendering of points above player
+
         getGem = true;
-        gemValue = 100;
+
+        // set Gem value and add to points total
+
+        gemValue = this.value;
         player.points += gemValue;
 
-    } else if (this.sprite === 'images/Gem-Orange-sm.png') {
+        // set points display timer
 
-        orangeGemSound.play();
-        getGem = true;
-        gemValue = 300;
-        player.points += gemValue;
+        pointsDisplay ();
 
-    } else if (this.sprite === 'images/Gem-Green-sm.png') {
-
-        greenGemSound.play();
-        getGem = true;
-        gemValue = 500;
-        player.points += gemValue;
-
-    // set conditions for special relic collisions
+    // check for Heart sprite
 
     } else if (this.sprite === 'images/Heart.png') {
 
+        // increase player lives by 1 and play appropriate sound
+
         player.lives++;
         heartSound.play();
-        console.log('Extra life!');
+
+    // check for Star
 
     } else if (this.sprite === 'images/Star.png') {
+
+        // play appropriate sounds
+
+        transformSound.play();
+        starBackgroundSound.play();
+
+        // disable Enemy collisions
+
+        collisionsOn = false;
+
+        // change Player sprite image
+
+        player.sprite = 'images/char-cartman-wizard.png';
+
+        // change player dimensions to make up for img size differences that affect collisions
+
+        player.right = 100;
+        player.left = -15;
+        player.bottom = 70;
+        player.top = -25;
 
         // display time remaining for star power and reset player conditions/properties after time runs out
 
         starTimerDisplay();
 
-        // set new star power player conditions characteristics
-
-        transformSound.play();
-        starBackgroundSound.play();
-        player.sprite = 'images/char-cartman-wizard.png';
-        player.right = 100;
-        player.left = -15;
-        player.bottom = 70;
-        player.top = -25;
-        collisionsOn = false;
-        starPower = true;
-        console.log('invincibility!');
+    // check for Key
 
     } else if (this.sprite === 'images/Key.png') {
 
+        // play appropriate sound
+
         keySound.play();
+
+        // Player automatically goes up one level
+
         player.level++;
+
+        // stop the game loop and render 'pass level' prompt to canvas
+
         goUplevel = true;
 
+        // align the number of times the Player has touched the water with new level
+
         if(player.level === 2) {
-          player.touchWater = 3;
+
+            player.touchWater = 3;
+
         } else if (player.level === 3) {
-          player.touchWater = 6;
+
+            player.touchWater = 6;
+
         } else if (player.level === 4) {
-          player.touchWater = 9;
+
+            player.touchWater = 9;
+
         } else if (player.level === 5) {
-          player.touchWater = 12;
+
+            player.touchWater = 12;
+
         }
 
+        // reset Player starting position
+
         player.startOver();
-        console.log('You unlocked the next level!');
 
     }
-
-    // set points display timer
-
-    pointsDisplay ();
 
 }
 
@@ -596,7 +636,7 @@ Relic.prototype.render = function() {
 
 // create Gem subclass of Relic
 
-function Gem(spriteImg) {
+function Gem(spriteImg, value) {
 
     // call prototype properties from Relic
 
@@ -612,6 +652,10 @@ function Gem(spriteImg) {
     // set Gem image
 
     this.sprite = spriteImg;
+
+    // set Gem value
+
+    this.value = value;
 
 }
 
@@ -737,6 +781,7 @@ function randomRange (max, min) {
 function pointsDisplay () {
 
     // if a Gem has been collected, getGem will be true, intiating the timer
+    // the points will be shown on the canvas for as long as the timer is activated
 
     if (getGem) {
 
@@ -763,7 +808,15 @@ function pointsDisplay () {
 
 function starTimerDisplay () {
 
+    // initiate canvas rendering of countdown
+
+    starPower = true;
+
+    // set countdown time
+
     starTime = 10;
+
+    // create timer
 
     var starTimer = setInterval(function() { 
 
@@ -788,10 +841,14 @@ function starTimerDisplay () {
             starPower = false;
             collisionsOn = true;
             player.sprite = 'images/char-cartman.png';
+            player.right = 77;
+            player.left = -15;
+            player.bottom = 55;
+            player.top = -25;
 
         }
 
-          }, 1000);
+    }, 1000);
 
 }
 
@@ -808,9 +865,9 @@ var player = new Player();
 
 var allRelics = [
 
-    new Gem('images/Gem-Blue-sm.png'),
-    new Gem('images/Gem-Orange-sm.png'),
-    new Gem('images/Gem-Green-sm.png'),
+    new Gem('images/Gem-Blue-sm.png', 100),
+    new Gem('images/Gem-Orange-sm.png', 300),
+    new Gem('images/Gem-Green-sm.png', 500),
     new Key(),
     new Heart(),
     new Star()
