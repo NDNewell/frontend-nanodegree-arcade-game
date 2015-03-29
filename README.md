@@ -70,6 +70,25 @@ Cartman Crush (frontend-nanodegree-arcade-game)
   Nicholas Newell
 
 
+  Resources used
+  --------------
+
+  Head First JavaScript Programming by O'Reilly
+  Head First HTML5 Programming - Building Web Apps with JavaScript by O'Reilly
+  JavaScript Patterns 2010 by Stoyan Stefanov
+  Javascript the Definitive Guide 6th Ed. by David Flanagan
+
+  Udacity: Object-Oriented JavaScript
+  Udacity: HTML5 Canvas
+
+  Mozilla Devloper Network
+  StackOverflow.com
+  w3schools.com
+  JSFiddle.net
+
+  Freesound.org
+
+
   Submissions
   -----------
 
