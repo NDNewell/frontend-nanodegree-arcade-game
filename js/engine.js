@@ -210,56 +210,69 @@ var Engine = (function(global) {
 
 
     }
-      // Draw gameBegin prompt box
+
+
+    // draw prompt box describing game rules etc. which begins the game
+
     function gameBegin () {
-        console.log("Draw game begin box");
+
+        // draw prompt box with a transparent fill
+
         ctx.rect(40, 75, 430, 590);
         ctx.fillStyle = "rgba(0,0,0,0.75)";
         ctx.fill();
 
-        //Set number to reflect level passed
-        var displayLevel = player.level -1;
-        //Set prompt text
-        var prompts = ["CARTMAN CRUSH", "Cartman must reach the water 3 times", "to pass each level. There are 4 levels.", "Try to obtain the following items:", "500 pts", "300 pts", "100 pts", "Pass Level", "Extra life", "Invincibility", "Every 1000 pts = 1 extra life.", "Press the Spacebar to begin!", "Avoid the bugs:", "Press 'P' to Pause the Game"]
+        // set content, text style, colour, and size for headlines
 
-        //Draw text: 'Welcome screen'
-        console.log("Draw game begin text");
         ctx.font = "60px Impact";
         ctx.fillStyle = "Yellow";
-        ctx.fillText(prompts[0], 55, 145);
+        ctx.fillText("CARTMAN CRUSH", 55, 145);
+
+        // set different size for bottom text
+
         ctx.font = "32px Impact";
-        ctx.fillText(prompts[11], 65, 650);
+        ctx.fillText("Press the Spacebar to begin!", 65, 650);
+
+        // set content and different size and colour for instructions
+
         ctx.font = "25px Impact";
         ctx.fillStyle = "#7ACC52";
-        ctx.fillText(prompts[1], 55, 185);
-        ctx.fillText(prompts[2], 55, 215);
-        ctx.fillText(prompts[12], 55, 265);
+        ctx.fillText("Cartman must reach the water 3 times", 55, 185);
+        ctx.fillText("to pass each level. There are 4 levels.", 55, 215);
+        ctx.fillText("Avoid the bugs:", 55, 265);
+        ctx.fillText("Try to obtain the following items:", 55, 310);
+
+        // set content and diffent colour for item descriptions
+
+        ctx.fillStyle = "orange";
+        ctx.fillText("500 pts", 145, 365);
+        ctx.fillText("300 pts", 145, 445);
+        ctx.fillText("100 pts", 145, 525);
+        ctx.fillText("Pass Level", 335, 365);
+        ctx.fillText("Extra life", 335, 445);
+        ctx.fillText("Invincibility", 335, 525);
+        ctx.fillText("Every 1000 pts = 1 extra life.", 120, 575);
+        ctx.fillText("Press 'P' to Pause the Game", 120, 610);
+
+        // add images
+
         ctx.drawImage(Resources.get('images/enemy-bug-begin.png'), 230, 200);
         ctx.drawImage(Resources.get('images/enemy-bug2-begin.png'), 300, 200);
         ctx.drawImage(Resources.get('images/enemy-bug3-begin.png'), 370, 200);
-        ctx.fillText(prompts[3], 55, 310);
-        ctx.fillStyle = "orange";
+
         ctx.drawImage(Resources.get('images/Gem-Green-sm.png'), 65, 300);
         ctx.drawImage(Resources.get('images/Gem-Orange-sm.png'), 65, 380);
         ctx.drawImage(Resources.get('images/Gem-Blue-sm.png'), 65, 460);
+
         ctx.drawImage(Resources.get('images/Key.png'), 255, 300);
         ctx.drawImage(Resources.get('images/Heart.png'), 255, 370);
         ctx.drawImage(Resources.get('images/Star.png'), 255, 460);
-        ctx.fillText(prompts[4], 145, 365);
-        ctx.fillText(prompts[5], 145, 445);
-        ctx.fillText(prompts[6], 145, 525);
-        ctx.fillText(prompts[7], 335, 365);
-        ctx.fillText(prompts[8], 335, 445);
-        ctx.fillText(prompts[9], 335, 525);
-        ctx.fillText(prompts[10], 120, 575);
-        ctx.fillText(prompts[13], 120, 610);
 
-        console.log("Begin the game!");
     }
 
       // Draw Game Over prompt box
     function gameOver () {
-        console.log("Draw Game Over Box");
+
         ctx.rect(40, 100, 430, 150);
         ctx.fillStyle = "rgba(0,0,0,0.75)";
         ctx.fill();
@@ -268,22 +281,22 @@ var Engine = (function(global) {
         var prompts = ["GAME OVER", "Press the Spacebar to Play Again"]
         
         //Draw prompt: 'GAME OVER'
-        console.log("Draw Game Over Text");
+
         ctx.font = "60px Impact";
         ctx.fillStyle = "yellow";
         ctx.fillText(prompts[0], 125, 170);
 
         //Draw prompt: 'Press spacebar to Continue
-        console.log("Draw Continue Text");
+
         ctx.font = "30px Impact";
         ctx.fillStyle = "#7ACC52";
         ctx.fillText(prompts[1], 55, 225);
-        console.log("Game Over!");
+
     }
 
           // Draw pause game prompt box
     function pauseGame () {
-        console.log("Draw pause box");
+
         ctx.rect(40, 100, 430, 150);
         ctx.fillStyle = "rgba(0,0,0,0.75)";
         ctx.fill();
@@ -292,7 +305,7 @@ var Engine = (function(global) {
         var prompts = ["PAUSED"]
         
         //Draw prompt: 'GAME OVER'
-        console.log("Draw pause text");
+
         ctx.font = "60px Impact";
         ctx.fillStyle = "yellow";
         ctx.fillText(prompts[0], 165, 190);
@@ -301,7 +314,7 @@ var Engine = (function(global) {
       // Draw you win prompt box
     function youWin () {
 
-        console.log("Draw winner box");
+
         ctx.rect(40, 100, 430, 150);
         ctx.fillStyle = "rgba(0,0,0,0.75)";
         ctx.fill();
@@ -310,22 +323,22 @@ var Engine = (function(global) {
         var prompts = ["YOU WIN!", "Press the Spacebar to Play Again"]
         
         //Draw prompt: 'YOU WIN!'
-        console.log("Draw winner text");
+
         ctx.font = "60px Impact";
         ctx.fillStyle = "yellow";
         ctx.fillText(prompts[0], 145, 170);
 
         //Draw prompt: 'Press spacebar to Continue
-        console.log("Draw continue text");
+
         ctx.font = "30px Impact";
         ctx.fillStyle = "#7ACC52";
         ctx.fillText(prompts[1], 55, 225);
-        console.log("You Win!");
+
     }
 
       // Draw pass level prompt box
     function passLevel () {
-        console.log("Draw pass level box");
+
         ctx.rect(40, 100, 430, 300);
         ctx.fillStyle = "rgba(0,0,0,0.75)";
         ctx.fill();
@@ -335,13 +348,13 @@ var Engine = (function(global) {
         //Set prompt text
         var prompts = ["YOU PASSED LEVEL", displayLevel, "Press the Spacebar", "for the next level !", "for the FINAL level !"]
         //Draw text: 'You passed level'
-        console.log("Draw pass level text");
+
         ctx.font = "50px Impact";
         ctx.fillStyle = "yellow";
         ctx.fillText(prompts[0], 80, 170);
 
         //Draw text: 'level number'
-        console.log("Draw level number text");
+
         ctx.font = "80px Impact";
         ctx.fillText(prompts[1], 235, 260);
 
@@ -351,14 +364,14 @@ var Engine = (function(global) {
         ctx.fillText(prompts[2], 95, 320);
 
         //Draw text: 'to Continue'
-        console.log("Draw continue text");
+
         ctx.font = "40px Impact";
             if(player.level === 4) {
                 ctx.fillText(prompts[4], 110, 365);
             } else {
                 ctx.fillText(prompts[3], 110, 365);
             }
-        console.log("Level Passed!");
+
     }
         
     function renderStats() {
@@ -440,7 +453,7 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     reset = function() {
-        console.log("Game Reset");
+
             if (player.lives === 0) {
                 player.points = 0; 
                 player.lives = 3;

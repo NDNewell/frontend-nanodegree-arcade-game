@@ -959,7 +959,7 @@ function starTimerDisplay (time) {
 
         starTime--;
 
-        // if the game is paused, reset starTime with time that was saved when pausing the game in order to resume countdown where leaving off
+        // if the game is paused, reset starTime with time that was saved when pausing the game in order to resume countdown where leaving off after unpausing the game
 
         if(paused) {
 
