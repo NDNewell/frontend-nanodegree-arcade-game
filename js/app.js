@@ -228,100 +228,139 @@ Player.prototype.render = function() {
 }
 
 // key instructions for player movements
+
 Player.prototype.handleInput = function(key) {
+
+    var stepSize = 35;
+
     switch(key) {
+
         case 'left':
+
             if(this.x > 0) {
-                this.x -= 35;
+
+                this.x -= stepSize;
+
             }
+
             break;
 
         case 'right':
+
+            // adjust allowable range of movement when Player has star power because of differing img sizes for Player sprite
+
             if(this.sprite === 'images/char-cartman-wizard.png') {
+
                 if (this.x < 340) {
-                this.x+=35;
+
+                this.x += stepSize;
+
                 }
+
             } else {
+
                 if (this.x < 400) {
-                this.x+=35;
+
+                this.x += stepSize;
+
                 }
+
             }
+
             break;
 
         case 'up':
-        // when player reaches the water is reset to default position
+
+            // player is reset to default position when reaching the water
+
             if(this.y > 25) {
-                this.y -= 35;
+
+                this.y -= stepSize;
+
             } else {
-                this.points += 10;
+
                 this.touchWater++;
                 reachTopSound.play();
 
-                    if(this.touchWater === 3) {
-                      this.level++;
-                      goUplevel = true;
-                    }
+                // check level progression and increase level accordingly
 
-                    if(this.touchWater === 6) {
-                      this.level++;
-                      goUplevel = true;
-                    }
+                if (this.touchWater >= this.level*3) {
 
-                    if(this.touchWater === 9) {
-                      this.level++;
-                      goUplevel = true;
-                    }
+                    this.level++;
+                    goUplevel = true;
 
-                    if(this.touchWater === 12) {
-                      this.level++;
-                      goUplevel = true;
-                    }
+                }
+
                 restartPlayer();
+
             }
+
             break;
 
         case 'down':
+
             if(this.y < 475) {
-                this.y += 35;
+
+                this.y += stepSize;
+
             }
+
             break;
 
           case 'p':
-            if (paused && !goUplevel && !winGame && player.lives > 0 && !beginGame) {
-                unPauseSound.play();
-                reset();
-            } else if (!beginGame && !goUplevel && player.lives > 0) {
+
+            // pause the game only during game play
+
+            if(!paused && !beginGame && !goUplevel && player.lives > 0) {
+
               pauseSound.play();
               stopGame = true;
               paused = true;
+
+            } else if(paused) {
+
+                unPauseSound.play();
+                reset();
+
             }
 
             break;
+
+            // continue from prompts: win game, game over, pass level, being game
 
         case 'space':
+
             if(player.lives === 0 || winGame || goUplevel || beginGame) {
+
                 spacebarClickSound.play();
                 reset();
+
             }
 
             break;
-    } 
+
+    }
+
 }
 
 
-// listen for key presses and send the keys to
-// Player.handleInput() method.
+// listen for key presses and send the keys to Player.handleInput() method.
+
 document.addEventListener('keyup', function(e) {
+
     var allowedKeys = {
+
         32: 'space',
         37: 'left',
         38: 'up',
         39: 'right',
         40: 'down',
         80: 'p'
+
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
+
 });
 
 // create Relic superclass
@@ -832,7 +871,6 @@ function checkLevel () {
     }
 
 }
-
 
 // set timer for how long points appear on screen after obtaining a Gem
 
