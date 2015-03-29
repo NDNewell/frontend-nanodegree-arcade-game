@@ -55,7 +55,7 @@ Enemy.prototype.collisions = function () {
 
                     // reset player
 
-                    player.die();
+                    die();
 
                 }
 
@@ -220,24 +220,11 @@ Player.prototype.update = function(dt) {
 }
 
 // draw the player on the screen
+
 Player.prototype.render = function() {
+
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
 
-// method to play appropriate sound, reset player position, subtract 1 life
-
-Player.prototype.die = function() {
-
-    heySound.play();
-    player.startOver();
-    this.lives--;
-
-}
-
-// method for resetting player position
-Player.prototype.startOver = function() {
-    this.x = 200;
-    this.y = 475;
 }
 
 // key instructions for player movements
@@ -289,7 +276,7 @@ Player.prototype.handleInput = function(key) {
                       this.level++;
                       goUplevel = true;
                     }
-                this.startOver();
+                restartPlayer();
             }
             break;
 
@@ -571,7 +558,7 @@ Relic.prototype.collisionConditions = function () {
 
         // reset Player starting position
 
-        player.startOver();
+        restartPlayer();
 
     }
 
@@ -774,7 +761,26 @@ function speedAdjust () {
 
 }
 
-// check player's lives and stops game if zero
+// reset Player position, play appropriate sound , subtract 1 life
+
+function die () {
+
+    heySound.play();
+    player.lives--;
+    restartPlayer();
+
+}
+
+// reset player to starting position
+
+function restartPlayer () {
+
+    player.x = 200;
+    player.y = 475;
+
+}
+
+// check Player's lives and stops game if zero
 
 function checkLives () {
 

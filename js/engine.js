@@ -445,7 +445,7 @@ var Engine = (function(global) {
                 player.lives = 3;
                 player.level = 1;
                 player.touchWater = 0;
-                player.startOver();
+                restartPlayer();
                 adjustSpeed = true;
 
             } else if (winGame) {
@@ -453,7 +453,7 @@ var Engine = (function(global) {
                 player.level = 1;
                 player.touchWater = 0;
                 winGame = false;
-                player.startOver();
+                restartPlayer();
             }
 
         adjustSpeed = true;
