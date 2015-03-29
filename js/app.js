@@ -1,3 +1,17 @@
+// set global variables
+
+var goUplevel = false,
+    winGame = false,
+    pause = false,
+    adjustSpeed = false,
+    collisionsOn = true,
+    bonus = 1,
+    stopGame = true,
+    beginGame = true,
+    getGem = false,
+    starPower = false,
+    savedStarTime = 0;
+
 // create superclass Enemy
 
 function Enemy() {
@@ -323,11 +337,11 @@ Player.prototype.handleInput = function(key) {
 
             // pause the game only during game play
 
-            if(!paused && !beginGame && !goUplevel && player.lives > 0) {
+            if(!pause && !beginGame && !goUplevel && player.lives > 0) {
 
                 pauseSound.play();
                 stopGame = true;
-                paused = true;
+                pause = true;
 
                 // save time left in star power countdown in order to being where leaving off after unpausing the game
 
@@ -337,7 +351,7 @@ Player.prototype.handleInput = function(key) {
 
                 }
 
-            } else if(paused) {
+            } else if(pause) {
 
                 unPauseSound.play();
                 reset();
@@ -961,7 +975,7 @@ function starTimerDisplay (time) {
 
         // if the game is paused, reset starTime with time that was saved when pausing the game in order to resume countdown where leaving off after unpausing the game
 
-        if(paused) {
+        if(pause) {
 
             starTime = savedStarTime;
 
@@ -973,7 +987,7 @@ function starTimerDisplay (time) {
 
             // the untransform sound is only played if the player hasn't completed a level or won the game so as not to interfere with game sounds (eg. passing a level, game over, or winning the game)
 
-            if(!winGame && !goUplevel && !paused) {
+            if(!winGame && !goUplevel && !pause) {
 
                 untransformSound.play();
 

@@ -1,42 +1,22 @@
 /* Engine.js
  * This file provides the game loop functionality (update entities and render),
  * draws the initial game board on the screen, and then calls the update and
- * render methods on your player and enemy objects (defined in your app.js).
- *
- * A game engine works by drawing the entire game screen over and over, kind of
- * like a flipbook you may have created as a kid. When your player moves across
- * the screen, it may look like just that image/character is moving or being
- * drawn but that is not the case. What's really happening is the entire "scene"
- * is being drawn over and over, presenting the illusion of animation.
- *
+ * render methods for Player and Enemy objects (defined in app.js).
+
  * This engine is available globally via the Engine variable and it also makes
  * the canvas' context (ctx) object globally available to make writing app.js
  * a little simpler to work with.
  */
 
 var Engine = (function(global) {
-    /* Predefine the variables we'll be using within this scope,
-     * create the canvas element, grab the 2D context for that canvas
-     * set the canvas elements height/width and add it to the DOM.
-     */
+
+    /* Predefine the variables within this scope, create the canvas element, grab the 2D context for that canvas, set the canvas elements height/width and add it to the DOM.*/
+
     var doc = global.document,
         win = global.window,
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
         lastTime;
-
-
-    goUplevel = false;
-    winGame = false;
-    paused = false;
-    adjustSpeed = false;
-    collisionsOn = true;
-    bonus = 1;
-    stopGame = true;
-    beginGame = true;
-    getGem = false;
-    starPower = false;
-    savedStarTime = 0;
 
     canvas.width = 505;
     canvas.height = 675;
@@ -78,7 +58,7 @@ var Engine = (function(global) {
                   youWin();
                 } else if (goUplevel) {
                   passLevel();
-                } else if (paused) {
+                } else if (pause) {
                   pauseGame();
                 } else if (beginGame) {
                   gameBegin();
@@ -507,7 +487,7 @@ var Engine = (function(global) {
 
     reset = function() {
 
-        // reset game conditions/properties after game over/ Player wins
+        // reset game conditions/properties after game over or Player wins
 
         if (player.lives === 0 || winGame) {
 
@@ -522,12 +502,10 @@ var Engine = (function(global) {
 
         }
 
-
-
         // reset global variables
 
         adjustSpeed = true;
-        paused = false;
+        pause = false;
         stopGame = false;
         goUplevel = false;
         beginGame = false;
