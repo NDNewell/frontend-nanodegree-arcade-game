@@ -117,7 +117,7 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        clearCanvas();
+        clearStatsCanvas();
     }
 
     /* This is called by the update function  and loops through all of the
@@ -212,7 +212,7 @@ var Engine = (function(global) {
     }
 
 
-    // draw prompt box describing game rules etc. which begins the game
+    // draw prompt box describing game rules etc.
 
     function gameBegin () {
 
@@ -270,164 +270,217 @@ var Engine = (function(global) {
 
     }
 
-      // Draw Game Over prompt box
+
+    // draw Game Over prompt box
+
     function gameOver () {
 
+        // draw prompt box with a transparent fill
+
         ctx.rect(40, 100, 430, 150);
         ctx.fillStyle = "rgba(0,0,0,0.75)";
         ctx.fill();
 
-        //Set prompt text
-        var prompts = ["GAME OVER", "Press the Spacebar to Play Again"]
-        
-        //Draw prompt: 'GAME OVER'
+        // set content, text style, colour, and size 
 
         ctx.font = "60px Impact";
         ctx.fillStyle = "yellow";
-        ctx.fillText(prompts[0], 125, 170);
+        ctx.fillText("GAME OVER", 125, 170);
 
-        //Draw prompt: 'Press spacebar to Continue
+        // set content, text style, colour, and size 
 
         ctx.font = "30px Impact";
         ctx.fillStyle = "#7ACC52";
-        ctx.fillText(prompts[1], 55, 225);
+        ctx.fillText("Press the Spacebar to Play Again", 55, 225);
 
     }
 
-          // Draw pause game prompt box
+
+    // draw pause game prompt box
+
     function pauseGame () {
 
+        // draw prompt box with a transparent fill
+
         ctx.rect(40, 100, 430, 150);
         ctx.fillStyle = "rgba(0,0,0,0.75)";
         ctx.fill();
 
-        //Set prompt text
-        var prompts = ["PAUSED"]
-        
-        //Draw prompt: 'GAME OVER'
+        // set content, text style, colour, and size 
 
         ctx.font = "60px Impact";
         ctx.fillStyle = "yellow";
-        ctx.fillText(prompts[0], 165, 190);
+        ctx.fillText("PAUSED", 165, 190);
+
     }
 
-      // Draw you win prompt box
+    // draw win prompt box
+
     function youWin () {
 
+        // draw prompt box with a transparent fill
 
         ctx.rect(40, 100, 430, 150);
         ctx.fillStyle = "rgba(0,0,0,0.75)";
         ctx.fill();
 
-        //Set prompt text
-        var prompts = ["YOU WIN!", "Press the Spacebar to Play Again"]
-        
-        //Draw prompt: 'YOU WIN!'
+        // set content, text style, colour, and size 
 
         ctx.font = "60px Impact";
         ctx.fillStyle = "yellow";
-        ctx.fillText(prompts[0], 145, 170);
+        ctx.fillText("YOU WIN!", 145, 170);
 
-        //Draw prompt: 'Press spacebar to Continue
+        // set content, text style, colour, and size 
 
         ctx.font = "30px Impact";
         ctx.fillStyle = "#7ACC52";
-        ctx.fillText(prompts[1], 55, 225);
+        ctx.fillText("Press the Spacebar to Play Again", 55, 225);
 
     }
 
-      // Draw pass level prompt box
+
+    // draw pass level prompt box
+
     function passLevel () {
+
+        // draw prompt box with a transparent fill
 
         ctx.rect(40, 100, 430, 300);
         ctx.fillStyle = "rgba(0,0,0,0.75)";
         ctx.fill();
 
-        //Set number to reflect level passed
+        // set number to reflect level passed
+
         var displayLevel = player.level -1;
-        //Set prompt text
-        var prompts = ["YOU PASSED LEVEL", displayLevel, "Press the Spacebar", "for the next level !", "for the FINAL level !"]
-        //Draw text: 'You passed level'
+
+        // set content, text style, colour, and size 
 
         ctx.font = "50px Impact";
         ctx.fillStyle = "yellow";
-        ctx.fillText(prompts[0], 80, 170);
+        ctx.fillText("YOU PASSED LEVEL", 80, 170);
 
-        //Draw text: 'level number'
+        // set content, text style, and size 
 
         ctx.font = "80px Impact";
-        ctx.fillText(prompts[1], 235, 260);
+        ctx.fillText(displayLevel, 235, 260);
 
-        //Draw text: 'Press the spacebar'
+        // set content, text style, colour, and size 
+
         ctx.font = "40px Impact";
         ctx.fillStyle = "#7ACC52";
-        ctx.fillText(prompts[2], 95, 320);
+        ctx.fillText("Press the Spacebar", 95, 320);
 
-        //Draw text: 'to Continue'
+        // set text size 
 
         ctx.font = "40px Impact";
+
+            // change words 'final' and 'next' depending on level passed
+
             if(player.level === 4) {
-                ctx.fillText(prompts[4], 110, 365);
+
+                ctx.fillText("for the FINAL level !", 110, 365);
+
             } else {
-                ctx.fillText(prompts[3], 110, 365);
+
+                ctx.fillText("for the next level !", 110, 365);
+
             }
 
     }
-        
+
+    // draw players stats above game
+
     function renderStats() {
 
-        var prompts = ["LIVES:" + " " + player.lives, "POINTS:" + " " + player.points, "LEVEL:" + " " + player.level, "WINNER"]
+        // set y position for text
 
         var y = 45;
-        // Draw lives text
+
+        // set content, text style, colour, and size 
+
         ctx.font = "35px Impact";
         ctx.fillStyle = "#70B8FF";
-        ctx.fillText(prompts[0], 10, y);
+        ctx.fillText("LIVES:" + " " + player.lives, 10, y);
 
-        // Draw points text
+        // set content and text colour
+
         ctx.fillStyle = "#7ACC52";
-        ctx.fillText(prompts[1], 175 , y);
+        ctx.fillText("POINTS:" + " " + player.points, 175 , y);
 
-        // Draw level text;
+        // set content and text colour
+
         ctx.fillStyle = "orange";
+
+            // change words 'level' to 'winner' after Player wins
+
             if (player.level === 5) {
-                ctx.fillText(prompts[3], 385, y);
+
+                ctx.fillText("WINNER", 385, y);
+
             } else {
-                ctx.fillText(prompts[2], 385, y);
+
+                ctx.fillText("LEVEL:" + " " + player.level, 385, y);
+
             }
+
     }
+
+
+    // draw Gem points above the Player when obtaining a gem and draw a countdown timer below the Player when getting a Star
 
     function renderRelicInfo  () {
 
+        // when star power is enabled, draw content, text style, colour, and size
+
         if(starPower) {
+
             ctx.font = "35px Impact";
             ctx.fillStyle = "Yellow";
             ctx.fillStroke = "black";
             ctx.lineWidth = 1;
             ctx.fillText(starTime, player.x + 75, player.y + 190);
             ctx.strokeText(starTime, player.x + 75, player.y + 190);
+
         }
 
+        // when Player gets a Gem, draw content, text style, colour, and size
+
         if(getGem) {
+
             ctx.font = "30px Impact";
             ctx.fillStyle = "white";
             ctx.fillStroke = "black";
             ctx.lineWidth = 1;
             ctx.fillText(gemValue, player.x + 30, player.y);
             ctx.strokeText(gemValue, player.x + 30, player.y);
+
         }
 
     }
 
-    //clears the canvas so text doesn't get blurry
-    function clearCanvas () {
-        ctx.clearRect(0, 0, canvas.width, 680);
+
+    // clear the top part of the canvas (game stats)
+
+    function clearStatsCanvas () {
+
+        ctx.clearRect(0, 0, canvas.width, 50);
+
     }
-    /* Go ahead and load all of the images we know we're going to need to
-     * draw our game level. Then set init as the callback method, so that when
-     * all of these images are properly loaded our game will start.
-     */
+
+
+    // clear the whole canvas
+
+    function clearCanvas () {
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    }
+
+
+    // load all of the images to draw game level, then set init as the callback method, so that when all of the images are properly loaded the game will start.
+
     Resources.load([
+
         'images/stone-block.png',
         'images/water-block.png',
         'images/grass-block.png',
@@ -445,51 +498,67 @@ var Engine = (function(global) {
         'images/enemy-bug-begin.png',
         'images/enemy-bug2-begin.png',
         'images/enemy-bug3-begin.png'
+
     ]);
+
     Resources.onReady(init);
 
-        /* This function does nothing but it could have been a good place to
-     * handle game reset states - maybe a new game menu or a game over screen
-     * those sorts of things. It's only called once by the init() method.
-     */
+    // set game reset after game over, pause, game win, and level pass
+
     reset = function() {
 
-            if (player.lives === 0) {
-                player.points = 0; 
-                player.lives = 3;
-                player.level = 1;
-                player.touchWater = 0;
-                restartPlayer();
-                adjustSpeed = true;
+        // reset game conditions/properties after game over/ Player wins
 
-            } else if (winGame) {
-                player.lives = 3;
-                player.level = 1;
-                player.touchWater = 0;
-                winGame = false;
-                restartPlayer();
-            }
+        if (player.lives === 0 || winGame) {
+
+            player.lives = 3;
+            player.level = 1;
+            player.touchWater = 0;
+            player.points = 0;
+
+            // reposition Player
+
+            restartPlayer();
+
+        }
+
+
+
+        // reset global variables
 
         adjustSpeed = true;
         paused = false;
         stopGame = false;
         goUplevel = false;
         beginGame = false;
+        winGame = false;
+
+        // turn off beginning game music when game starts
 
         introMusicSound.pause();
+
+        // initiate gameplay music and set loop
 
         gameMusicSound.play();
         gameMusicSound.loop = true;
 
-        //reset path/canvas formatting
+        
+        // clear the canvas to delete prompt boxes: game over, paused, win, and level pass and reset path/canvas formatting
+
+        clearCanvas();
         ctx.beginPath();
 
+        // restart game loop
+
         main();
+
     }
 
     /* Assign the canvas' context object to the global variable (the window
      * object when run in a browser) so that developer's can use it more easily
      * from within their app.js files.
      */
+
     global.ctx = ctx;
+
 })(this);
