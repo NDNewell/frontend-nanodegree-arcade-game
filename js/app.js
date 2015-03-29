@@ -187,8 +187,8 @@ function Player() {
 
     this.lives = 3;
     this.points = 0;
-    this.level = 4;
-    this.touchWater = 11;
+    this.level = 1;
+    this.touchWater = 0;
 
 }
 
