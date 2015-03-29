@@ -192,7 +192,7 @@ function Player() {
 
 }
 
-// set conditions for game loop continuance
+// set conditions for game loop continuance and update player/game properties
 
 Player.prototype.update = function(dt) {
 
@@ -202,19 +202,21 @@ Player.prototype.update = function(dt) {
 
     // check level advancement
 
-    levelCheck();
+    checkLevel();
 
     // give the player an extra life for every 1000 points
+
     if (this.points >= bonus*1000) {
+
         bonus ++;
         this.lives ++;
+
+        // play appropriate sound
+
         extraLifeSound.play();
+
     }
 
-    // whenver the game stops, the background music is paused
-    if (stopGame) {
-        gameMusicSound.pause();
-    }
 }
 
 // draw the player on the screen
@@ -790,7 +792,7 @@ function checkLives () {
 
 // check level and enable various sounds and game status depending on the level
 
-function levelCheck () {
+function checkLevel () {
 
     // check level
 
