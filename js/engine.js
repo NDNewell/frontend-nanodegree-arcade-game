@@ -36,6 +36,7 @@ var Engine = (function(global) {
     beginGame = true;
     getGem = false;
     starPower = false;
+    savedStarTime = 0;
 
     canvas.width = 505;
     canvas.height = 675;
@@ -461,7 +462,6 @@ var Engine = (function(global) {
         stopGame = false;
         goUplevel = false;
         beginGame = false;
-        starPower = false;
 
         introMusicSound.pause();
 

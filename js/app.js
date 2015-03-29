@@ -1,7 +1,3 @@
-// set global variables
-
-
-
 // create superclass Enemy
 
 function Enemy() {
@@ -15,6 +11,7 @@ function Enemy() {
     this.speed = randomRange(115, 50);
 
 }
+
 
 // update Enemy objects
 
@@ -37,6 +34,7 @@ Enemy.prototype.update = function(dt) {
     }
 
 }
+
 
 // collision detection method using box collision for enemies
 
@@ -65,6 +63,7 @@ Enemy.prototype.collisions = function () {
 
 }
 
+
 // create subclass evilEnemy from Enemy
 
 function evilEnemy() {
@@ -87,13 +86,16 @@ function evilEnemy() {
 
 }
 
+
 // set evilEnemy prototype as a subclass of Enemy
 
 evilEnemy.prototype = Object.create(Enemy.prototype);
 
+
 // set evilEnemy constructor
 
 evilEnemy.prototype.constructor = evilEnemy;
+
 
 // create subclass evilerEnemy from Enemy
 
@@ -117,13 +119,16 @@ function evilerEnemy() {
 
 }
 
+
 // set evilerEnemy prototype as a subclass of Enemy
 
 evilerEnemy.prototype = Object.create(Enemy.prototype);
 
+
 // set evilerEnemy constructor
 
 evilerEnemy.prototype.constructor = evilerEnemy;
+
 
 // create subclass evilestEnemy from Enemy
 
@@ -147,13 +152,16 @@ function evilestEnemy() {
 
 }
 
+
 // Set evilestEnemy prototype as a subclass of Enemy
 
 evilestEnemy.prototype = Object.create(Enemy.prototype);
 
+
 // set evilestEnemy constructor
 
 evilestEnemy.prototype.constructor = evilestEnemy;
+
 
 // Draw the enemies on the screen
 
@@ -162,6 +170,7 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 
 }
+
 
 // Create player class
 
@@ -192,6 +201,7 @@ function Player() {
 
 }
 
+
 // set conditions for game loop continuance and update player/game properties
 
 Player.prototype.update = function(dt) {
@@ -219,6 +229,7 @@ Player.prototype.update = function(dt) {
 
 }
 
+
 // draw the player on the screen
 
 Player.prototype.render = function() {
@@ -226,6 +237,7 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 
 }
+
 
 // key instructions for player movements
 
@@ -313,9 +325,17 @@ Player.prototype.handleInput = function(key) {
 
             if(!paused && !beginGame && !goUplevel && player.lives > 0) {
 
-              pauseSound.play();
-              stopGame = true;
-              paused = true;
+                pauseSound.play();
+                stopGame = true;
+                paused = true;
+
+                // save time left in star power countdown in order to being where leaving off after unpausing the game
+
+                if(starPower) {
+
+                    savedStarTime = starTime;
+
+                }
 
             } else if(paused) {
 
@@ -363,6 +383,7 @@ document.addEventListener('keyup', function(e) {
 
 });
 
+
 // create Relic superclass
 
 function Relic() {
@@ -401,6 +422,7 @@ function Relic() {
 
 }
 
+
 Relic.prototype.update = function(dt) {
 
     // update the Relic's position using time delta between ticks
@@ -418,6 +440,7 @@ Relic.prototype.update = function(dt) {
     }
 
 }
+
 
 // Reset random starting point for x and y
 // Key, Star, and Heart are reset to further points away in order to make them less common.
@@ -459,6 +482,7 @@ Relic.prototype.reset = function() {
     }
 }
 
+
 // collision detection method for Relics using box collision
 
 Relic.prototype.collisions = function () {
@@ -483,6 +507,7 @@ Relic.prototype.collisions = function () {
     });
 
 }
+
 
 // set conditions for what happens after the player Collides with a Relic
 
@@ -546,7 +571,7 @@ Relic.prototype.collisionConditions = function () {
 
         // display time remaining for star power and reset player conditions/properties after time runs out
 
-        starTimerDisplay();
+        starTimerDisplay(10);
 
         // change Player sprite image
 
@@ -603,6 +628,7 @@ Relic.prototype.collisionConditions = function () {
 
 }
 
+
 // draw the Relic on the screen
 
 Relic.prototype.render = function() {
@@ -610,6 +636,7 @@ Relic.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 
 }
+
 
 // create Gem subclass of Relic
 
@@ -636,13 +663,16 @@ function Gem(spriteImg, value) {
 
 }
 
+
 // set Gem prototype as a subclass of Relic
 
 Gem.prototype = Object.create(Relic.prototype);
 
+
 // set Gem constructor
 
 Gem.prototype.constructor = Gem;
+
 
 // create Key subclass of Relic
 
@@ -669,13 +699,16 @@ function Key() {
 
 }
 
+
 // set Key prototype as a subclass of Relic
 
 Key.prototype = Object.create(Relic.prototype);
 
+
 // set Key constructor
 
 Key.prototype.constructor = Key;
+
 
 // create Heart subclass of Relic
 
@@ -702,13 +735,16 @@ function Heart() {
 
 }
 
+
 // set Heart prototype as a subclass of Relic
 
 Heart.prototype = Object.create(Relic.prototype);
 
+
 // set Heart constructor
 
 Heart.prototype.constructor = Heart;
+
 
 // create Star subclass of Relic
 
@@ -735,13 +771,16 @@ function Star() {
 
 }
 
+
 // set Star prototype as a subclass of Relic
 
 Star.prototype = Object.create(Relic.prototype);
 
+
 // set Star constructor
 
 Star.prototype.constructor = Star;
+
 
 // set a random number within a given range
 
@@ -752,6 +791,7 @@ function randomRange (max, min) {
     return Math.floor((Math.random() * (max - min)) + min);
 
 }
+
 
 // check conditions for Enemy speed adjustment according to level
 
@@ -799,6 +839,7 @@ function speedAdjust () {
 
 }
 
+
 // reset Player position, play appropriate sound , subtract 1 life
 
 function die () {
@@ -809,6 +850,7 @@ function die () {
 
 }
 
+
 // reset player to starting position
 
 function restartPlayer () {
@@ -817,6 +859,7 @@ function restartPlayer () {
     player.y = 475;
 
 }
+
 
 // check Player's lives and stops game if zero
 
@@ -833,6 +876,7 @@ function checkLives () {
     }
 
 }
+
 
 // check level and enable various sounds and game status depending on the level
 
@@ -871,6 +915,7 @@ function checkLevel () {
 
 }
 
+
 // set timer for how long points appear on screen after obtaining a Gem
 
 function pointsDisplay () {
@@ -899,13 +944,14 @@ function pointsDisplay () {
     }
 }
 
+
 // set timer for star power timer and reset player properties/conditions when the timer is finished
 
-function starTimerDisplay () {
+function starTimerDisplay (time) {
 
     // set countdown time
 
-    starTime = 10;
+    starTime = time;
 
     // create timer
 
@@ -913,13 +959,21 @@ function starTimerDisplay () {
 
         starTime--;
 
+        // if the game is paused, reset starTime with time that was saved when pausing the game in order to resume countdown where leaving off
+
+        if(paused) {
+
+            starTime = savedStarTime;
+
+        }
+
         // if timer gets to zero or the player wins the game, the timer resets the original player properties/conditions
 
         if(starTime <= 0 || player.level === 5) {
 
             // the untransform sound is only played if the player hasn't completed a level or won the game so as not to interfere with game sounds (eg. passing a level, game over, or winning the game)
 
-            if(!winGame && !goUplevel) {
+            if(!winGame && !goUplevel && !paused) {
 
                 untransformSound.play();
 
@@ -936,6 +990,7 @@ function starTimerDisplay () {
     }, 1000);
 
 }
+
 
 // removes star power properties and conditions, resets player img and dimensions
 
@@ -959,6 +1014,7 @@ function disableStarPower () {
 
 }
 
+
 // instantiate objects
 
 var allEnemies = [
@@ -969,7 +1025,9 @@ var allEnemies = [
 
     ];
 
+
 var player = new Player();
+
 
 var allRelics = [
 
@@ -982,12 +1040,14 @@ var allRelics = [
 
     ];
 
+
 // Player sound instances
 
 var heySound = new Audio('sounds/hey.wav');
 var respectSound = new Audio('sounds/respect.wav');
 var screwYouSound = new Audio('sounds/screwYou.wav');
 var sonBitchSound = new Audio('sounds/son_of_a.wav');
+
 
 // Relic sound instances
 
@@ -999,6 +1059,7 @@ var keySound = new Audio('sounds/key.wav');
 var transformSound = new Audio('sounds/transform.wav');
 var untransformSound = new Audio('sounds/transform.wav');
 var starBackgroundSound = new Audio('sounds/starPower.wav');
+
 
 // misc game sound instances
 
@@ -1012,6 +1073,7 @@ var spacebarClickSound = new Audio('sounds/spaceBarClick.wav');
 var winGameSound = new Audio('sounds/winGame.wav');
 var gameMusicSound = new Audio('sounds/gameMusic.mp3');
 var introMusicSound = new Audio('sounds/introMusic.wav');
+
 
 // initiate intro music and loop
 
