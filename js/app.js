@@ -158,7 +158,9 @@ evilestEnemy.prototype.constructor = evilestEnemy;
 // Draw the enemies on the screen
 
 Enemy.prototype.render = function() {
+
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+
 }
 
 // Create player class
@@ -185,37 +187,41 @@ function Player() {
 
     this.lives = 3;
     this.points = 0;
-    this.level = 1;
-    this.touchWater = 0;
+    this.level = 4;
+    this.touchWater = 11;
 
 }
 
-// set conditions for game continuence
+// set conditions for game loop continuance
+
 Player.prototype.update = function(dt) {
-    
-    // Check player's lives
-    if(player.lives === 0) {
-        stopGame = true;
-        gameOverSound.play();
-        sonBitchSound.play();
-    }
+
+    // check Player's lives
+
+    checkLives();
+
+    // check level advancement
 
     if(goUplevel) {
-        removeStarPower();
+
+        // turn off star power
+
+        disableStarPower();
+
+        // stop the game loop
+
         stopGame = true;
-            if(player.level < 5) {
-                completeLevelSound.play();
-                respectSound.play();
-            }
+
+        if(this.level < 5) {
+
+            completeLevelSound.play();
+            respectSound.play();
+
+        }
+
     }
 
-    if(player.level === 5) {
-
-        // if the player has star power invoked, this will check and get rid of it.
-
-        if(starPower) {
-            removeStarPower();
-        }
+    if(this.level === 5) {
 
         winGame = true;
         winGameSound.play();
@@ -224,9 +230,9 @@ Player.prototype.update = function(dt) {
     }
 
     // give the player an extra life for every 1000 points
-    if (player.points >= bonus*1000) {
+    if (this.points >= bonus*1000) {
         bonus ++;
-        player.lives ++;
+        this.lives ++;
         extraLifeSound.play();
     }
 
@@ -234,14 +240,6 @@ Player.prototype.update = function(dt) {
     if (stopGame) {
         gameMusicSound.pause();
     }
-}
-
-removeStarPower = function () {
-    console.log("removing star power")
-    player.sprite = 'images/char-cartman.png';
-    starTime = 0;
-    starPower = false;
-    starBackgroundSound.pause();
 }
 
 // draw the player on the screen
@@ -799,6 +797,22 @@ function speedAdjust () {
 
 }
 
+// check player's lives and stops game if zero
+
+function checkLives () {
+
+    if(player.lives === 0) {
+
+        // stop game loop and play appropriate sounds
+
+        stopGame = true;
+        gameOverSound.play();
+        sonBitchSound.play();
+
+    }
+
+}
+
 // set timer for how long points appear on screen after obtaining a Gem
 
 function pointsDisplay () {
@@ -855,18 +869,35 @@ function starTimerDisplay () {
 
             clearInterval(starTimer);
 
-            // reset the original player properties/conditions
+            // remove star power
 
-            starPower = false;
-            player.sprite = 'images/char-cartman.png';
-            player.right = 77;
-            player.left = -15;
-            player.bottom = 55;
-            player.top = -25;
+            disableStarPower();
 
         }
 
     }, 1000);
+
+}
+
+// removes star power properties and conditions, resets player img and dimensions
+
+function disableStarPower () {
+
+    starPower = false;
+    player.sprite = 'images/char-cartman.png';
+    player.right = 77;
+    player.left = -15;
+    player.bottom = 55;
+    player.top = -25;
+
+    // star power and associated sounds are immediately turned off in order not to interfere with level up or game win sounds
+
+    if(goUplevel) {
+
+        starTime = 0;
+        starBackgroundSound.pause();
+
+    }
 
 }
 
