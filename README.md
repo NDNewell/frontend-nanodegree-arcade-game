@@ -58,10 +58,11 @@ Cartman Crush (frontend-nanodegree-arcade-game)
   - The 'space' key is used to exit game prompts.
 
   The game can be played online at:
-  rebelexplorer.github.io/frontend-nanodegree-arcade-game/
+  rebelexplorer.github.io/Cartman_Crush/
 
   Details of the latest version can be found on GitHub
-  at: https://github.com/RebelExplorer/frontend-nanodegree-arcade-game.
+  at: https://github.com/RebelExplorer/Cartman_Crush.git.
+
 
 
   Author
