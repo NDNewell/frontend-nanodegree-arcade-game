@@ -85,6 +85,15 @@ var Engine = (function(global) {
                   gameOver();
                 }
             }
+
+        // whenver the game stops, the background music is paused
+
+        if (stopGame) {
+
+            gameMusicSound.pause();
+
+        }
+
     };
 
     /* This function does some initial setup that should only occur once,
@@ -120,7 +129,7 @@ var Engine = (function(global) {
     function updateEntities(dt) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
-            enemyCollisions();
+            enemy.collisions();
         });
 
         allRelics.forEach(function(relic) {
