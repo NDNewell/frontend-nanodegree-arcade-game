@@ -202,32 +202,7 @@ Player.prototype.update = function(dt) {
 
     // check level advancement
 
-    if(goUplevel) {
-
-        // turn off star power
-
-        disableStarPower();
-
-        // stop the game loop
-
-        stopGame = true;
-
-        if(this.level < 5) {
-
-            completeLevelSound.play();
-            respectSound.play();
-
-        }
-
-    }
-
-    if(this.level === 5) {
-
-        winGame = true;
-        winGameSound.play();
-        screwYouSound.play();
-        stopGame = true;
-    }
+    levelCheck();
 
     // give the player an extra life for every 1000 points
     if (this.points >= bonus*1000) {
@@ -812,6 +787,44 @@ function checkLives () {
     }
 
 }
+
+// check level and enable various sounds and game status depending on the level
+
+function levelCheck () {
+
+    // check level
+
+    if(goUplevel) {
+
+        // turn off star power
+
+        disableStarPower();
+
+        // stop the game loop
+
+        stopGame = true;
+
+        // play the following sounds only if below level 5
+
+        if(player.level < 5) {
+
+            completeLevelSound.play();
+            respectSound.play();
+
+        // when Player wins, play different sounds and set win game variable
+
+        } else {
+
+            winGame = true;
+            winGameSound.play();
+            screwYouSound.play();
+
+        }
+
+    }
+
+}
+
 
 // set timer for how long points appear on screen after obtaining a Gem
 
