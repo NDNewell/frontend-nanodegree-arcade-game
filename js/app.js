@@ -720,8 +720,7 @@ function Star() {
 
     // set random horizontal position
 
-    this.x = 1; //randomRange(-5000, -3000);
-    this.y = 425;
+    this.x = randomRange(-5000, -3000);
 
     // set variable dimensions for Star
 
