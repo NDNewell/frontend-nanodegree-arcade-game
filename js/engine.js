@@ -28,7 +28,7 @@ var Engine = (function(global) {
 
     function main() {
 
-        // Get  time delta information which is required for smooth animation 
+        // Get  time delta information which is required for smooth animation
 
         var now = Date.now(),
             dt = (now - lastTime) / 1000.0;
@@ -149,7 +149,7 @@ var Engine = (function(global) {
     }
 
 
-    // This function initially draws the "game level", then calls the render-Entities/Stats/RelicInfo functions. 
+    // This function initially draws the "game level", then calls the render-Entities/Stats/RelicInfo functions.
 
     function render() {
 
@@ -201,7 +201,7 @@ var Engine = (function(global) {
 
     function renderEntities() {
 
-        // Loop through allRelics array then call the render function 
+        // Loop through allRelics array then call the render function
 
         allRelics.forEach(function(relic) {
 
@@ -209,7 +209,7 @@ var Engine = (function(global) {
 
         });
 
-        // Loop through allEnemies array then call the render function 
+        // Loop through allEnemies array then call the render function
 
         allEnemies.forEach(function(enemy) {
 
@@ -217,7 +217,7 @@ var Engine = (function(global) {
 
         });
 
-        // Call the Player render function 
+        // Call the Player render function
 
         player.render();
 
@@ -293,13 +293,13 @@ var Engine = (function(global) {
         ctx.fillStyle = "rgba(0,0,0,0.75)";
         ctx.fill();
 
-        // set content, text style, colour, and size 
+        // set content, text style, colour, and size
 
         ctx.font = "60px Impact";
         ctx.fillStyle = "yellow";
         ctx.fillText("GAME OVER", 125, 170);
 
-        // set content, text style, colour, and size 
+        // set content, text style, colour, and size
 
         ctx.font = "30px Impact";
         ctx.fillStyle = "#7ACC52";
@@ -318,7 +318,7 @@ var Engine = (function(global) {
         ctx.fillStyle = "rgba(0,0,0,0.75)";
         ctx.fill();
 
-        // set content, text style, colour, and size 
+        // set content, text style, colour, and size
 
         ctx.font = "60px Impact";
         ctx.fillStyle = "yellow";
@@ -336,13 +336,13 @@ var Engine = (function(global) {
         ctx.fillStyle = "rgba(0,0,0,0.75)";
         ctx.fill();
 
-        // set content, text style, colour, and size 
+        // set content, text style, colour, and size
 
         ctx.font = "60px Impact";
         ctx.fillStyle = "yellow";
         ctx.fillText("YOU WIN!", 145, 170);
 
-        // set content, text style, colour, and size 
+        // set content, text style, colour, and size
 
         ctx.font = "30px Impact";
         ctx.fillStyle = "#7ACC52";
@@ -365,24 +365,24 @@ var Engine = (function(global) {
 
         var displayLevel = player.level -1;
 
-        // set content, text style, colour, and size 
+        // set content, text style, colour, and size
 
         ctx.font = "50px Impact";
         ctx.fillStyle = "yellow";
         ctx.fillText("YOU PASSED LEVEL", 80, 170);
 
-        // set content, text style, and size 
+        // set content, text style, and size
 
         ctx.font = "80px Impact";
         ctx.fillText(displayLevel, 235, 260);
 
-        // set content, text style, colour, and size 
+        // set content, text style, colour, and size
 
         ctx.font = "40px Impact";
         ctx.fillStyle = "#7ACC52";
         ctx.fillText("Press the Spacebar", 95, 320);
 
-        // set text size 
+        // set text size
 
         ctx.font = "40px Impact";
 
@@ -408,7 +408,7 @@ var Engine = (function(global) {
 
         var y = 45;
 
-        // set content, text style, colour, and size 
+        // set content, text style, colour, and size
 
         ctx.font = "35px Impact";
         ctx.fillStyle = "#70B8FF";
@@ -552,7 +552,7 @@ var Engine = (function(global) {
         gameMusicSound.play();
         gameMusicSound.loop = true;
 
-        
+
         // clear the canvas to delete prompt boxes: game over, paused, win, and level pass and reset path/canvas formatting
 
         clearCanvas();
@@ -562,7 +562,7 @@ var Engine = (function(global) {
 
         main();
 
-    }
+    };
 
     /* Assign the canvas' context object to the global variable (the window
      * object when run in a browser) so that developer's can use it more easily

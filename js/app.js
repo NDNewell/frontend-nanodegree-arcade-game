@@ -47,7 +47,7 @@ Enemy.prototype.update = function(dt) {
 
     }
 
-}
+};
 
 
 // collision detection method using box collision for enemies
@@ -75,7 +75,7 @@ Enemy.prototype.collisions = function () {
 
         }
 
-}
+};
 
 
 // create subclass evilEnemy from Enemy
@@ -183,7 +183,7 @@ Enemy.prototype.render = function() {
 
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 
-}
+};
 
 
 // Create player class
@@ -241,7 +241,7 @@ Player.prototype.update = function(dt) {
 
     }
 
-}
+};
 
 
 // draw the player on the screen
@@ -250,7 +250,7 @@ Player.prototype.render = function() {
 
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 
-}
+};
 
 
 // key instructions for player movements
@@ -378,7 +378,7 @@ Player.prototype.handleInput = function(key) {
 
     }
 
-}
+};
 
 
 // listen for key presses and send the keys to Player.handleInput() method.
@@ -456,7 +456,7 @@ Relic.prototype.update = function(dt) {
 
     }
 
-}
+};
 
 
 // Reset random starting point for x and y
@@ -497,7 +497,8 @@ Relic.prototype.reset = function() {
         this.y = 360;
 
     }
-}
+
+};
 
 
 // collision detection method for Relics using box collision
@@ -523,7 +524,7 @@ Relic.prototype.collisions = function () {
 
     });
 
-}
+};
 
 
 // set conditions for what happens after the player Collides with a Relic
@@ -643,7 +644,7 @@ Relic.prototype.collisionConditions = function () {
 
     }
 
-}
+};
 
 
 // draw the Relic on the screen
@@ -652,7 +653,7 @@ Relic.prototype.render = function() {
 
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 
-}
+};
 
 
 // create Gem subclass of Relic
@@ -944,7 +945,7 @@ function pointsDisplay () {
 
         gemTime = 1;
 
-        var gemTimer = setInterval(function() { 
+        var gemTimer = setInterval(function() {
 
             gemTime--;
 
@@ -972,7 +973,7 @@ function starTimerDisplay (time) {
 
     // create timer
 
-    var starTimer = setInterval(function() { 
+    var starTimer = setInterval(function() {
 
         starTime--;
 
