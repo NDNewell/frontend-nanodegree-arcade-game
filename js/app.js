@@ -263,7 +263,7 @@ Player.prototype.handleInput = function(key) {
 
         case 'left':
 
-            if(this.x > 0) {
+            if(this.x > 0 && !pause) {
 
                 this.x -= stepSize;
 
@@ -277,7 +277,7 @@ Player.prototype.handleInput = function(key) {
 
             if(this.sprite === 'images/char-cartman-wizard.png') {
 
-                if (this.x < 340) {
+                if (this.x < 340 && !pause) {
 
                 this.x += stepSize;
 
@@ -285,7 +285,7 @@ Player.prototype.handleInput = function(key) {
 
             } else {
 
-                if (this.x < 400) {
+                if (this.x < 400 && !pause) {
 
                 this.x += stepSize;
 
@@ -299,13 +299,16 @@ Player.prototype.handleInput = function(key) {
 
             // player is reset to default position when reaching the water
 
-            if(this.y > 25) {
+            if(this.y > 25 && !pause) {
 
                 this.y -= stepSize;
 
-            } else {
+            } else if (!pause) {
+
+                // tally times player touches the water, add points and play the a sound
 
                 this.touchWater++;
+                this.points += 10;
                 reachTopSound.play();
 
                 // check level progression and increase level accordingly
@@ -325,7 +328,7 @@ Player.prototype.handleInput = function(key) {
 
         case 'down':
 
-            if(this.y < 475) {
+            if(this.y < 475 && !pause) {
 
                 this.y += stepSize;
 
