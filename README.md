@@ -1,8 +1,8 @@
-Cartman Crush (frontend-nanodegree-arcade-game)
+##  Cartman Crush (frontend-nanodegree-arcade-game)
 ===============================================
 
 
-  What is it?
+###  What is it?
   -----------
 
   This is the third project for Udacity's front-end Nano degree. It is a frogger
@@ -10,52 +10,52 @@ Cartman Crush (frontend-nanodegree-arcade-game)
   killer bugs in order to reach the water on the opposite side.
 
 
-  How to play
+###  How to play
   -----------
 
-  - Cartman must reach the water three times in order to pass each level.
+  * Cartman must reach the water three times in order to pass each level.
 
-  - The game is won after passing the 4th level.
+  * The game is won after passing the 4th level.
 
-  - If Cartman collides with any of the bugs, one life is lost.
+  * If Cartman collides with any of the bugs, one life is lost.
 
-  - With each level progression, the bugs become faster.
+  * With each level progression, the bugs become faster.
 
-  - When all lives have been lost, the game is over; the game can be restarted
+  * When all lives have been lost, the game is over; the game can be restarted
     by pressing the spacebar.
 
-  - During game play, Cartman can collect different objects called relics.
+  * During game play, Cartman can collect different objects called relics.
 
-  - There are gem, heart, star, and key relics.
+  * There are gem, heart, star, and key relics.
 
-  - For every gem Cartman gets, points are received. The amounts are: 100 points
+  * For every gem Cartman gets, points are received. The amounts are: 100 points
     for a blue gem, 300 points for an orange gem, and 500 for a green gem.
 
-  - For every 1000 points, an extra life is gained.
+  * For every 1000 points, an extra life is gained.
 
-  - Collecting a key automatically results in passing the level.
+  * Collecting a key automatically results in passing the level.
 
-  - Collecting a heart yields one extra life.
+  * Collecting a heart yields one extra life.
 
-  - Collecting a star gives Cartman "star power", which makes him immune to
+  * Collecting a star gives Cartman "star power", which makes him immune to
     the bugs for 10 seconds.
 
 
-  Player controls
+###  Player controls
   ---------------
 
-  - The 'Up' arrow key moves Cartman 35px in this direction until reaching the
+  * The 'Up' arrow key moves Cartman 35px in this direction until reaching the
     water.
 
-  - The 'Down' arrow key moves Cartman 35px in this direction.
+  * The 'Down' arrow key moves Cartman 35px in this direction.
 
-  - The 'Right' arrow key moves Cartman 35px in this direction.
+  * The 'Right' arrow key moves Cartman 35px in this direction.
 
-  - The 'Left' arrow key moves Cartman 35px in this direction.
+  * The 'Left' arrow key moves Cartman 35px in this direction.
 
-  - The 'P' key will pause/unpause the game.
+  * The 'P' key will pause/unpause the game.
 
-  - The 'space' key is used to exit game prompts.
+  * The 'space' key is used to exit game prompts.
 
   The game can be played online at:
   https://rebelexplorer.github.io/Cartman_Crush/
@@ -65,13 +65,13 @@ Cartman Crush (frontend-nanodegree-arcade-game)
 
 
 
-  Author
+###  Author
   ------
 
   Nicholas Newell
 
 
-  Resources used
+###  Resources used
   --------------
 
   Head First JavaScript Programming by O'Reilly
@@ -90,7 +90,7 @@ Cartman Crush (frontend-nanodegree-arcade-game)
   Freesound.org
 
 
-  Submissions
+###  Submissions
   -----------
 
   For bugs, feature requests, patches please contact first elaborating on
@@ -98,7 +98,7 @@ Cartman Crush (frontend-nanodegree-arcade-game)
   a pull request etc.
 
 
-  Contact
+###  Contact
   -------
 
   Email: rebelexplorer31@gmail.com
