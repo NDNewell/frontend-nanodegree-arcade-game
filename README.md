@@ -57,10 +57,10 @@
 
   * The 'space' key is used to exit game prompts.
 
-  # The game can be played online at:
+  #### The game can be played online at:
   https://rebelexplorer.github.io/Cartman_Crush/
 
-  # Details of the latest version can be found on GitHub
+  #### Details of the latest version can be found on GitHub
   at: https://github.com/RebelExplorer/Cartman_Crush.git.
 
 
