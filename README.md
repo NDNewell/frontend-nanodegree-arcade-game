@@ -57,10 +57,10 @@
 
   * The 'space' key is used to exit game prompts.
 
-  The game can be played online at:
+  # The game can be played online at:
   https://rebelexplorer.github.io/Cartman_Crush/
 
-  Details of the latest version can be found on GitHub
+  # Details of the latest version can be found on GitHub
   at: https://github.com/RebelExplorer/Cartman_Crush.git.
 
 
@@ -74,20 +74,27 @@
 ###  Resources used
   --------------
 
-  Head First JavaScript Programming by O'Reilly
-  Head First HTML5 Programming - Building Web Apps with JavaScript by O'Reilly
-  JavaScript Patterns 2010 by Stoyan Stefanov
-  Javascript the Definitive Guide 6th Ed. by David Flanagan
+  * Head First JavaScript Programming by O'Reilly
 
-  Udacity: Object-Oriented JavaScript
-  Udacity: HTML5 Canvas
+  * Head First HTML5 Programming - Building Web Apps with JavaScript by O'Reilly
 
-  Mozilla Devloper Network
-  StackOverflow.com
-  w3schools.com
-  JSFiddle.net
+  * JavaScript Patterns 2010 by Stoyan Stefanov
 
-  Freesound.org
+  * Javascript the Definitive Guide 6th Ed. by David Flanagan
+
+  * Udacity: Object-Oriented JavaScript
+
+  * Udacity: HTML5 Canvas
+
+  * Mozilla Devloper Network
+
+  * StackOverflow.com
+
+  * w3schools.com
+
+  * JSFiddle.net
+
+  * Freesound.org
 
 
 ###  Submissions
