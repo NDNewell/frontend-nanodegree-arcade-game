@@ -86,7 +86,7 @@
 
   * Udacity: HTML5 Canvas
 
-  * Mozilla Devloper Network
+  * Mozilla Developer Network
 
   * StackOverflow.com
 
