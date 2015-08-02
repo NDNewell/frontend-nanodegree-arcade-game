@@ -55,7 +55,7 @@
 
   * The 'P' key will pause/unpause the game.
 
-  * The 'space' key is used to exit game prompts.
+  * The 'Space' key is used to exit game prompts.
 
   #### The game can be played online at:
   https://NDNewell.github.io/frontend-nanodegree-arcade-game/
