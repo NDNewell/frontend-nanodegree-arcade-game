@@ -1,4 +1,4 @@
-##  Cartman Crush (frontend-nanodegree-arcade-game)
+##  Cartman Crush (Arcade Game Project)
 ===============================================
 
 
